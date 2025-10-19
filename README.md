@@ -1,5 +1,5 @@
 # Re:Tide - Aplikasi Pengolahan Sampah Plastik Lautan
-Latar Belakang Permasalahan
+## Latar Belakang Permasalahan
 Masalah utama yang diangkat adalah rendahnya kesadaran masyarakat dalam menjaga kebersihan perairan laut, serta juga sungai, dan minimnya sarana media digital yang efektif untuk memberikan edukasi dan motivasi dalam pengurangan polusi air.
 Dari hasil studi, ditemukan bahwa:
 • Masyarakat belum memahami bahwa sampah plastik yang dibuang di sungai pada akhirnya akan berakhir di lautan, dan akhirnya merusak ekosistem laut.
