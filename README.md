@@ -1,5 +1,7 @@
 # Re:Tide - Aplikasi Pengolahan Sampah Plastik Lautan
 
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Archaniels/ReTide-Webpage/total?style=for-the-badge) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Archaniels/ReTide-Webpage?style=for-the-badge) ![GitHub contributors](https://img.shields.io/github/contributors/Archaniels/ReTide-Webpage?style=for-the-badge) ![GitHub Release Date](https://img.shields.io/github/release-date/Archaniels/ReTide-Webpage?style=for-the-badge)
+
 ## Latar Belakang Permasalahan
 Masalah utama yang diangkat adalah rendahnya kesadaran masyarakat dalam menjaga kebersihan perairan laut, serta juga sungai, dan minimnya sarana media digital yang efektif untuk memberikan edukasi dan motivasi dalam pengurangan polusi air.
 
