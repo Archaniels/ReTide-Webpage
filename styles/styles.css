@@ -1,0 +1,89 @@
+.defaultTheme {
+    background-color: black;
+    color: white;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Times New Roman', Times, serif;
+}
+
+.homepage {
+    background-image: url("/styles/assets/Homepage\ Background.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    padding-top: 80px;
+}
+
+/* 🌐 Navigation Bar Styles */
+.navbar {
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid rgb(43, 43, 43);*/
+    border-radius: 10px;
+    margin: 16px auto;
+    margin-top: 16px;
+    max-width: 500px;
+    padding: 12px 0;
+    font-weight: lighter;
+    background-color: black;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #63CFC0;
+    font-weight: bold;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.navbar a:hover {
+    color: white;
+    text-shadow: 0 0 5px #63CFC0;
+}
+
+.navbar a.active {
+    color: white;
+    text-shadow: 0 0 8px #63CFC0;
+}
+
+/* 🌟 Hero Text Styling */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -2px;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.cta-button {
+    background-color: #63CFC0;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: white;
+    color: black;
+}
