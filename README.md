@@ -2,6 +2,7 @@
 
 ![ReTide](https://github.com/user-attachments/assets/ff0cf29b-defe-40ea-8c16-e8fac601f1d0)
 
+![ReTideLogo](https://github.com/user-attachments/assets/77271af1-ce0d-431f-a7af-c66e0a163d45)
 
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Archaniels/ReTide-Webpage/total?style=for-the-badge) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Archaniels/ReTide-Webpage?style=for-the-badge) ![GitHub contributors](https://img.shields.io/github/contributors/Archaniels/ReTide-Webpage?style=for-the-badge) ![GitHub Release Date](https://img.shields.io/github/release-date/Archaniels/ReTide-Webpage?style=for-the-badge)
 
