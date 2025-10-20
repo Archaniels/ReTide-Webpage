@@ -27,3 +27,11 @@ Dengan dilakukannya penelitian ini, diharapkan bertujuan untuk:
   • Mengembangkan solusi berbasis digital website yang diharapkan dapat meningkatkan kesadaran masyarakat dan meningkatkan partisipasi dalam menjaga kebersihan laut dan sungai.
 
 Hasil dari penelitian ini diharapkan dapat memberikan dasar fondasi yang kuat untuk dapat mulai merancang sistem informasi dan interaksi pengguna yang efektif dalam mendukung pencapaian SDG 14.
+
+## Pembagian Tugas
+
+• DANIYAL ARSHAQ SUDRAJAT - 103022330076: Homepage, About Us, Blog (CRUD) (WIP).
+
+• RADITYA MAHESWARA PUTRA - 103022330026: ...
+
+• ADMIRAL MANAN BADAWI - 103022300060: ...
