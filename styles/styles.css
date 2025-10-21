@@ -12,6 +12,39 @@
     padding-top: 80px;
 }
 
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.header h1 {
+    font-size: 3rem;
+    color: #63CFC0;
+    margin-bottom: 8px;
+    letter-spacing: -2px;
+}
+
+.header p {
+    color: #c7c7c7;
+    font-size: 1.1rem;
+}
+
+.btn {
+    background-color: #63CFC0;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
 /* 🌐 Navigation Bar Styles */
 .navbar {
     position: sticky;
