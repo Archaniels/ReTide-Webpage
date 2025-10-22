@@ -12,12 +12,6 @@
     padding-top: 80px;
 }
 
-.blog-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 24px;
-}
-
 .header {
     text-align: center;
     margin-bottom: 48px;
@@ -46,6 +40,10 @@
 }
 
 /* 🌐 Navigation Bar Styles */
+.blog-page .navbar {
+    margin-top: 3rem;
+}
+
 .navbar {
     position: sticky;
     top: 20px;
@@ -109,28 +107,6 @@
     letter-spacing: -1px;
 }
 
-.cta-button {
-    background-color: #63CFC0;
-    color: black;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: white;
-    color: black;
-}
-
-/* 🌟 Visi dan Misi Styling */
-.visi-misi {
-    display: flex;
-    gap: 32px;
-    margin-top: 3rem;
-}
-
 .smoothen-gradient-box {
     width: 100%;
     height: 200px;
@@ -141,6 +117,13 @@
     align-items: center;
     font-family: sans-serif;
     margin-top: 35rem;
+}
+
+/* 🌟 Visi dan Misi Styling */
+.visi-misi {
+    display: flex;
+    gap: 32px;
+    margin-top: 3rem;
 }
 
 .homepage-container-boxes {
@@ -157,6 +140,7 @@
     transform: translate(-50%, -50%);
 }
 
+<!-- ℹ️ About Us Styling --->
 .about-page {
     min-height: 100vh;
     padding-top: 80px;
@@ -208,7 +192,103 @@
     margin: 0 0 8px 0;
 }
 
+<!-- 📞 Call To Action Styling --->
 .about-cta {
     text-align: center;
     margin: 24px auto 80px;
+}
+
+.cta-button {
+    background-color: #63CFC0;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* 🧩 Blog (CRUD) Styling */
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.create-section,
+.edit-section,
+.delete-section {
+    background-color: #0b0b0b;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 48px;
+}
+
+.create-form,
+.edit-form,
+.delete-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.create-form input,
+.edit-form input,
+textarea,
+select {
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.create-form input::placeholder,
+textarea::placeholder {
+    color: #777;
+}
+
+.blog-post {
+    background-color: #0b0b0b;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.blog-post h3 {
+    color: #63CFC0;
+    margin-bottom: 8px;
+}
+
+.blog-post .date {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.blog-post .content {
+    color: #c7c7c7;
+    margin-bottom: 16px;
+}
+
+.crud-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.delete-btn {
+    background-color: #c75151;
+    color: white;
+}
+.delete-btn:hover {
+    background-color: #ff6666;
 }

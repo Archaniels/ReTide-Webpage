@@ -20,9 +20,9 @@
         <!-- 🌐 Navigation Bar -->
         <nav class="navbar">
             <ul>
-                <li><a href="/home.html" class="active">Home</a></li>
+                <li><a href="/home.html">Home</a></li>
                 <li><a href="/about.html">About Us</a></li>
-                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/blog.html" class="active">Blog</a></li>
                 <li><a href="/contact.html">Contact</a></li>
                 <li><a href="/account.html">Account</a></li>
             </ul>
@@ -35,11 +35,78 @@
             <p>Cerita, berita, dan update terbaru tentang pelestarian laut</p>
         </div>
 
-        <div class="actions">
-            
-        </div>
+        <!-- 🟢 CREATE: Add Blog -->
+        <section class="create-section">
+            <h2 class="section-title">Create a New Post</h2>
+            <form class="create-form" action="#" method="POST">
+                <input type="text" name="title" placeholder="Post Title" required>
+                <textarea name="content" placeholder="Write your blog content here..." rows="5" required></textarea>
+                <button type="submit" class="btn">Add Post</button>
+            </form>
+        </section>
 
-        <div class="blog-grid" id="blogGrid"></div>
+        <hr style="margin: 3rem 0; border: 1px solid #333;">
+
+        <!-- 🟣 READ: Blog List -->
+        <section class="blog-list">
+            <h2 class="section-title">All Blog Posts</h2>
+
+            <!-- Blog Post 1 -->
+            <article class="blog-post">
+                <h3>🌊 Menjaga Kebersihan Laut</h3>
+                <p class="date">Published on October 10, 2025</p>
+                <p class="content">Sampah plastik di laut menjadi ancaman serius bagi kehidupan laut. Mari kita mulai
+                    dari hal kecil seperti mengurangi penggunaan plastik sekali pakai...</p>
+                <div class="crud-buttons">
+                    <button class="btn">Edit</button>
+                    <button class="btn delete-btn">Delete</button>
+                </div>
+            </article>
+
+            <!-- Blog Post 2 -->
+            <article class="blog-post">
+                <h3>🐢 Konservasi Penyu di Pantai Selatan</h3>
+                <p class="date">Published on September 25, 2025</p>
+                <p class="content">Program pelestarian penyu berhasil meningkatkan jumlah telur yang menetas hingga 30%.
+                    Masyarakat sekitar berperan penting dalam menjaga ekosistem pantai...</p>
+                <div class="crud-buttons">
+                    <button class="btn">Edit</button>
+                    <button class="btn delete-btn">Delete</button>
+                </div>
+            </article>
+        </section>
+
+        <hr style="margin: 3rem 0; border: 1px solid #333;">
+
+        <!-- 🟡 UPDATE -->
+        <section class="edit-section">
+            <h2 class="section-title">Edit Post</h2>
+            <form class="edit-form" action="#" method="POST">
+                <select name="post-to-edit">
+                    <option value="">Pilih post yang ingin diedit</option>
+                    <option value="1">Menjaga Kebersihan Laut</option>
+                    <option value="2">Konservasi Penyu di Pantai Selatan</option>
+                </select>
+                <input type="text" name="edit-title" placeholder="New Title">
+                <textarea name="edit-content" rows="4" placeholder="New Content..."></textarea>
+                <button type="submit" class="btn">Update Post</button>
+            </form>
+        </section>
+
+        <!-- 🔴 DELETE -->
+        <section class="delete-section">
+            <h2 class="section-title">Delete Post (Placeholder)</h2>
+            <form class="delete-form" action="#" method="POST">
+                <select name="post-to-delete">
+                    <option value="">Select a post to delete</option>
+                    <option value="1">Menjaga Kebersihan Laut</option>
+                    <option value="2">Konservasi Penyu di Pantai Selatan</option>
+                </select>
+                <button type="submit" class="btn delete-btn">Delete Post</button>
+            </form>
+        </section>
+
+        <hr style="margin: 3rem 0; border: 1px solid #333;">
     </div>
 </body>
 
