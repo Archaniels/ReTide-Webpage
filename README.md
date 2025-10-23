@@ -31,7 +31,7 @@ Hasil dari penelitian ini diharapkan dapat memberikan dasar fondasi yang kuat un
 
 ## Pembagian Tugas
 
-• DANIYAL ARSHAQ SUDRAJAT - 103022330076: Homepage, About Us, Blog (CRUD) (WIP).
+• DANIYAL ARSHAQ SUDRAJAT - 103022330076: Homepage, About Us, Blog (CRUD).
 
 • RADITYA MAHESWARA PUTRA - 103022330026: ...
 
