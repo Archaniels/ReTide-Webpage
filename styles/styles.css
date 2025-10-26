@@ -44,10 +44,6 @@
     margin-top: 3rem;
 }
 
-.account-page .navbar {
-    margin-top: 3rem;
-}
-
 .navbar {
     position: sticky;
     top: 20px;
@@ -246,7 +242,8 @@
 .create-form input,
 .edit-form input,
 textarea,
-select {
+select,
+.account-form input {
     padding: 12px;
     border: 1px solid #333;
     border-radius: 10px;
@@ -292,7 +289,41 @@ textarea::placeholder {
 .delete-btn {
     background-color: #c75151;
     color: white;
+    padding: 12px;
+    border-radius: 25px;
 }
 .delete-btn:hover {
     background-color: #ff6666;
 }
+
+/* Account Page Styling */
+.account-page {
+    min-height: 10vh;
+    padding-top: 80px;
+    background-color: black;
+}
+
+.account-page .navbar {
+    margin-top: 3rem;
+}
+
+.account-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.account-settings {
+    background-color: #0b0b0b;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 24px;
+}
+

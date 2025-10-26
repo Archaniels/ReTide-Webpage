@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
+    <script src="scripts/account.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <title>Account</title>
 </head>
 
-<body>
+<body class="defaultTheme">
     <div class="account-page">
         <!-- 🌐 Navigation Bar -->
         <nav class="navbar">
@@ -23,6 +26,32 @@
                 <li><a href="account.html" class="active">Account</a></li>
             </ul>
         </nav>
+    </div>
+
+    <div class="account-container">
+        <div class="header">
+            <h1>Account</h1>
+            <p>Pengaturan akun, profil, dan preferensi Anda.</p>
+        </div>
+
+        <section class="account-settings">
+            <h2 class="section-title">Account Settings</h2>
+            <form class="account-form" action="#" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+
+                <label for="notelp">No Telp:</label>
+                <input type="text" id="notelp" name="notelp">
+
+                <button type="submit" class="btn">Update Settings</button>
+            </form>
+            <div>
+                <button id="delete-btn" class="btn delete-btn">Delete Account</button>
+            </div>
+        </section>
     </div>
 </body>
 
