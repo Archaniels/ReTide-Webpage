@@ -296,34 +296,5 @@ textarea::placeholder {
     background-color: #ff6666;
 }
 
-/* Account Page Styling */
-.account-page {
-    min-height: 10vh;
-    padding-top: 80px;
-    background-color: black;
-}
 
-.account-page .navbar {
-    margin-top: 3rem;
-}
-
-.account-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 24px;
-}
-
-.account-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 16px;
-}
-
-.account-settings {
-    background-color: #0b0b0b;
-    border: 1px solid #222;
-    border-radius: 16px;
-    padding: 24px;
-}
 

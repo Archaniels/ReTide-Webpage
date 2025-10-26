@@ -1,11 +1,11 @@
 // Data akun dummy (simulasi JSON yang sudah ada)
-const DUMMY_DATA = {
-    username: "namaanda",
-    email: "emailanda@contoh.com",
-    notelp: "081122334455"
+let DUMMY_DATA = {
+    username: "Bagaskara",
+    email: "Bagaskara@gmail.com",
+    notelp: ""
 };
 
-const STORAGE_KEY = 'userData';
+let STORAGE_KEY = 'userData';
 
 function resetForm() {
     document.getElementById('username').value = '';

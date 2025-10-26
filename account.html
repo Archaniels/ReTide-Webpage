@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/account.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <script src="scripts/account.js" defer></script>
@@ -38,19 +38,17 @@
             <h2 class="section-title">Account Settings</h2>
             <form class="account-form" action="#" method="POST">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
+                <input type="text" id="username" name="username" required>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="email" required>
 
                 <label for="notelp">No Telp:</label>
                 <input type="text" id="notelp" name="notelp">
 
                 <button type="submit" class="btn">Update Settings</button>
             </form>
-            <div>
-                <button id="delete-btn" class="btn delete-btn">Delete Account</button>
-            </div>
+            <button id="delete-btn" class="btn delete-btn">Delete Account</button>
         </section>
     </div>
 </body>
