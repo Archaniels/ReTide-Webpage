@@ -40,6 +40,7 @@
 }
 
 /* 🌐 Navigation Bar Styles */
+
 .blog-page .navbar {
     margin-top: 3rem;
 }
@@ -296,5 +297,20 @@ textarea::placeholder {
     background-color: #ff6666;
 }
 
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
 
+.contact-content {
+    margin-top: 24px;
+    text-align: center;
+    background-color: #0b0b0b;
+    padding: 24px;
+    border-radius: 16px;
+    width: 50%;
+    margin: 0 auto;
+    color: white;
+}
 
