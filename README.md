@@ -33,6 +33,6 @@ Hasil dari penelitian ini diharapkan dapat memberikan dasar fondasi yang kuat un
 
 • DANIYAL ARSHAQ SUDRAJAT - 103022330076: Homepage, About Us, Blog (CRUD).
 
-• RADITYA MAHESWARA PUTRA - 103022330026: ...
+• RADITYA MAHESWARA PUTRA - 103022330026: Account (CRUD)
 
-• ADMIRAL MANAN BADAWI - 103022300060: ...
+• ADMIRAL MANAN BADAWI - 103022300060: Donasi (CRUD)
