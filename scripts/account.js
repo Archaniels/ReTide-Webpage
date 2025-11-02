@@ -1,11 +1,12 @@
-// Data akun dummy (simulasi JSON yang sudah ada)
-let DUMMY_DATA = {
+// Data akun dummy (simulasi JSON yang sudah ada) - DIGUNAKAN SEBAGAI TEMPLATE AWAL
+const DUMMY_DATA = {
     username: "Bagaskara",
     email: "Bagaskara@gmail.com",
     notelp: ""
 };
 
-let STORAGE_KEY = 'userData';
+// Data ini akan hilang ketika halaman di-refresh.
+let CURRENT_USER_DATA = { ...DUMMY_DATA }; 
 
 function resetForm() {
     document.getElementById('username').value = '';
@@ -15,9 +16,8 @@ function resetForm() {
 
 // Memuat data saat halaman dimuat
 function loadData() {
-    // Coba ambil data dari localStorage
-    const savedData = localStorage.getItem(STORAGE_KEY);
-    const data = savedData ? JSON.parse(savedData) : DUMMY_DATA;
+    // Data dimuat langsung dari objek CURRENT_USER_DATA (in-memory JSON object)
+    const data = CURRENT_USER_DATA; 
 
     // Isi formulir
     document.getElementById('username').value = data.username;
@@ -36,8 +36,8 @@ function saveData(event) {
         notelp: document.getElementById('notelp').value
     };
     
-    // Simpan objek data ke localStorage sebagai JSON string
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedData));
+    // 💾 SIMPAN: Perbarui objek CURRENT_USER_DATA secara langsung
+    CURRENT_USER_DATA = updatedData;
     
     alert('Pengaturan berhasil disimpan!');
 }
@@ -49,9 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Tambahkan event submit ke formulir
     const form = document.querySelector('.account-form');
-    form.addEventListener('submit', saveData);
+    if (form) {
+        form.addEventListener('submit', saveData);
+    }
 
-    // Ambil tombol delete berdasarkan ID yang sudah Anda buat (asumsi ID-nya adalah 'delete-btn')
+    // Ambil tombol delete
     const deleteButton = document.getElementById('delete-btn');
 
     // Tambahkan event listener 'click' ke tombol tersebut
@@ -60,21 +62,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Menghapus data akun (BARU)
+// Menghapus data akun
 function deleteData() {
     // Tampilkan konfirmasi kepada pengguna
     const isConfirmed = confirm("Apakah Anda yakin ingin menghapus akun? Tindakan ini tidak dapat dibatalkan.");
 
     if (isConfirmed) {
-        // Hapus data JSON dari localStorage
-        localStorage.removeItem(STORAGE_KEY);
+        // 🗑️ HAPUS: Reset objek CURRENT_USER_DATA menjadi objek kosong (atau nilai default)
+        CURRENT_USER_DATA = {
+            username: "",
+            email: "",
+            notelp: ""
+        }; 
         
         // Kosongkan formulir di tampilan
         resetForm();
 
         alert('Akun berhasil dihapus.');
-        
-        // Opsional: Muat ulang halaman untuk mencerminkan status akun yang dihapus
-        // window.location.reload(); 
     }
 }
