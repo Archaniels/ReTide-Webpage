@@ -16,7 +16,7 @@ function resetForm() {
 
 // Memuat data saat halaman dimuat
 function loadData() {
-    // Data dimuat langsung dari objek CURRENT_USER_DATA (in-memory JSON object)
+    // Data dimuat langsung dari objek CURRENT_USER_DATA
     const data = CURRENT_USER_DATA; 
 
     // Isi formulir
@@ -36,7 +36,7 @@ function saveData(event) {
         notelp: document.getElementById('notelp').value
     };
     
-    // 💾 SIMPAN: Perbarui objek CURRENT_USER_DATA secara langsung
+    // Perbarui objek CURRENT_USER_DATA secara langsung
     CURRENT_USER_DATA = updatedData;
     
     alert('Pengaturan berhasil disimpan!');
@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // Menghapus data akun
 function deleteData() {
     // Tampilkan konfirmasi kepada pengguna
-    const isConfirmed = confirm("Apakah Anda yakin ingin menghapus akun? Tindakan ini tidak dapat dibatalkan.");
+    const isConfirmed = confirm("Apakah Anda yakin ingin menghapus akun?");
 
     if (isConfirmed) {
-        // 🗑️ HAPUS: Reset objek CURRENT_USER_DATA menjadi objek kosong (atau nilai default)
+        // Reset objek CURRENT_USER_DATA menjadi objek kosong 
         CURRENT_USER_DATA = {
             username: "",
             email: "",
