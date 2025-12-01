@@ -1,0 +1,133 @@
+.defaultTheme {
+  background-color: black;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🌐 Navbar Styling (seperti di blog) */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    padding: 20px 0;
+    margin: 0 auto;
+    border: none;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #63CFC0;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.navbar a:hover {
+    color: white;
+    text-shadow: 0 0 6px #63CFC0;
+}
+
+.navbar a.active {
+    color: white;
+    text-shadow: 0 0 8px #63CFC0;
+}
+
+
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.header h1 {
+  font-size: 3rem;
+  color: #63CFC0;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #c7c7c7;
+  font-size: 1.1rem;
+}
+
+.donation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.donation-form-section,
+.donation-list-section {
+  background-color: #0b0b0b;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.donation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.donation-form input,
+.donation-form textarea {
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn {
+  background-color: #63CFC0;
+  color: black;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn:hover {
+  background-color: #7ae0d3;
+}
+
+.delete-btn {
+  background-color: #c75151;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #ff6666;
+}
+
+.donation-card {
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.donation-card h3 {
+  color: #63CFC0;
+}
+
+.card-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+}

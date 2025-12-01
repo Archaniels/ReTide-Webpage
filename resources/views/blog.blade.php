@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Script -->
+    <script src="{{ asset('assets/js/blog-crud.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>Blog</title>
+</head>
+
+<body class="defaultTheme">
+    <div class="blog-page">
+        <!-- 🌐 Navigation Bar -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/blog" class="active">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/account">Account</a></li>
+                <li><a href="/marketplace">Marketplace</a></li>
+                <li><a href="/donation">Donation</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="blog-container">
+        <div class="header">
+            <h1>Blog</h1>
+            <p>Cerita, berita, dan update terbaru tentang pelestarian laut</p>
+        </div>
+
+        <!-- 🟢 CREATE -->
+        <section class="create-section">
+            <h2 class="section-title">Create a New Post</h2>
+            <form class="create-form" action="#" method="POST">
+                <input type="text" name="title" placeholder="Post Title" required>
+                <textarea name="content" placeholder="Write your blog content here..." rows="5" required></textarea>
+                <button type="submit" class="btn">Add Post</button>
+            </form>
+        </section>
+
+        <hr style="margin: 3rem 0; border: 1px solid #333;">
+
+        <!-- 🟣 READ -->
+        <section class="blog-list">
+            <h2 class="section-title">All Blog Posts</h2>
+        </section>
+    </div>
+</body>
+
+</html>
