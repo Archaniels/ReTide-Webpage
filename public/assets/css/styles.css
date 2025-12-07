@@ -1,15 +1,32 @@
+/* Add this at the very top to prevent horizontal scroll */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: hidden;
+}
+
 .defaultTheme {
+    overflow: hidden;
     background-color: black;
     color: white;
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Times New Roman', Times, serif;
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Times New Roman",
+        Times, serif;
 }
 
 .homepage {
     background-image: url("../img/Homepage Background.jpg");
     background-size: cover;
     background-position: center;
-    height: 100vh;
-    padding-top: 80px;
+    height: 100rem;
+    width: 100%;
+    /* padding-top: 100px; */
 }
 
 .header {
@@ -19,7 +36,7 @@
 
 .header h1 {
     font-size: 3rem;
-    color: #63CFC0;
+    color: #63cfc0;
     margin-bottom: 8px;
     letter-spacing: -2px;
 }
@@ -30,13 +47,13 @@
 }
 
 .btn {
-    background-color: #63CFC0;
+    background-color: #63cfc0;
     color: black;
     padding: 12px 24px;
     border: none;
     border-radius: 25px;
     font-weight: bold;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 /* 🌐 Navigation Bar Styles */
@@ -51,7 +68,6 @@
     z-index: 1000;
     display: flex;
     justify-content: center;
-    /* border: 2px solid rgb(43, 43, 43);*/
     border-radius: 10px;
     margin: 16px auto;
     margin-top: -2rem;
@@ -71,19 +87,19 @@
 
 .navbar a {
     text-decoration: none;
-    color: #63CFC0;
+    color: #63cfc0;
     font-weight: bold;
     transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .navbar a:hover {
     color: white;
-    text-shadow: 0 0 5px #63CFC0;
+    text-shadow: 0 0 5px #63cfc0;
 }
 
 .navbar a.active {
     color: white;
-    text-shadow: 0 0 8px #63CFC0;
+    text-shadow: 0 0 8px #63cfc0;
 }
 
 /* 🌟 Hero Text Styling */
@@ -94,30 +110,30 @@
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
+    width: 90%;
+    max-width: 800px;
 }
 
 .hero-text h1 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 500;
     margin-bottom: 0.5rem;
     letter-spacing: -2px;
 }
 
 .hero-text p {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     margin-bottom: 1.5rem;
     letter-spacing: -1px;
 }
 
 .smoothen-gradient-box {
+    position: absolute;
+    top: 18rem;
+    left: 0;
     width: 100%;
     height: 200px;
     background-image: linear-gradient(to top, #000000, #e52e7100);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    margin-top: 35rem;
 }
 
 /* 🌟 Visi dan Misi Styling */
@@ -125,6 +141,7 @@
     display: flex;
     gap: 32px;
     margin-top: 3rem;
+    padding: 0 1rem;
 }
 
 .homepage-container-boxes {
@@ -132,16 +149,15 @@
     height: 130px;
     display: flex;
     align-items: center;
-    margin-left: 480px;
     background-color: white;
     border-radius: 25px;
     position: absolute;
     top: 1502px;
-    left: 150px;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
-<!-- ℹ️ About Us Styling --->
+/* ℹ️ About Us Styling */
 .about-page {
     min-height: 100vh;
     padding-top: 80px;
@@ -163,8 +179,8 @@
 }
 
 .section-title {
-    font-size: 2.25rem;
-    color: #63CFC0;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    color: #63cfc0;
     margin-bottom: 8px;
     letter-spacing: -1px;
     text-align: center;
@@ -193,20 +209,21 @@
     margin: 0 0 8px 0;
 }
 
-<!-- 📞 Call To Action Styling --->
+/* 📞 Call To Action Styling */
 .about-cta {
     text-align: center;
     margin: 24px auto 80px;
 }
 
 .cta-button {
-    background-color: #63CFC0;
+    background-color: #63cfc0;
     color: black;
     padding: 10px 20px;
     border-radius: 25px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
 }
 
 .cta-button:hover {
@@ -250,7 +267,7 @@ select,
     border-radius: 10px;
     background-color: black;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .create-form input::placeholder,
@@ -267,7 +284,7 @@ textarea::placeholder {
 }
 
 .blog-post h3 {
-    color: #63CFC0;
+    color: #63cfc0;
     margin-bottom: 8px;
 }
 
@@ -309,8 +326,8 @@ textarea::placeholder {
     background-color: #0b0b0b;
     padding: 24px;
     border-radius: 16px;
-    width: 50%;
+    width: 90%;
+    max-width: 600px;
     margin: 0 auto;
     color: white;
 }
-
