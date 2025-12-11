@@ -82,7 +82,7 @@
 
     <div class="account-container" style="margin-top: 120px;">
         <div class="header">
-            <h1>Account</h1>
+            <h1 class="font-semibold text-[#7ae0d3]">Account</h1>
             <p>Pengaturan akun, profil, dan preferensi Anda.</p>
         </div>
 

@@ -88,7 +88,7 @@
         <!-- Header -->
         <div class="marketplace-container" style="margin-top: 60px;">
             <div class="header">
-                <h1>Marketplace</h1>
+                <h1 class="font-semibold text-[#7ae0d3]">Marketplace</h1>
                 <p>Produk ramah lingkungan dari sampah laut yang didaur ulang</p>
             </div>
 

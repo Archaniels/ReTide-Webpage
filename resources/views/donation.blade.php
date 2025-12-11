@@ -84,7 +84,7 @@
 
   <div class="donation-container" style="margin-top: 120px;">
     <div class="header">
-      <h1>Donation</h1>
+      <h1 class="font-semibold text-[#7ae0d3]">Donation</h1>
       <p>Berikan kontribusi Anda untuk mendukung kegiatan konservasi laut kami.</p>
     </div>
 
