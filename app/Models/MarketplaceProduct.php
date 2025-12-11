@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class MarketplaceProduct extends Model
 {
-    //
+    protected $table = 'marketplace_products';
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'image_path',
+    ];
 }

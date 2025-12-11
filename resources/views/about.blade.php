@@ -84,10 +84,17 @@
         <!-- Hero -->
         <section class="about-hero">
             <div class="hero-text">
-                <h1 class="font-semibold text-[#7ae0d3]">About ReTide</h1>
-                <p>Membantu masyarakat untuk menjaga ekosistem laut melalui aksi nyata.</p>
+                <h1 class="font-semibold text-[#7ae0d3] text-left">About Us</h1>
+                <p class="text-left">Membantu masyarakat untuk menjaga ekosistem laut melalui aksi nyata.</p>
             </div>
         </section>
+
+        <div style="width: 100%; height: auto; object-fit: fill; margin-top: -80px;">
+            <img src="assets/img/about_us_decoration.jpg" class="rounded-3xl"
+                style="width: 100%; height: 400px; object-fit: cover;" alt="About Us Decoration">
+        </div>
+
+
 
         <!-- Siapa Kami? -->
         <section class="about-section" style="align-items: center;">
