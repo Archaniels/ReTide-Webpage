@@ -84,7 +84,7 @@
         <!-- Hero -->
         <section class="about-hero">
             <div class="hero-text">
-                <h1>About ReTide</h1>
+                <h1 class="font-semibold text-[#7ae0d3]">About ReTide</h1>
                 <p>Membantu masyarakat untuk menjaga ekosistem laut melalui aksi nyata.</p>
             </div>
         </section>

@@ -82,7 +82,7 @@
 
     <div class="blog-container" style="margin-top: 8rem;">
         <div class="header">
-            <h1>Blog</h1>
+            <h1 class="font-semibold text-[#7ae0d3]">Blog</h1>
             <p>Cerita, berita, dan update terbaru tentang pelestarian laut</p>
         </div>
 

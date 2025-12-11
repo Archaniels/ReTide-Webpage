@@ -88,7 +88,7 @@
 
     <div class="contact-container" style="margin-top: 8rem; margin-bottom: 9rem;">
         <div class="header">
-            <h1>Contact</h1>
+            <h1 class="font-semibold text-[#7ae0d3]">Contact</h1>
         </div>
         <div class="contact-content">
             <p>Email: <span style="font-weight: bolder;"><a
