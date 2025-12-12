@@ -12,8 +12,8 @@ class MarketplaceProductController extends Controller
      */
     public function index()
     {
-        $products = MarketplaceProduct::all();
-        return view('products.index', ['products' => $products]);
+        $products = MarketplaceProduct::orderBy('created_at', 'desc')->get();
+        return view('marketplace.index', ['products' => $products]);
     }
 
     /**
@@ -21,7 +21,7 @@ class MarketplaceProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('marketplace.create');
     }
 
     /**
@@ -30,9 +30,10 @@ class MarketplaceProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric|min:0',
+            'image_path' => 'nullable|max:255',
         ]);
 
         MarketplaceProduct::create([
@@ -41,7 +42,8 @@ class MarketplaceProductController extends Controller
             'price' => $request->price,
             'image_path' => $request->image_path,
         ]);
-        return redirect('/')->with('success', 'Product berhasil ditambahkan!');
+
+        return redirect()->route('marketplace.index')->with('success', 'Product berhasil ditambahkan!');
     }
 
     /**
@@ -49,7 +51,8 @@ class MarketplaceProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = MarketplaceProduct::findOrFail($id);
+        return view('marketplace.show', compact('product'));
     }
 
     /**
@@ -58,7 +61,7 @@ class MarketplaceProductController extends Controller
     public function edit(string $id)
     {
         $product = MarketplaceProduct::findOrFail($id);
-        return view('products.edit', compact('product'));
+        return view('marketplace.edit', compact('product'));
     }
 
     /**
@@ -66,9 +69,17 @@ class MarketplaceProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'price' => 'required|numeric|min:0',
+            'image_path' => 'nullable|max:255',
+        ]);
+
         $product = MarketplaceProduct::findOrFail($id);
         $product->update($request->all());
-        return redirect('/')->with('success', 'Product berhasil diperbarui!');
+
+        return redirect()->route('marketplace.index')->with('success', 'Product berhasil diperbarui!');
     }
 
     /**
@@ -78,6 +89,7 @@ class MarketplaceProductController extends Controller
     {
         $product = MarketplaceProduct::findOrFail($id);
         $product->delete();
-        return redirect('/')->with('success', 'Product berhasil dihapus!');
+
+        return redirect()->route('marketplace.index')->with('success', 'Product berhasil dihapus!');
     }
 }

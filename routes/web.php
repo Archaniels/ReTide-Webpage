@@ -38,15 +38,17 @@ Route::get('/donation', function () {
 });
 
 // Blog Posts CRUD
-Route::get('/blog', [BlogPostsController::class, 'index']);
-Route::post('/blog', [BlogPostsController::class, 'store']);
-Route::get('/blog/{id}/edit', [BlogPostsController::class, 'edit']);
-Route::put('/blog/{id}', [BlogPostsController::class, 'update']);
-Route::delete('/blog/{id}', [BlogPostsController::class, 'delete']);
+Route::get('/blog', [BlogPostsController::class, 'index'])->name('blog.index');
+Route::get('/blog/create', [BlogPostsController::class, 'create'])->name('blog.create');
+Route::post('/blog', [BlogPostsController::class, 'store'])->name('blog.store');
+Route::get('/blog/{id}/edit', [BlogPostsController::class, 'edit'])->name('blog.edit');
+Route::put('/blog/{id}', [BlogPostsController::class, 'update'])->name('blog.update');
+Route::delete('/blog/{id}', [BlogPostsController::class, 'destroy'])->name('blog.destroy');
 
 // Marketplace Products CRUD
-Route::get('/marketplace', [MarketplaceProductController::class, 'index']);
-Route::post('/marketplace', [MarketplaceProductController::class, 'store']);
-Route::get('/marketplace/{id}/edit', [MarketplaceProductController::class, 'edit']);
-Route::put('/marketplace/{id}', [MarketplaceProductController::class, 'update']);
-Route::delete('/marketplace/{id}', [MarketplaceProductController::class, 'delete']);
+Route::get('/marketplace', [MarketplaceProductController::class, 'index'])->name('marketplace.index');
+Route::get('/marketplace/create', [MarketplaceProductController::class, 'create'])->name('marketplace.create');
+Route::post('/marketplace', [MarketplaceProductController::class, 'store'])->name('marketplace.store');
+Route::get('/marketplace/{id}/edit', [MarketplaceProductController::class, 'edit'])->name('marketplace.edit');
+Route::put('/marketplace/{id}', [MarketplaceProductController::class, 'update'])->name('marketplace.update');
+Route::delete('/marketplace/{id}', [MarketplaceProductController::class, 'destroy'])->name('marketplace.destroy');
