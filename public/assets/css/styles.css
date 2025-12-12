@@ -275,6 +275,14 @@ textarea::placeholder {
 }
 
 .blog-post {
+    /* background-color: #0b0b0b; */
+    /* border: 1px solid #222; */
+    /* border-radius: 16px; */
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.blog-item {
     background-color: #0b0b0b;
     border: 1px solid #222;
     border-radius: 16px;

@@ -80,32 +80,73 @@
         </nav>
     </header>
 
-    <form action="{{ route('blog.update', $blog->id) }}" method="POST" class="max-w-sm mx-auto space-y-4">
+    <!-- Edit Blog Post Title -->
+    <div style="margin-top: 150px;">
+        <h1 class="font-semibold text-[#7ae0d3] text-5xl justify-center text-center">Edit Blog Post</h1>
+        <p class="text-center" style="margin-top: 16px;">Edit blog post!</p>
+    </div>
+
+    <!-- Back Button-->
+    <div class="flex justify-center mt-7">
+        <button type="button" class="bg-[#7ae0d3] text-black font-semibold py-2 px-4 rounded-full">
+            <a href="/blog">Kembali</a>
+        </button>
+    </div>
+
+    <!-- Success Message -->
+    @if(session('success'))
+        <div class="bg-transparent text-center py-4 lg:px-4">
+            <div class="p-2 bg-green-800 items-center text-green-100 leading-none lg:rounded-full flex lg:inline-flex"
+                role="alert">
+                <span class="flex rounded-full bg-green-300 uppercase px-2 py-1 text-xs font-bold mr-3">Success</span>
+                <span class="font-semibold mr-2 text-left flex-auto">Blog post berhasil disimpan!</span>
+            </div>
+        </div>
+    @endif
+
+    <!-- Error Message -->
+    @if(session('error'))
+        <div class="bg-transparent text-center py-4 lg:px-4">
+            <div class="p-2 bg-red-800 items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex"
+                role="alert">
+                <span class="flex rounded-full bg-red-600 uppercase px-2 py-1 text-xs font-bold mr-3">Error</span>
+                <span class="font-semibold mr-2 text-left flex-auto">Terjadi kesalahan ketika menyimpan blog post!</span>
+            </div>
+        </div>
+    @endif
+
+    <!-- Edit Form -->
+    <form action="{{ route('blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data"
+        class="max-w-sm mx-auto space-y-4 mt-6">
         @csrf
         @method('PUT')
+        <!-- Title Form -->
         <div>
             <label for="title" class="block mb-2.5 text-sm font-medium text-heading">Title</label>
-            <input type="text" id="title"
-                class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
+            <input type="text" id="title" name="title"
+                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 placeholder:text-body"
                 placeholder="" required />
         </div>
+        <!-- Content Form -->
         <div>
             <label for="content" class="block mb-2.5 text-sm font-medium text-heading">Content</label>
-            <textarea type="text" id="content"
-                class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
+            <textarea type="text" id="content" name="content"
+                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
                 placeholder="" required></textarea>
         </div>
+        <!-- Image Form -->
         <div>
             <label for="image" class="block mb-2.5 text-sm font-medium text-heading">Image</label>
-            <input type="file" id="image"
-                class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
-                placeholder="" required />
+            <input type="file" id="image" name="image"
+                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
+                placeholder="" />
         </div>
 
+        <!-- Cancel and Update Button -->
+        <button type="reset"
+            class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">Cancel</button>
         <button type="submit"
-            class="text-white bg-success box-border border border-transparent hover:bg-success-strong focus:ring-4 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none">Update</button>
-        <button type="button"
-            class="text-white bg-danger box-border border border-transparent hover:bg-danger-strong focus:ring-4 focus:ring-danger-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none">Cancel</button>
+            class="text-black bg-[#7ae0d3] box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">Update</button>
     </form>
 
     <!-- Footer -->
