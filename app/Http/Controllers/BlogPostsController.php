@@ -72,7 +72,7 @@ class BlogPostsController extends Controller
     {
         $blog = BlogPost::findOrFail($id);
         $blog->update($request->all());
-        return redirect('/blog/edit')->with('success', 'Blog berhasil diperbarui!');
+        return redirect('/blog/' . $id . '/edit')->with('success', 'Blog berhasil diperbarui!');
     }
 
     /**

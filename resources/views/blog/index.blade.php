@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Style -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/account.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.css') }}">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -34,11 +34,11 @@
 
 
     <!-- Custom Scripts -->
-    <script src="{{ asset('assets/js/account.js') }}" defer></script>
+    <!-- <script src="{{ asset('assets/js/account.js') }}" defer></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
 
-    <title>Account</title>
+    <title>Edit Blog | Re:Tide</title>
 </head>
 
 <body class="defaultTheme">
@@ -92,7 +92,7 @@
 
     <!-- Create Blog Post Button -->
     <div class="justify-center text-center mt-7">
-        <a href="{{ route('blog.create') }}" class="btn btn-xs btn-info">Create Blog Post</a>
+        <a href="{{ route('blog.create') }}" class="btn btn-xs btn-info">✍️ Create Blog Post</a>
     </div>
 
     <hr style="margin: 3rem 0; border: 1px solid #333;">
@@ -100,6 +100,49 @@
     <section class="blog-list">
         <h2 class="section-title font-semibold text-[#7ae0d3] text-4xl justify-center text-center">All Blog Posts</h2>
     </section>
+
+    <section class="blog-post">
+        @foreach($blog as $blogPosts)
+            <div class="blog-item">
+                <img src="{{ asset('storage/' . $blogPosts->image) }}"
+                    class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Blog Image">
+
+                <h3 class="text-2xl font-bold mt-6">{{ $blogPosts->title }}</h3>
+
+                <p class="text-base">{{ $blogPosts->content }}</p>
+
+
+                <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
+                    <p class="font-semibold">Created At:</p>
+                    <span class="ml-1 italic">{{ $blogPosts->created_at->format('F j, Y, g:i a') }}</span>
+                </div>
+
+                <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
+                    <p class="font-semibold">Updated At:</p>
+                    <span class="ml-1 italic">{{ $blogPosts->updated_at->format('F j, Y, g:i a') }}</span>
+                </div>
+
+                <div class="flex">
+                    <div class="mt-7">
+                        <a href="{{ route('blog.edit', $blogPosts->id) }}"
+                            class="text-white bg-green-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">✏️
+                            Edit</a>
+                    </div>
+                    <div class="ml-3 mt-5">
+                        <form action="{{ route('blog.destroy', $blogPosts->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5"
+                                onclick="return confirm('Yakin hapus?')">🗑️
+                                Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </section>
+
 
     <!-- Footer -->
     <footer class="bg-neutral-primary-soft border border-default m-4 rounded-xl border-gray-900">
