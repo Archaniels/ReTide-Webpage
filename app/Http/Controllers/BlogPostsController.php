@@ -21,7 +21,7 @@ class BlogPostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('blog.create');
     }
 
     /**
@@ -32,15 +32,20 @@ class BlogPostsController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image_path' => 'required',
+            'image_path' => 'nullable|image',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('blog_images');
+        }
 
         BlogPost::create([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
-            'image_path' => $request->input('image_path'),
+            'image_path' => $imagePath,
         ]);
-        return redirect('/')->with('success', 'Blog berhasil ditambahkan!');
+        return redirect('/blog/create')->with('success', 'Blog berhasil ditambahkan!');
     }
 
     /**
@@ -67,7 +72,7 @@ class BlogPostsController extends Controller
     {
         $blog = BlogPost::findOrFail($id);
         $blog->update($request->all());
-        return redirect('/')->with('success', 'Blog berhasil diperbarui!');
+        return redirect('/blog/edit')->with('success', 'Blog berhasil diperbarui!');
     }
 
     /**
@@ -77,6 +82,6 @@ class BlogPostsController extends Controller
     {
         $blog = BlogPost::findOrFail($id);
         $blog->delete();
-        return redirect('/')->with('success', 'Blog berhasil dihapus!');
+        return redirect('/blog/')->with('success', 'Blog berhasil dihapus!');
     }
 }
