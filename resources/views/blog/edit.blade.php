@@ -33,7 +33,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
 
-    <title>Account</title>
+    <title>Edit Blog | Re:Tide</title>
 </head>
 
 <body class="defaultTheme">
