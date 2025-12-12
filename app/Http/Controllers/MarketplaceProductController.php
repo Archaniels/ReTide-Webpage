@@ -33,14 +33,16 @@ class MarketplaceProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
-            'image_path' => 'nullable|max:255',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $imagePath = $request->file('image_path')->store('marketplace_products');
 
         MarketplaceProduct::create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
-            'image_path' => $request->image_path,
+            'image_path' => $imagePath,
         ]);
 
         return redirect()->route('marketplace.index')->with('success', 'Product berhasil ditambahkan!');
@@ -51,8 +53,8 @@ class MarketplaceProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = MarketplaceProduct::findOrFail($id);
-        return view('marketplace.show', compact('product'));
+        // $product = MarketplaceProduct::findOrFail($id);
+        // return view('marketplace.show', compact('product'));
     }
 
     /**
@@ -73,7 +75,7 @@ class MarketplaceProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
-            'image_path' => 'nullable|max:255',
+            'image_path' => 'nullable|',
         ]);
 
         $product = MarketplaceProduct::findOrFail($id);

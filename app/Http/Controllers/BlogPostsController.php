@@ -32,13 +32,10 @@ class BlogPostsController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image_path' => 'nullable|image',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image_path')) {
-            $imagePath = $request->file('image_path')->store('blog_images');
-        }
+        $imagePath = $request->file('image_path')->store('blog_images');
 
         BlogPost::create([
             'title' => $request->input('title'),
