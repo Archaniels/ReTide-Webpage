@@ -4,122 +4,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Style -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/account.css') }}">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Libraries -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-    <!-- Lenis by Darkroom Engineering -->
-    <script src="https://unpkg.com/lenis@1.3.14/dist/lenis.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.15/dist/lenis.css">
-
-    <!-- GSAP + ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <!-- Anime.js -->
-    <script src="https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js"></script>
-
-    <!-- Custom Scripts -->
-    <script src="{{ asset('assets/js/account.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
-
-    <title>Account</title>
+    <title>Account - Re:Tide</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: white;
+        }
+        .text-tosca { color: #7ae0d3; }
+        .bg-input { background-color: #000000; border: 1px solid #333; }
+        .bg-input:focus { border-color: #7ae0d3; outline: none; }
+        .nav-link:hover { color: #7ae0d3; text-decoration: underline; }
+    </style>
 </head>
 
-<body class="defaultTheme">
-    <!-- Navbar -->
-    <header class="fixed w-full z-20 top-0 start-0">
-        <nav class="backdrop-blur-lg">
-            <div class="flex flex-wrap justify-center items-center mx-auto max-w-screen-xl p-4">
-                <a href="assets/img/ReTide_Logo.png" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="assets/img/ReTide_Logo.png" class="h-7" alt="ReTide Logo" />
-                </a>
-                <!-- <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <a href="/login" class="text-sm font-medium text-fg-brand hover:underline">Login</a>
-                </div> -->
-            </div>
-        </nav>
-        <nav class="backdrop-blur-lg border-y border-default border-default">
-            <div class="max-w-screen-xl px-4 py-3 mx-auto">
-                <div class="flex items-center justify-center">
-                    <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                        <li>
-                            <a href="/" class="text-heading hover:underline" aria-current="page">Home</a>
-                        </li>
-                        <li>
-                            <a href="/about" class="text-heading hover:underline">About Us</a>
-                        </li>
-                        <li>
-                            <a href="/blog" class="text-heading hover:underline">Blog</a>
-                        </li>
-                        <li>
-                            <a href="/contact" class="text-heading hover:underline">Contact</a>
-                        </li>
-                        <li>
-                            <a href="/account" class="text-heading hover:underline">Account</a>
-                        </li>
-                        <li>
-                            <a href="/marketplace" class="text-heading hover:underline">Marketplace</a>
-                        </li>
-                        <li>
-                            <a href="/donation" class="text-heading hover:underline">Donation</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<body>
+    <header class="w-full py-6">
+        <div class="flex flex-col items-center">
+            <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8 mb-6" alt="ReTide Logo">
+            <nav>
+                <ul class="flex space-x-8 text-sm font-medium">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/about" class="nav-link">About Us</a></li>
+                    <li><a href="/blog" class="nav-link">Blog</a></li>
+                    <li><a href="/contact" class="nav-link">Contact</a></li>
+                    <li><a href="/account" class="text-tosca underline">Account</a></li>
+                    <li><a href="/marketplace" class="nav-link">Marketplace</a></li>
+                    <li><a href="/donation" class="nav-link">Donation</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <div class="account-container" style="margin-top: 120px;">
-        <div class="header">
-            <h1 class="font-semibold text-[#7ae0d3]">Account</h1>
-            <p>Pengaturan akun, profil, dan preferensi Anda.</p>
+    <main class="max-w-screen-xl mx-auto px-10 mt-20">
+        <div class="mb-12">
+            <h1 class="text-6xl font-bold text-tosca mb-2">Account</h1>
+            <p class="text-xl">Halo, <span class="font-bold">{{ Auth::user()->name }}</span></p>
         </div>
 
-        <section class="account-settings">
-            <h2 class="section-title">Account Settings</h2>
-            <form class="account-form" action="#" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+        @if(session('success'))
+            <div class="mb-6 p-4 bg-tosca/10 border border-tosca text-tosca rounded transition-all">
+                {{ session('success') }}
+            </div>
+        @endif
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+            <form action="{{ route('account.update') }}" method="POST" class="space-y-6">
+                @csrf
+                @method('PUT')
+                
+                <h2 class="text-2xl font-semibold mb-6">Informasi Profil</h2>
+                
+                <div class="flex flex-col">
+                    <label class="text-sm text-gray-400 mb-2">Username</label>
+                    <input type="text" name="username" value="{{ old('username', $user->name) }}" class="bg-input p-3 rounded-md w-full">
+                </div>
 
-                <label for="notelp">No Telp:</label>
-                <input type="text" id="notelp" name="notelp">
+                <div class="flex flex-col">
+                    <label class="text-sm text-gray-400 mb-2">Email</label>
+                    <input type="email" name="email" value="{{ old('email', $user->email) }}" class="bg-input p-3 rounded-md w-full">
+                </div>
 
-                <button type="#" class="btn">Update Settings</button>
+                <div class="flex flex-col">
+                    <label class="text-sm text-gray-400 mb-2">No Telp</label>
+                    <input type="text" name="notelp" value="{{ old('notelp', $user->phone_number) }}" class="bg-input p-3 rounded-md w-full">
+                </div>
+
+                <button type="submit" class="bg-[#006a94] hover:bg-[#005a7d] px-10 py-3 rounded-md font-bold transition">
+                    Simpan Perubahan
+                </button>
             </form>
-            <button id="delete-btn" class="btn delete-btn">Delete Account</button>
-        </section>
-    </div>
 
-    <!-- Footer -->
-    <footer class="bg-neutral-primary-soft border border-default m-4 rounded-xl border-gray-900">
-        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-            <span class="text-sm text-body sm:text-center">© 2025 <a href="http://127.0.0.1:8001/"
-                    class="hover:underline">Re:Tide</a>. All Rights Reserved.
-            </span>
-            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-body sm:mt-0">
-                <li>
-                    <a href="/about" class="hover:underline me-4 md:me-6">About</a>
-                </li>
-                <li>
-                    <a href="/contact" class="hover:underline">Contact</a>
-                </li>
-            </ul>
+            <div class="space-y-12">
+                <form action="{{ route('account.update') }}" method="POST" class="space-y-6">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="username" value="{{ $user->name }}">
+                    <input type="hidden" name="email" value="{{ $user->email }}">
+                    <input type="hidden" name="notelp" value="{{ $user->phone_number }}">
+
+                    <h2 class="text-2xl font-semibold mb-6">Ganti Password</h2>
+                    
+                    <div>
+                        <input type="password" name="current_password" placeholder="Password Lama" 
+                               class="bg-input p-3 rounded-md w-full @error('current_password') border-red-500 @enderror">
+                        @error('current_password')
+                            <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <input type="password" name="new_password" placeholder="Password Baru" 
+                               class="bg-input p-3 rounded-md w-full @error('new_password') border-red-500 @enderror">
+                        @error('new_password')
+                            <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <input type="password" name="new_password_confirmation" placeholder="Konfirmasi Password Baru" 
+                               class="bg-input p-3 rounded-md w-full">
+                    </div>
+                    
+                    <button type="submit" class="border border-tosca text-tosca hover:bg-tosca hover:text-black px-10 py-3 rounded-md font-bold transition">
+                        Update Password
+                    </button>
+                </form>
+
+                <div class="pt-10 border-t border-gray-800">
+                    <h2 class="text-xl font-bold text-red-500 mb-4">Hapus Akun</h2>
+                    <p class="text-gray-400 text-sm mb-4">Tindakan ini permanen. Seluruh data Anda akan dihapus.</p>
+                    <form action="{{ route('account.destroy') }}" method="POST" onsubmit="return confirm('Yakin ingin hapus?')">
+                        @csrf @method('DELETE')
+                        <button class="text-red-500 hover:underline transition">Hapus akun saya secara permanen</button>
+                    </form>
+                    
+                    <form action="{{ route('logout') }}" method="POST" class="mt-4">
+                        @csrf
+                        <button class="text-gray-500 hover:text-white underline transition">Keluar (Logout)</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </footer>
+    </main>
 </body>
-
 </html>
