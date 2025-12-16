@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: hidden;
+}
+
+/* Account Page Styling */
+.defaultTheme {
+    background-color: black;
+    color: white;
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Times New Roman",
+        Times, serif;
+}
+
+.navbar {
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid rgb(43, 43, 43);*/
+    border-radius: 10px;
+    margin: 16px auto;
+    margin-top: -2rem;
+    max-width: 45rem;
+    padding: 12px 0;
+    font-weight: lighter;
+    background-color: black;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #63cfc0;
+    font-weight: bold;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.navbar a:hover {
+    color: white;
+    text-shadow: 0 0 5px #63cfc0;
+}
+
+.navbar a.active {
+    color: white;
+    text-shadow: 0 0 8px #63cfc0;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.header h1 {
+    font-size: 3rem;
+    color: #63cfc0;
+    margin-bottom: 8px;
+    letter-spacing: -2px;
+}
+
+.header p {
+    color: #c7c7c7;
+    font-size: 1.1rem;
+}
+
+.account-page {
+    min-height: 10vh;
+    padding-top: 80px;
+    background-color: black;
+}
+
+.account-page .navbar {
+    margin-top: 3rem;
+}
+
+.account-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.account-settings {
+    background-color: #0b0b0b;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.account-form input {
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+.btn {
+    background-color: #63cfc0;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+}
+
+.btn:hover {
+    background-color: #7ae0d3;
+}
+
+.delete-btn {
+    background-color: #c75151;
+    color: white;
+    padding: 12px;
+    border-radius: 25px;
+}
+.delete-btn:hover {
+    background-color: #ff6666;
+}
