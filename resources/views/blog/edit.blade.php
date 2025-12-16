@@ -87,11 +87,11 @@
     </div>
 
     <!-- Back Button-->
-    <div class="flex justify-center mt-7">
+    <!-- <div class="flex justify-center mt-7">
         <button type="button" class="bg-[#7ae0d3] text-black font-semibold py-2 px-4 rounded-full">
             <a href="/blog">Kembali</a>
         </button>
-    </div>
+    </div> -->
 
     <!-- Success Message -->
     @if(session('success'))
@@ -144,9 +144,11 @@
 
         <!-- Cancel and Update Button -->
         <button type="reset"
-            class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">Cancel</button>
+            class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">
+            <a href="/blog">Cancel</a></button>
         <button type="submit"
-            class="text-black bg-[#7ae0d3] box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">Update</button>
+            class="text-black bg-[#7ae0d3] box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">
+            <a href="/blog">Update</a></button>
     </form>
 
     <!-- Footer -->

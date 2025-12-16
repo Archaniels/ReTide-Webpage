@@ -30,8 +30,8 @@ class MarketplaceProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
+            'name' => 'required|min:5|max:100',
+            'description' => 'required|min:5|max:3000',
             'price' => 'required|numeric|min:0',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);

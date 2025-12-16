@@ -30,8 +30,8 @@ class BlogPostsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
+            'title' => 'required|min:5|max:100',
+            'content' => 'required|min:5|max:3000',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
