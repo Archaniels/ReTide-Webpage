@@ -143,9 +143,9 @@
             class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5"><a
                 href="/marketplace">Cancel</a></button>
         <button type="submit"
-            class="text-black bg-[#7ae0d3] box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">Create</button>
+            class="text-black bg-[#7ae0d3] box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">Update</button>
     </form>
- 
+
     <!-- Footer -->
     <footer class="bg-neutral-primary-soft border border-default m-4 rounded-xl border-gray-900">
         <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
