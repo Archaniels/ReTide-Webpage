@@ -13,7 +13,6 @@ class AuthController extends Controller
 
     public function showRegister() { return view('auth.register'); }
 
-    // MODIFIKASI: Register tidak langsung login
     public function register(Request $request) {
         $request->validate([
             'email' => 'required|email|unique:users',
@@ -30,7 +29,6 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan masuk.');
     }
 
-    // MODIFIKASI: Setelah login arahkan ke Home ('/')
     public function login(Request $request) {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -39,7 +37,6 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-            // Diarahkan ke Home (Route '/')
             return redirect('/'); 
         }
 
