@@ -1,13 +1,13 @@
 const mysql = require("mysql");
-require("dotenv").config();
+// require("dotenv").config();
 const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
+    host: "127.0.0.1",
+    user: "Bagaskara",
+    password: "",
+    database: "retide-database",
 });
 db.connect((err) => {
     if (err) throw err;
-    console.log("Database connected");
+    console.log("Database is now connected!");
 });
 module.exports = db;
