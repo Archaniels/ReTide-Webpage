@@ -37,7 +37,7 @@ const updateBlog = async (req, res) => {
 const deleteBlog = async (req, res) => {
     try {
         await blogService.deleteBlog(req.params.id);
-        res.status(200).json({ message: "Blog berhasil dihapus" });
+        res.status(200).json({ message: "Blog berhasil dihapus!" });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
