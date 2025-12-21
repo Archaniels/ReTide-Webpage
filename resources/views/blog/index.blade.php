@@ -29,7 +29,6 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
-
     <!-- Custom Scripts -->
     <!-- <script src="{{ asset('assets/js/account.js') }}" defer></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
