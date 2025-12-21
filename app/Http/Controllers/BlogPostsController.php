@@ -36,7 +36,10 @@ class BlogPostsController extends Controller
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imagePath = $request->file('image_path')->store('blog_images');
+        $imagePath = null;
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('blog_images', 'public');
+        }
 
         BlogPost::create([
             'title' => $request->input('title'),
@@ -64,7 +67,7 @@ class BlogPostsController extends Controller
         // return view('blog.edit', compact('blog'));
 
         // New Code: using NodeJS
-        $response = Http::get("http://localhost:3000/blog/$id");
+        $response = Http::get("http://localhost:3000/blogs/$id");
         if ($response->successful()) {
             $blogData = $response->json();
             $blog = (object) $blogData;
@@ -86,7 +89,7 @@ class BlogPostsController extends Controller
         // return redirect('/blog/' . $id . '/edit')->with('success', 'Blog berhasil diperbarui!');
 
         // New Code: using NodeJS
-        Http::put("http://localhost:3000/blog/$id", [
+        Http::put("http://localhost:3000/blogs/$id", [
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'image_path' => $request->input('image_path'),
@@ -105,7 +108,7 @@ class BlogPostsController extends Controller
         // return redirect('/blog/')->with('success', 'Blog berhasil dihapus!');
 
         // New Code: using NodeJS
-        Http::delete("http://localhost:3000/blog/$id");
+        Http::delete("http://localhost:3000/blogs/$id");
 
         return redirect()->route('blog.index')->with('success', 'Blog berhasil dihapus!');
     }
