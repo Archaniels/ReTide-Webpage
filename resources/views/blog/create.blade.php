@@ -124,8 +124,8 @@
                 placeholder="" required></textarea>
         </div>
         <div>
-            <label for="image" class="block mb-2.5 text-sm font-medium text-heading">Image</label>
-            <input type="file" id="image" name="image"
+            <label for="image_path" class="block mb-2.5 text-sm font-medium text-heading">Image</label>
+            <input type="file" id="image_path" name="image_path"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
                 placeholder="" />
         </div>

@@ -18,14 +18,14 @@ const getBlogById = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
-const createBlog = async (req, res) => {
-    try {
-        await blogService.createBlog(req.body);
-        res.status(201).json({ message: "Blog berhasil ditambahkan" });
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-};
+// const createBlog = async (req, res) => {
+//     try {
+//         await blogService.createBlog(req.body);
+//         res.status(201).json({ message: "Blog berhasil ditambahkan" });
+//     } catch (err) {
+//         res.status(400).json({ message: err.message });
+//     }
+// };
 const updateBlog = async (req, res) => {
     try {
         await blogService.updateBlog(req.params.id, req.body);
@@ -45,7 +45,7 @@ const deleteBlog = async (req, res) => {
 module.exports = {
     getAllBlogs,
     getBlogById,
-    createBlog,
+    // createBlog,
     updateBlog,
     deleteBlog,
 };
