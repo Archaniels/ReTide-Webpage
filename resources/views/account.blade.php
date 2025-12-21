@@ -13,10 +13,25 @@
             background-color: #000000;
             color: white;
         }
-        .text-tosca { color: #7ae0d3; }
-        .bg-input { background-color: #000000; border: 1px solid #333; }
-        .bg-input:focus { border-color: #7ae0d3; outline: none; }
-        .nav-link:hover { color: #7ae0d3; text-decoration: underline; }
+
+        .text-tosca {
+            color: #7ae0d3;
+        }
+
+        .bg-input {
+            background-color: #000000;
+            border: 1px solid #333;
+        }
+
+        .bg-input:focus {
+            border-color: #7ae0d3;
+            outline: none;
+        }
+
+        .nav-link:hover {
+            color: #7ae0d3;
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -54,25 +69,29 @@
             <form action="{{ route('account.update') }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
-                
+
                 <h2 class="text-2xl font-semibold mb-6">Informasi Profil</h2>
-                
+
                 <div class="flex flex-col">
                     <label class="text-sm text-gray-400 mb-2">Username</label>
-                    <input type="text" name="username" value="{{ old('username', $user->name) }}" class="bg-input p-3 rounded-md w-full">
+                    <input type="text" name="username" value="{{ old('username', $user->name) }}"
+                        class="bg-input p-3 rounded-md w-full">
                 </div>
 
                 <div class="flex flex-col">
                     <label class="text-sm text-gray-400 mb-2">Email</label>
-                    <input type="email" name="email" value="{{ old('email', $user->email) }}" class="bg-input p-3 rounded-md w-full">
+                    <input type="email" name="email" value="{{ old('email', $user->email) }}"
+                        class="bg-input p-3 rounded-md w-full">
                 </div>
 
                 <div class="flex flex-col">
                     <label class="text-sm text-gray-400 mb-2">No Telp</label>
-                    <input type="text" name="notelp" value="{{ old('notelp', $user->phone_number) }}" class="bg-input p-3 rounded-md w-full">
+                    <input type="text" name="notelp" value="{{ old('notelp', $user->phone_number) }}"
+                        class="bg-input p-3 rounded-md w-full">
                 </div>
 
-                <button type="submit" class="bg-[#006a94] hover:bg-[#005a7d] px-10 py-3 rounded-md font-bold transition">
+                <button type="submit"
+                    class="bg-[#006a94] hover:bg-[#005a7d] px-10 py-3 rounded-md font-bold transition">
                     Simpan Perubahan
                 </button>
             </form>
@@ -86,29 +105,30 @@
                     <input type="hidden" name="notelp" value="{{ $user->phone_number }}">
 
                     <h2 class="text-2xl font-semibold mb-6">Ganti Password</h2>
-                    
+
                     <div>
-                        <input type="password" name="current_password" placeholder="Password Lama" 
-                               class="bg-input p-3 rounded-md w-full @error('current_password') border-red-500 @enderror">
+                        <input type="password" name="current_password" placeholder="Password Lama"
+                            class="bg-input p-3 rounded-md w-full @error('current_password') border-red-500 @enderror">
                         @error('current_password')
                             <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div>
-                        <input type="password" name="new_password" placeholder="Password Baru" 
-                               class="bg-input p-3 rounded-md w-full @error('new_password') border-red-500 @enderror">
+                        <input type="password" name="new_password" placeholder="Password Baru"
+                            class="bg-input p-3 rounded-md w-full @error('new_password') border-red-500 @enderror">
                         @error('new_password')
                             <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div>
-                        <input type="password" name="new_password_confirmation" placeholder="Konfirmasi Password Baru" 
-                               class="bg-input p-3 rounded-md w-full">
+                        <input type="password" name="new_password_confirmation" placeholder="Konfirmasi Password Baru"
+                            class="bg-input p-3 rounded-md w-full">
                     </div>
-                    
-                    <button type="submit" class="border border-tosca text-tosca hover:bg-tosca hover:text-black px-10 py-3 rounded-md font-bold transition">
+
+                    <button type="submit"
+                        class="border border-tosca text-tosca hover:bg-tosca hover:text-black px-10 py-3 rounded-md font-bold transition">
                         Update Password
                     </button>
                 </form>
@@ -116,11 +136,12 @@
                 <div class="pt-10 border-t border-gray-800">
                     <h2 class="text-xl font-bold text-red-500 mb-4">Hapus Akun</h2>
                     <p class="text-gray-400 text-sm mb-4">Tindakan ini permanen. Seluruh data Anda akan dihapus.</p>
-                    <form action="{{ route('account.destroy') }}" method="POST" onsubmit="return confirm('Yakin ingin hapus?')">
+                    <form action="{{ route('account.destroy') }}" method="POST"
+                        onsubmit="return confirm('Yakin ingin hapus?')">
                         @csrf @method('DELETE')
                         <button class="text-red-500 hover:underline transition">Hapus akun saya secara permanen</button>
                     </form>
-                    
+
                     <form action="{{ route('logout') }}" method="POST" class="mt-4">
                         @csrf
                         <button class="text-gray-500 hover:text-white underline transition">Keluar (Logout)</button>
@@ -130,4 +151,5 @@
         </div>
     </main>
 </body>
+
 </html>
