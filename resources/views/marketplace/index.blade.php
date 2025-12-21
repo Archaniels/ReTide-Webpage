@@ -106,7 +106,7 @@
                 @foreach($products as $marketplaceProduct)
                     <div class="blog-item">
                         <img src="{{ asset('storage/' . $marketplaceProduct->image) }}"
-                            class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Blog Image">
+                            class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Product Image">
 
                         <h3 class="text-2xl font-bold mt-6 text-[#7ae0d3]">{{ $marketplaceProduct->name }}</h3>
 

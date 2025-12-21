@@ -36,7 +36,10 @@ class BlogPostsController extends Controller
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imagePath = $request->file('image_path')->store('blog_images');
+        $imagePath = null;
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('blog_images', 'public');
+        }
 
         BlogPost::create([
             'title' => $request->input('title'),

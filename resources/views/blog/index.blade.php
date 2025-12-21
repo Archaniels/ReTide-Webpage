@@ -107,16 +107,19 @@
 
                 <p class="text-base">{{ $blogPosts->content }}</p>
 
+                @if($blogPosts->created_at)
+                    <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
+                        <p class="font-semibold">Created At:</p>
+                        <span class="ml-1 italic">{{ $blogPosts->created_at->format('F j, Y, g:i a') }}</span>
+                    </div>
+                @endif
 
-                <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
-                    <p class="font-semibold">Created At:</p>
-                    <span class="ml-1 italic">{{ $blogPosts->created_at->format('F j, Y, g:i a') }}</span>
-                </div>
-
-                <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
-                    <p class="font-semibold">Updated At:</p>
-                    <span class="ml-1 italic">{{ $blogPosts->updated_at->format('F j, Y, g:i a') }}</span>
-                </div>
+                @if($blogPosts->updated_at)
+                    <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
+                        <p class="font-semibold">Updated At:</p>
+                        <span class="ml-1 italic">{{ $blogPosts->updated_at->format('F j, Y, g:i a') }}</span>
+                    </div>
+                @endif
 
                 <div class="flex">
                     <div class="mt-7">
