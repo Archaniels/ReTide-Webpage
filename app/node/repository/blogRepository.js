@@ -19,14 +19,14 @@ const findById = (id) => {
         );
     });
 };
-const create = (data) => {
-    return new Promise((resolve, reject) => {
-        db.query("INSERT INTO blog_posts SET ?", data, (err, result) => {
-            if (err) reject(err);
-            resolve(result);
-        });
-    });
-};
+// const create = (data) => {
+//     return new Promise((resolve, reject) => {
+//         db.query("INSERT INTO blog_posts SET ?", data, (err, result) => {
+//             if (err) reject(err);
+//             resolve(result);
+//         });
+//     });
+// };
 const update = (id, data) => {
     return new Promise((resolve, reject) => {
         db.query(
@@ -47,4 +47,10 @@ const destroy = (id) => {
         });
     });
 };
-module.exports = { findAll, findById, create, update, destroy };
+module.exports = {
+    findAll,
+    findById,
+    // create,
+    update,
+    destroy,
+};
