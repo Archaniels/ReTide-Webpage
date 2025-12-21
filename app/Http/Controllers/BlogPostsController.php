@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
+use Illuminate\Support\Facades\Http;
 
 class BlogPostsController extends Controller
 {
@@ -58,8 +59,20 @@ class BlogPostsController extends Controller
      */
     public function edit(string $id)
     {
-        $blog = BlogPost::findOrFail($id);
-        return view('blog.edit', compact('blog'));
+        // Old Code: using Laravel Eloquent
+        // $blog = BlogPost::findOrFail($id);
+        // return view('blog.edit', compact('blog'));
+
+        // New Code: using NodeJS
+        $response = Http::get("http://localhost:3000/blog/$id");
+        if ($response->successful()) {
+            $blogData = $response->json();
+            $blog = (object) $blogData;
+            $blog->image = $blogData['image_path'] ?? null;
+            return view("blog.edit", compact("blog"));
+        }
+
+        return redirect()->route('blog.index')->with('error', 'Blog not found');
     }
 
     /**
@@ -67,9 +80,19 @@ class BlogPostsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $blog = BlogPost::findOrFail($id);
-        $blog->update($request->all());
-        return redirect('/blog/' . $id . '/edit')->with('success', 'Blog berhasil diperbarui!');
+        // Old Code: using Laravel Eloquent
+        // $blog = BlogPost::findOrFail($id);
+        $request->all();
+        // return redirect('/blog/' . $id . '/edit')->with('success', 'Blog berhasil diperbarui!');
+
+        // New Code: using NodeJS
+        Http::put("http://localhost:3000/blog/$id", [
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'image_path' => $request->input('image_path'),
+        ]);
+
+        return redirect()->route('blog.index')->with('success', 'Blog berhasil diperbarui!');
     }
 
     /**
@@ -77,8 +100,13 @@ class BlogPostsController extends Controller
      */
     public function destroy(string $id)
     {
-        $blog = BlogPost::findOrFail($id);
-        $blog->delete();
-        return redirect('/blog/')->with('success', 'Blog berhasil dihapus!');
+        // $blog = BlogPost::findOrFail($id);
+        // $blog->delete();
+        // return redirect('/blog/')->with('success', 'Blog berhasil dihapus!');
+
+        // New Code: using NodeJS
+        Http::delete("http://localhost:3000/blog/$id");
+
+        return redirect()->route('blog.index')->with('success', 'Blog berhasil dihapus!');
     }
 }

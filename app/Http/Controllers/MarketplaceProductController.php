@@ -14,26 +14,25 @@ class MarketplaceProductController extends Controller
     public function index()
     {
         // Old Code: using Laravel Eloquent
-        // $products = MarketplaceProduct::orderBy('created_at', 'desc')->get();
-        // return view('marketplace.index', ['products' => $products]);
+        $products = MarketplaceProduct::orderBy('created_at', 'desc')->get();
+        return view('marketplace.index', ['products' => $products]);
 
         // New: using NodeJS
-        $response = Http::get("http://localhost:3000/products");
-        $products = [];
+        // $response = Http::get("http://localhost:3000/products");
+        // $products = [];
 
-        if ($response->successful()) {
-            $data = $response->json();
-            $products = collect($data)->map(function ($item) {
-                $object = (object) $item;
-                // Carbon for date formatting
-                $object->created_at = \Carbon\Carbon::parse($item['created_at'] ?? now());
-                $object->updated_at = \Carbon\Carbon::parse($item['updated_at'] ?? now());
-                $object->image = $item['image_path'] ?? null;
-                return $object;
-            });
-        }
-
-        return view("marketplace.index", compact("products"));
+        // if ($response->successful()) {
+        //     $data = $response->json();
+        //     $products = collect($data)->map(function ($item) {
+        //         $object = (object) $item;
+        //         // Carbon for date formatting
+        //         $object->created_at = \Carbon\Carbon::parse($item['created_at'] ?? now());
+        //         $object->updated_at = \Carbon\Carbon::parse($item['updated_at'] ?? now());
+        //         $object->image = $item['image_path'] ?? null;
+        //         return $object;
+        //     });
+        // }
+        // return view("marketplace.index", compact("products"));
     }
 
     /**
@@ -56,23 +55,26 @@ class MarketplaceProductController extends Controller
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imagePath = $request->file('image_path')->store('marketplace_products');
+        $imagePath = null;
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('marketplace_products', 'public');
+        }
 
         // Old Code: using Laravel Eloquent
-        // MarketplaceProduct::create([
-        //     'name' => $request->name,
-        //     'description' => $request->description,
-        //     'price' => $request->price,
-        //     'image_path' => $imagePath,
-        // ]);
-
-        // New Code: using NodeJS
-        Http::post("http://localhost:3000/products", [
+        MarketplaceProduct::create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'image_path' => $imagePath,
         ]);
+
+        // New Code: using NodeJS
+        // Http::post("http://localhost:3000/products", [
+        //     'name' => $request->name,
+        //     'description' => $request->description,
+        //     'price' => $request->price,
+        //     'image_path' => $imagePath,
+        // ]);
 
         return redirect()->route('marketplace.index')->with('success', 'Product berhasil ditambahkan!');
     }
