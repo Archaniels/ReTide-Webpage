@@ -75,7 +75,7 @@
     </header>
 
     <div style="margin-top: 150px;">
-        <h1 class="font-semibold text-[#7ae0d3] text-5xl justify-center text-center">Add Blog Post!</h1>
+        <h1 class="font-semibold text-[#7ae0d3] text-5xl justify-center text-center">Add Your Own Blog Post</h1>
         <p class="text-center" style="margin-top: 16px;">Add new blog post!</p>
     </div>
 
