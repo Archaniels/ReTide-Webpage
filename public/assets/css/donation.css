@@ -1,23 +1,32 @@
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
     box-sizing: border-box;
 }
 
 html,
 body {
-    overflow-x: hidden;
     max-width: 100%;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
+body {
+    margin: 0;
+}
+
+/* =========================
+   THEME
+========================= */
 .defaultTheme {
     background-color: black;
     color: white;
     font-family: "Poppins", sans-serif;
 }
 
-/* 🌐 Navbar Styling (seperti di blog) */
+/* =========================
+   NAVBAR (KONSISTEN)
+========================= */
 .navbar {
     position: sticky;
     top: 0;
@@ -26,8 +35,7 @@ body {
     justify-content: center;
     background-color: black;
     padding: 20px 0;
-    margin: 0 auto;
-    border: none;
+    border-bottom: 1px solid #222;
 }
 
 .navbar ul {
@@ -41,8 +49,7 @@ body {
 .navbar a {
     text-decoration: none;
     color: #63cfc0;
-    font-weight: bold;
-    font-family: "Poppins", sans-serif;
+    font-weight: 600;
     transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
@@ -51,11 +58,9 @@ body {
     text-shadow: 0 0 6px #63cfc0;
 }
 
-.navbar a.active {
-    color: white;
-    text-shadow: 0 0 8px #63cfc0;
-}
-
+/* =========================
+   HEADER
+========================= */
 .header {
     text-align: center;
     margin-bottom: 48px;
@@ -69,52 +74,92 @@ body {
 
 .header p {
     color: #c7c7c7;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
+/* =========================
+   CONTAINER
+========================= */
 .donation-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 24px;
+    padding: 32px 20px;
 }
 
+/* =========================
+   SECTIONS
+========================= */
 .donation-form-section,
 .donation-list-section {
-    background-color: #0b0b0b;
-    border: 1px solid #222;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 32px;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.04),
+        rgba(255,255,255,0.01)
+    );
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 36px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
 }
 
+.donation-form-section h2,
+.donation-list-section h2 {
+    margin-bottom: 24px;
+    font-size: 1.4rem;
+    color: #63cfc0;
+}
+
+/* =========================
+   FORM
+========================= */
 .donation-form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
+}
+
+.donation-form label {
+    font-size: 0.9rem;
+    color: #c7c7c7;
 }
 
 .donation-form input,
 .donation-form textarea {
-    padding: 12px;
+    padding: 14px 16px;
     border: 1px solid #333;
-    border-radius: 10px;
-    background-color: black;
+    border-radius: 12px;
+    background-color: #0b0b0b;
     color: white;
+    font-size: 0.95rem;
     font-family: "Poppins", sans-serif;
 }
 
+.donation-form input:focus,
+.donation-form textarea:focus {
+    outline: none;
+    border-color: #63cfc0;
+}
+
+/* =========================
+   BUTTONS
+========================= */
 .btn {
+    margin-top: 8px;
     background-color: #63cfc0;
     color: black;
-    padding: 12px 24px;
+    padding: 14px 24px;
     border: none;
-    border-radius: 25px;
-    font-weight: bold;
-    font-family: "Poppins", sans-serif;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn:hover {
-    background-color: #7ae0d3;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(99,207,192,0.3);
 }
 
 .delete-btn {
@@ -123,23 +168,80 @@ body {
 }
 
 .delete-btn:hover {
-    background-color: #ff6666;
+    box-shadow: 0 8px 20px rgba(199,81,81,0.3);
 }
 
+/* =========================
+   DONATION LIST
+========================= */
 .donation-card {
-    background-color: #111;
-    border: 1px solid #333;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 16px;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.05),
+        rgba(255,255,255,0.015)
+    );
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
 }
 
 .donation-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
     color: #63cfc0;
+    margin-bottom: 6px;
+}
+
+.donation-card p {
+    font-size: 0.9rem;
+    margin: 4px 0;
+    color: #e5e7eb;
+}
+
+.donation-card .amount {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4ade80;
 }
 
 .card-buttons {
-    margin-top: 10px;
+    margin-top: 14px;
     display: flex;
     gap: 12px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    margin-top: 60px;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    border-top: 1px solid #222;
+}
+/* =========================
+   FIX BUTTON DONASI
+========================= */
+.btn-primary {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #63cfc0;
+    color: black;
+    padding: 16px 0;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #7ae0d3;
+    box-shadow: 0 10px 25px rgba(99,207,192,0.35);
+    transform: translateY(-1px);
 }
