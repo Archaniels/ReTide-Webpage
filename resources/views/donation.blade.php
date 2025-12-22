@@ -86,31 +86,79 @@
     </div>
 
     <section class="donation-form-section">
-      <h2 class="section-title">Formulir Donasi</h2>
-      <form class="donation-form" id="donation-form">
-        <label for="donorName">Nama Lengkap:</label>
-        <input type="text" id="donorName" name="donorName" required>
+    
+      <!-- JUDUL FORM -->
+      <h2 class="text-xl font-semibold text-white mb-6">
+          Formulir Donasi
+      </h2>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+      <form method="POST" action="{{ route('donation.store') }}" class="donation-form">
+          @csrf
 
-        <label for="amount">Nominal Donasi (Rp):</label>
-        <input type="number" id="amount" name="amount" min="1000" required>
+          <div class="mb-4">
+              <label class="block text-sm text-gray-300 mb-2">
+                  Nama Lengkap
+              </label>
+              <input type="text" name="name" class="w-full input-style">
+          </div>
 
-        <label for="message">Pesan atau Dukungan:</label>
-        <textarea id="message" name="message" rows="3" placeholder="Tulis pesan Anda..."></textarea>
+          <div class="mb-4">
+              <label class="block text-sm text-gray-300 mb-2">
+                  Email
+              </label>
+              <input type="email" name="email" class="w-full input-style">
+          </div>
 
-        <input type="hidden" id="editIndex"> <!-- digunakan saat update -->
+          <div class="mb-4">
+              <label class="block text-sm text-gray-300 mb-2">
+                  Nominal Donasi (Rp)
+              </label>
+              <input type="number" name="amount" min="1000" class="w-full input-style">
+          </div>
 
-        <button type="submit" class="btn">Simpan Donasi</button>
-        <button type="button" id="reset-btn" class="btn delete-btn">Reset Form</button>
+          <div class="mb-6">
+              <label class="block text-sm text-gray-300 mb-2">
+                  Pesan atau Dukungan
+              </label>
+              <textarea name="message" rows="3" class="w-full input-style"
+                  placeholder="Tulis pesan Anda..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Simpan Donasi
+          </button>
       </form>
+
     </section>
 
     <section class="donation-list-section">
-      <h2 class="section-title">Daftar Donasi</h2>
-      <div id="donation-list"></div>
-    </section>
+  <h2 class="section-title">Daftar Donasi</h2>
+
+  @forelse ($donations as $donation)
+    <div class="donation-card">
+      <div class="donation-header">
+        <h3 class="donor-name">{{ $donation->name ?? 'Anonim' }}</h3>
+        <span class="donation-date">
+          {{ $donation->created_at->format('d M Y H:i') }}
+        </span>
+      </div>
+
+      <div class="donation-body">
+        <p><span>Email:</span> {{ $donation->email ?? '-' }}</p>
+        <p class="donation-amount">
+          Rp {{ number_format($donation->amount, 0, ',', '.') }}
+        </p>
+        <p class="donation-message">
+          {{ $donation->message ?? 'Tanpa pesan' }}
+        </p>
+      </div>
+    </div>
+  @empty
+    <p class="empty-donation">Belum ada donasi.</p>
+  @endforelse
+</section>
+
+
   </div>
 
   <!-- Footer -->
