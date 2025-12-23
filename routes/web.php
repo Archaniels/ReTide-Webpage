@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/marketplace/{id}', [MarketplaceProductController::class, 'update'])->name('marketplace.update');
     Route::delete('/marketplace/{id}', [MarketplaceProductController::class, 'destroy'])->name('marketplace.destroy');
 
-    // Marketplace Account CRUD
+    // Account Page CRUD
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::put('/account', [AccountController::class, 'update'])->name('account.update');
     Route::delete('/account', [AccountController::class, 'destroy'])->name('account.destroy');
