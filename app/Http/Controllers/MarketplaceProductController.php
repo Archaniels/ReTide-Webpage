@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MarketplaceProduct;
+use Illuminate\Support\Facades\Http;
 
 class MarketplaceProductController extends Controller
 {
@@ -12,8 +13,26 @@ class MarketplaceProductController extends Controller
      */
     public function index()
     {
+        // Old Code: using Laravel Eloquent
         $products = MarketplaceProduct::orderBy('created_at', 'desc')->get();
         return view('marketplace.index', ['products' => $products]);
+
+        // New: using NodeJS
+        // $response = Http::get("http://localhost:3000/products");
+        // $products = [];
+
+        // if ($response->successful()) {
+        //     $data = $response->json();
+        //     $products = collect($data)->map(function ($item) {
+        //         $object = (object) $item;
+        //         // Carbon for date formatting
+        //         $object->created_at = \Carbon\Carbon::parse($item['created_at'] ?? now());
+        //         $object->updated_at = \Carbon\Carbon::parse($item['updated_at'] ?? now());
+        //         $object->image = $item['image_path'] ?? null;
+        //         return $object;
+        //     });
+        // }
+        // return view("marketplace.index", compact("products"));
     }
 
     /**
@@ -30,20 +49,32 @@ class MarketplaceProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
+            'name' => 'required|min:5|max:100',
+            'description' => 'required|min:5|max:3000',
             'price' => 'required|numeric|min:0',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imagePath = $request->file('image_path')->store('marketplace_products');
+        $imagePath = null;
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('marketplace_products', 'public');
+        }
 
+        // Old Code: using Laravel Eloquent
         MarketplaceProduct::create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'image_path' => $imagePath,
         ]);
+
+        // New Code: using NodeJS
+        // Http::post("http://localhost:3000/products", [
+        //     'name' => $request->name,
+        //     'description' => $request->description,
+        //     'price' => $request->price,
+        //     'image_path' => $imagePath,
+        // ]);
 
         return redirect()->route('marketplace.index')->with('success', 'Product berhasil ditambahkan!');
     }
@@ -62,8 +93,19 @@ class MarketplaceProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = MarketplaceProduct::findOrFail($id);
-        return view('marketplace.edit', compact('product'));
+        // Old Code: using Laravel Eloquent
+        // $product = MarketplaceProduct::findOrFail($id);
+
+        // New Code: using NodeJS
+        $response = Http::get("http://localhost:3000/products/$id");
+        if ($response->successful()) {
+            $productData = $response->json();
+            $product = (object) $productData;
+            $product->image = $productData['image_path'] ?? null;
+            return view("marketplace.edit", compact("product"));
+        }
+
+        return redirect()->route('marketplace.index')->with('error', 'Product not found');
     }
 
     /**
@@ -78,8 +120,17 @@ class MarketplaceProductController extends Controller
             'image_path' => 'nullable|',
         ]);
 
-        $product = MarketplaceProduct::findOrFail($id);
-        $product->update($request->all());
+        // Old Code: using Laravel Eloquent
+        // $product = MarketplaceProduct::findOrFail($id);
+        // $product->update($request->all());
+
+        // New Code: using NodeJS
+        Http::put("http://localhost:3000/products/$id", [
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image_path' => $request->image_path,
+        ]);
 
         return redirect()->route('marketplace.index')->with('success', 'Product berhasil diperbarui!');
     }
@@ -89,8 +140,12 @@ class MarketplaceProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = MarketplaceProduct::findOrFail($id);
-        $product->delete();
+        // Old Code: using Laravel Eloquent
+        // $product = MarketplaceProduct::findOrFail($id);
+        // $product->delete();
+
+        // New Code: using NodeJS
+        Http::delete("http://localhost:3000/products/$id");
 
         return redirect()->route('marketplace.index')->with('success', 'Product berhasil dihapus!');
     }

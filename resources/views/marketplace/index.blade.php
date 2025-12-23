@@ -25,9 +25,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-    <!-- Anime.js -->
-    <script src="https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js"></script>
-
     <!-- Script -->
     <script src="{{ asset('assets/js/marketplace.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -109,7 +106,7 @@
                 @foreach($products as $marketplaceProduct)
                     <div class="blog-item">
                         <img src="{{ asset('storage/' . $marketplaceProduct->image) }}"
-                            class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Blog Image">
+                            class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Product Image">
 
                         <h3 class="text-2xl font-bold mt-6 text-[#7ae0d3]">{{ $marketplaceProduct->name }}</h3>
 

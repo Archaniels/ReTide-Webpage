@@ -6,6 +6,8 @@ use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\MarketplaceProductController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DonationController;
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -44,9 +46,11 @@ Route::middleware(['auth'])->group(function () {
         return view('marketplace');
     });
 
-    Route::get('/donation', function () {
-        return view('donation');
-    });
+    // Donation
+    Route::get('/donation', [DonationController::class, 'index'])->name('donation.index');
+    Route::post('/donation', [DonationController::class, 'store'])->name('donation.store');
+    Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
+
 
     // Blog Posts CRUD
     Route::get('/blog', [BlogPostsController::class, 'index'])->name('blog.index');
