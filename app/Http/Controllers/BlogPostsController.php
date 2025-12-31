@@ -38,7 +38,7 @@ class BlogPostsController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image_path')) {
-            $imagePath = $request->file('image_path')->store('blog_images', 'public');
+            $imagePath = $request->file('image_path')->store('blog_posts', 'public');
         }
 
         BlogPost::create([

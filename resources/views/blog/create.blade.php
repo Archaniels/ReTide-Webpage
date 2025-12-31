@@ -103,19 +103,20 @@
         class="max-w-sm mx-auto space-y-4 mt-6">
         @csrf
         <div>
-            <label for="title" class="block mb-2.5 text-sm font-medium text-heading">Title</label>
+            <label for="title" class="block mb-2.5 text-sm font-medium text-heading">Title (Min 5, Max 100)</label>
             <input type="text" id="title" name="title" value="{{ old('title') }}"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 placeholder:text-body"
                 placeholder="" required />
         </div>
         <div>
-            <label for="content" class="block mb-2.5 text-sm font-medium text-heading">Content</label>
+            <label for="content" class="block mb-2.5 text-sm font-medium text-heading">Content (Min 5, Max 3000)</label>
             <textarea id="content" name="content"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
                 placeholder="" required>{{ old('content') }}</textarea>
         </div>
         <div>
-            <label for="image_path" class="block mb-2.5 text-sm font-medium text-heading">Image</label>
+            <label for="image_path" class="block mb-2.5 text-sm font-medium text-heading">Image (Optional, image must be
+                in .jpeg, .png, .jpg, or .gif, max 2MB)</label>
             <input type="file" id="image_path" name="image_path"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body" />
         </div>

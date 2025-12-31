@@ -89,12 +89,12 @@
                 <p>Produk ramah lingkungan dari sampah laut yang didaur ulang</p>
             </div>
 
-            <!-- Cart Button -->
+            <!-- Cart Button
             <div class="cart-toggle" style="margin-top: 120px;">
                 <button id="cart-btn" class="btn cart-btn">
                     Keranjang (<span id="cart-count">0</span>)
                 </button>
-            </div>
+            </div> -->
 
             <!-- Create Marketplace Product Button -->
             <div class="justify-center text-center mt-7">
@@ -105,7 +105,7 @@
             <section class="products-section mt-10">
                 @foreach($products as $marketplaceProduct)
                     <div class="blog-item">
-                        <img src="{{ asset('storage/' . $marketplaceProduct->image) }}"
+                        <img src="{{ asset('storage/' . $marketplaceProduct->image_path) }}"
                             class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Product Image">
 
                         <h3 class="text-2xl font-bold mt-6 text-[#7ae0d3]">{{ $marketplaceProduct->name }}</h3>

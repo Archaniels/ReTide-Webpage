@@ -100,7 +100,7 @@
     <section class="blog-post">
         @foreach($blog as $blogPosts)
             <div class="blog-item">
-                <img src="{{ asset('storage/' . $blogPosts->image) }}"
+                <img src="{{ asset('storage/' . $blogPosts->image_path) }}"
                     class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Blog Image">
 
                 <h3 class="text-2xl font-bold mt-6">{{ $blogPosts->title }}</h3>
