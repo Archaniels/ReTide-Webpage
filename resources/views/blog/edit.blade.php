@@ -119,21 +119,22 @@
         @method('PUT')
         <!-- Title Form -->
         <div>
-            <label for="title" class="block mb-2.5 text-sm font-medium text-heading">Title</label>
+            <label for="title" class="block mb-2.5 text-sm font-medium text-heading">Title (Min 5, Max 100)</label>
             <input type="text" id="title" name="title"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 placeholder:text-body"
                 placeholder="" required />
         </div>
         <!-- Content Form -->
         <div>
-            <label for="content" class="block mb-2.5 text-sm font-medium text-heading">Content</label>
+            <label for="content" class="block mb-2.5 text-sm font-medium text-heading">Content (Min 5, Max 3000)</label>
             <textarea type="text" id="content" name="content"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
                 placeholder="" required></textarea>
         </div>
         <!-- Image Form -->
         <div>
-            <label for="image" class="block mb-2.5 text-sm font-medium text-heading">Image</label>
+            <label for="image" class="block mb-2.5 text-sm font-medium text-heading">Image (Optional, image must be in
+                .jpeg, .png, .jpg, or .gif, max 2MB)</label>
             <input type="file" id="image" name="image"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
                 placeholder="" />
