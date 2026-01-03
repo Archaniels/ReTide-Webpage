@@ -83,6 +83,10 @@
     <div class="header">
       <h1 class="font-semibold text-[#7ae0d3]">Donation</h1>
       <p>Berikan kontribusi Anda untuk mendukung kegiatan konservasi laut kami.</p>
+      <div class="total-donations mt-4 p-4 bg-blue-900 rounded-lg">
+        <h3 class="text-white text-lg font-semibold">Total Donasi Terkumpul</h3>
+        <p class="text-[#7ae0d3] text-2xl font-bold">Rp {{ number_format($totalDonations, 0, ',', '.') }}</p>
+      </div>
     </div>
 
     <section class="donation-form-section">
@@ -99,14 +103,14 @@
               <label class="block text-sm text-gray-300 mb-2">
                   Nama Lengkap
               </label>
-              <input type="text" name="name" class="w-full input-style">
+              <input type="text" name="name" value="{{ auth()->user()->name }}" class="w-full input-style" readonly>
           </div>
 
           <div class="mb-4">
               <label class="block text-sm text-gray-300 mb-2">
                   Email
               </label>
-              <input type="email" name="email" class="w-full input-style">
+              <input type="email" name="email" value="{{ auth()->user()->email }}" class="w-full input-style" readonly>
           </div>
 
           <div class="mb-4">
@@ -132,32 +136,43 @@
     </section>
 
     <section class="donation-list-section">
-  <h2 class="section-title">Daftar Donasi</h2>
+      <h2 class="section-title">Daftar Donasi</h2>
 
-  @forelse ($donations as $donation)
-    <div class="donation-card">
-      <div class="donation-header">
-        <h3 class="donor-name">{{ $donation->name ?? 'Anonim' }}</h3>
-        <span class="donation-date">
-          {{ $donation->created_at->format('d M Y H:i') }}
-        </span>
-      </div>
+      @forelse ($donations as $donation)
+        <div class="donation-card">
+          <div class="donation-header">
+            <h3 class="donor-name">{{ $donation->name ?? 'Anonim' }}</h3>
+            <span class="donation-date">
+              {{ $donation->created_at->format('d M Y H:i') }}
+            </span>
+          </div>
 
-      <div class="donation-body">
-        <p><span>Email:</span> {{ $donation->email ?? '-' }}</p>
-        <p class="donation-amount">
-          Rp {{ number_format($donation->amount, 0, ',', '.') }}
-        </p>
-        <p class="donation-message">
-          {{ $donation->message ?? 'Tanpa pesan' }}
-        </p>
-      </div>
-    </div>
-  @empty
-    <p class="empty-donation">Belum ada donasi.</p>
-  @endforelse
-</section>
+          <div class="donation-body">
+            <p><span>Email:</span> {{ $donation->email ?? '-' }}</p>
+            <p class="donation-amount">
+              Rp {{ number_format($donation->amount, 0, ',', '.') }}
+            </p>
+            <p class="donation-message">
+              {{ $donation->message ?? 'Tanpa pesan' }}
+            </p>
+            <button class="toggle-timeline mt-4 bg-blue-500 text-white px-4 py-2 rounded" data-donation-id="{{ $donation->id }}">
+              Lihat Perjalanan Donasi
+            </button>
+          </div>
 
+          <div class="timeline-container mt-4" id="timeline-{{ $donation->id }}" style="display:none;">
+            <h4 class="text-white">Perjalanan Donasi</h4>
+            <div class="timeline-content">
+              <!-- Updates will be loaded here -->
+            </div>
+          </div>
+        </div>
+      @empty
+        <p class="empty-donation">Belum ada donasi.</p>
+      @endforelse
+    </section>
+
+    {{-- ================= TIMELINE DONASI (USER) - Per donasi ================= --}}
 
   </div>
 
@@ -177,6 +192,65 @@
       </ul>
     </div>
   </footer>
+
+  <script>
+    // Toggle timeline for each donation
+    $(document).ready(function() {
+      $('.toggle-timeline').click(function() {
+        var donationId = $(this).data('donation-id');
+        var timelineRow = $('#timeline-' + donationId);
+        var timelineContent = timelineRow.find('.timeline-content');
+
+        if (timelineRow.is(':visible')) {
+          timelineRow.hide();
+        } else {
+          loadTimeline(donationId);
+          timelineRow.show();
+        }
+      });
+
+      // Auto update visible timelines every 30 seconds
+      setInterval(function() {
+        $('.timeline-container:visible').each(function() {
+          var donationId = $(this).attr('id').replace('timeline-', '');
+          loadTimeline(donationId);
+        });
+      }, 30000);
+    });
+
+    function loadTimeline(donationId) {
+      var timelineContent = $('#timeline-' + donationId).find('.timeline-content');
+
+      $.ajax({
+        url: 'http://localhost:3000/donation-updates/' + donationId,
+        type: 'GET',
+        success: function(data) {
+          if (data.length > 0) {
+            var html = '<div class="timeline">';
+            data.forEach(function(update) {
+              html += `
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h4>${update.title}</h4>
+                    <p>${update.description}</p>
+                    <span class="timeline-date">${new Date(update.created_at).toLocaleString('id-ID')}</span>
+                  </div>
+                </div>
+              `;
+            });
+            html += '</div>';
+            timelineContent.html(html);
+          } else {
+            timelineContent.html('<p class="text-gray-300">Belum ada update untuk donasi ini.</p>');
+          }
+        },
+        error: function() {
+          timelineContent.html('<p class="text-red-300">Error loading updates.</p>');
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

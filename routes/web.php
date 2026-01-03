@@ -7,11 +7,25 @@ use App\Http\Controllers\MarketplaceProductController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\Admin\DonationUpdateController;
+
 
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/donations', [DonationController::class, 'adminIndex'])->name('donations.index');
+    Route::delete('/donations/{donation}', [DonationController::class, 'adminDestroy'])->name('donations.destroy');
+    Route::get('/donations/{donation}/updates', [DonationUpdateController::class, 'index'])
+        ->name('donations.updates.index');
+
+    Route::get('/donations/{donation}/updates/create', [DonationUpdateController::class, 'create'])
+        ->name('donations.updates.create');
+
+    Route::post('/donations/{donation}/updates', [DonationUpdateController::class, 'store'])
+        ->name('donations.updates.store');
+});
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

@@ -14,5 +14,16 @@ class Donation extends Model
         'email',
         'amount',
         'message',
+        'user_id',
     ];
+
+    public function updates()
+    {
+        return $this->hasMany(DonationUpdate::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

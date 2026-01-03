@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donation;
+use App\Models\DonationUpdate;
+use Illuminate\Support\Facades\Http;
+
 
 class DonationController extends Controller
 {
-    public function index()
+        public function index()
     {
-        $donations = Donation::latest()->get(); // ambil dari DB
-    return view('donation', compact('donations'));
+        // 1. Ambil donasi dari user yang login
+        $donations = Donation::where('user_id', auth()->id())->latest()->get();
+
+        // 2. Total donasi keseluruhan
+        $totalDonations = Donation::sum('amount');
+
+        return view('donation', compact('donations', 'totalDonations'));
     }
 
     public function store(Request $request)
@@ -24,10 +32,11 @@ class DonationController extends Controller
 
 
         Donation::create([
-            'name'   => $request->name,
-            'email'  => $request->email,
+            'name'   => $request->name ?: auth()->user()->name,
+            'email'  => $request->email ?: auth()->user()->email,
             'amount' => $request->amount,
             'message' => $request->message,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('donation.success');
@@ -36,5 +45,17 @@ class DonationController extends Controller
     public function success()
     {
         return view('donation_success');
+    }
+
+    public function adminIndex()
+    {
+        $donations = Donation::with('user')->latest()->get();
+        return view('admin.donations.index', compact('donations'));
+    }
+
+    public function adminDestroy(Donation $donation)
+    {
+        $donation->delete();
+        return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil dihapus');
     }
 }
