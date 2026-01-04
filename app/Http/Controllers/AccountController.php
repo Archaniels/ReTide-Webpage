@@ -22,11 +22,24 @@ class AccountController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users', 'name')->ignore($user->id)
+            ],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($user->id)
+            ],
             'notelp' => ['nullable', 'string', 'max:20'],
             'current_password' => ['nullable', 'required_with:new_password'],
             'new_password' => ['nullable', 'min:8', 'confirmed'],
+        ], [
+            'username.unique' => 'Nama pengguna ini sudah diambil, silakan gunakan nama lain.',
+            'email.unique' => 'Email ini sudah terdaftar.',
         ]);
 
         $user->name = $request->username;
@@ -34,20 +47,16 @@ class AccountController extends Controller
         $user->phone_number = $request->notelp;
 
         if ($request->filled('new_password')) {
-            // Validasi Password Lama
             if (!Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'Password lama yang Anda masukkan salah.'])->withInput();
+                return back()->withErrors(['current_password' => 'Password lama salah.'])->withInput();
             }
             $user->password = Hash::make($request->new_password);
-            $message = 'Profil dan Password berhasil diperbarui!';
-        } else {
-            $message = 'Profil berhasil diperbarui!';
         }
 
         /** @var \App\Models\User $user */
-        $user->save();
+        $user->save(); 
 
-        return back()->with('success', $message);
+        return back()->with('success', 'Profil berhasil diperbarui!');
     }
 
     // Menghapus Akun
