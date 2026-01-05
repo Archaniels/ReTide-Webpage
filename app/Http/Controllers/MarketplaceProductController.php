@@ -117,7 +117,7 @@ class MarketplaceProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
-            'image_path' => 'nullable|',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Old Code: using Laravel Eloquent
@@ -125,11 +125,24 @@ class MarketplaceProductController extends Controller
         // $product->update($request->all());
 
         // New Code: using NodeJS
+        // Fetch current product to get existing image path
+        $response = Http::get("http://localhost:3000/products/$id");
+        $currentImagePath = null;
+        if ($response->successful()) {
+            $currentImagePath = $response->json()['image_path'] ?? null;
+        }
+
+        $imagePath = $currentImagePath;
+
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('marketplace_products', 'public');
+        }
+
         Http::put("http://localhost:3000/products/$id", [
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
-            'image_path' => $request->image_path,
+            'image_path' => $imagePath,
         ]);
 
         return redirect()->route('marketplace.index')->with('success', 'Product berhasil diperbarui!');
