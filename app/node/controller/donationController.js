@@ -26,18 +26,32 @@ const createUpdate = async (req, res) => {
     }
 };
 
-const deleteUpdate = async (req, res) => {
+const getUpdateById = async (req, res) => {
     try {
-        await donationService.deleteUpdate(req.params.id);
-        res.status(200).json({ message: 'Update berhasil dihapus' });
+        const update = await donationService.getUpdateById(req.params.id);
+        if (!update) {
+            return res.status(404).json({ message: 'Update tidak ditemukan' });
+        }
+        res.status(200).json(update);
     } catch (err) {
         res.status(500).json({ message: err.message });
+    }
+};
+
+const updateUpdate = async (req, res) => {
+    try {
+        await donationService.updateUpdate(req.params.id, req.body);
+        res.status(200).json({ message: 'Update berhasil diperbarui' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
     }
 };
 
 module.exports = {
     getAllUpdates,
     getUpdatesByDonationId,
+    getUpdateById,
     createUpdate,
+    updateUpdate,
     deleteUpdate,
 };

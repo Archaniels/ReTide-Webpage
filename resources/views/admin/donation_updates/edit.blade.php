@@ -5,7 +5,7 @@
     <h2>Edit Update Donasi</h2>
 
     <form method="POST"
-          action="{{ route('admin.donations.updates.update', $update->id) }}">
+          action="{{ route('admin.donations.updates.update', [$donation->id, $update->id]) }}">
         @csrf
         @method('PUT')
 
@@ -27,9 +27,9 @@
         <div>
             <label>Status</label><br>
             <select name="status">
-                <option value="proses" @selected($update->status=='proses')>Proses</option>
-                <option value="tersalurkan" @selected($update->status=='tersalurkan')>Tersalurkan</option>
-                <option value="selesai" @selected($update->status=='selesai')>Selesai</option>
+                <option value="pending" @selected($update->status=='pending')>Pending</option>
+                <option value="in_progress" @selected($update->status=='in_progress')>In Progress</option>
+                <option value="completed" @selected($update->status=='completed')>Completed</option>
             </select>
         </div>
 

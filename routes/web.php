@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\DonationUpdateController;
 // });
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/donations', [DonationController::class, 'adminIndex'])->name('donations.index');
+    Route::get('/donations/{donation}/edit', [DonationController::class, 'adminEdit'])->name('donations.edit');
+    Route::put('/donations/{donation}', [DonationController::class, 'adminUpdate'])->name('donations.update');
     Route::delete('/donations/{donation}', [DonationController::class, 'adminDestroy'])->name('donations.destroy');
     Route::get('/donations/{donation}/updates', [DonationUpdateController::class, 'index'])
         ->name('donations.updates.index');
@@ -25,6 +27,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::post('/donations/{donation}/updates', [DonationUpdateController::class, 'store'])
         ->name('donations.updates.store');
+
+    Route::get('/donations/{donation}/updates/{update}/edit', [DonationUpdateController::class, 'edit'])
+        ->name('donations.updates.edit');
+
+    Route::put('/donations/{donation}/updates/{update}', [DonationUpdateController::class, 'update'])
+        ->name('donations.updates.update');
+
+    Route::delete('/donations/{donation}/updates/{update}', [DonationUpdateController::class, 'destroy'])
+        ->name('donations.updates.destroy');
 });
 
 Route::middleware('guest')->group(function () {

@@ -25,6 +25,9 @@
                         <td>Rp {{ number_format($donation->amount, 0, ',', '.') }}</td>
                         <td>{{ $donation->created_at->format('d M Y H:i') }}</td>
                         <td>
+                            <a href="{{ route('admin.donations.edit', $donation->id) }}" style="margin-right:10px;">
+                                Edit
+                            </a>
                             <button class="toggle-timeline" data-donation-id="{{ $donation->id }}">
                                 Lihat Perjalanan
                             </button>

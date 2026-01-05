@@ -58,4 +58,23 @@ class DonationController extends Controller
         $donation->delete();
         return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil dihapus');
     }
+
+    public function adminEdit(Donation $donation)
+    {
+        return view('admin.donations.edit', compact('donation'));
+    }
+
+    public function adminUpdate(Request $request, Donation $donation)
+    {
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
+            'amount' => 'required|integer|min:1000',
+            'message' => 'nullable|string|max:500',
+        ]);
+
+        $donation->update($request->only(['name', 'email', 'amount', 'message']));
+
+        return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil diperbarui');
+    }
 }

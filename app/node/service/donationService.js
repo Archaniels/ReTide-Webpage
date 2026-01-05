@@ -15,13 +15,20 @@ const createUpdate = async (data) => {
     return await donationRepository.create(data);
 };
 
-const deleteUpdate = async (id) => {
-    return await donationRepository.destroy(id);
+const getUpdateById = async (id) => {
+    return await donationRepository.findById(id);
+};
+
+const updateUpdate = async (id, data) => {
+    if (!data.title) throw new Error("Title wajib diisi");
+    return await donationRepository.update(id, data);
 };
 
 module.exports = {
     getAllUpdates,
     getUpdatesByDonationId,
+    getUpdateById,
     createUpdate,
+    updateUpdate,
     deleteUpdate,
 };

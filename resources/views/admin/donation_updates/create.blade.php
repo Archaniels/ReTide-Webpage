@@ -25,9 +25,9 @@
         <div>
             <label>Status</label><br>
             <select name="status" required>
-                <option value="proses">Proses</option>
-                <option value="tersalurkan">Tersalurkan</option>
-                <option value="selesai">Selesai</option>
+                <option value="pending">Pending</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
             </select>
         </div>
 
