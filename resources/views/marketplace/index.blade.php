@@ -89,17 +89,18 @@
                 <p>Produk ramah lingkungan dari sampah laut yang didaur ulang</p>
             </div>
 
-            <!-- Cart Button
-            <div class="cart-toggle" style="margin-top: 120px;">
-                <button id="cart-btn" class="btn cart-btn">
+            <!-- Cart Button -->
+            <div class="cart-toggle" style="margin-top: 20px; float: right; margin-right: 20px;">
+                <button id="cart-btn" class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     Keranjang (<span id="cart-count">0</span>)
                 </button>
-            </div> -->
+            </div>
 
             <!-- Create Marketplace Product Button -->
             <div class="justify-center text-center mt-7">
-                <a href="{{ route('marketplace.create') }}" class="btn btn-xs btn-info">✍️ Create Marketplace
-                    Product</a>
+                @if(Auth::check() && Auth::user()->role === 'admin')
+                    <a href="{{ route('marketplace.create') }}" class="btn btn-xs btn-info">✍️ Create Marketplace Product</a>
+                @endif
             </div>
 
             <section class="products-section mt-10">
@@ -112,7 +113,7 @@
 
                         <p class="text-base">{{ $marketplaceProduct->description }}</p>
 
-                        <h3 class="text-2xl font-bold mt-6">{{ 'Rp ' . $marketplaceProduct->price }}</h3>
+                        <h3 class="text-2xl font-bold mt-6">{{ 'Rp ' . number_format($marketplaceProduct->price, 0, ',', '.') }}</h3>
 
                         <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
                             <p class="font-semibold">Created At:</p>
@@ -124,6 +125,19 @@
                             <span class="ml-1 italic">{{ $marketplaceProduct->updated_at->format('F j, Y, g:i a') }}</span>
                         </div>
 
+                        <!-- Add to Cart -->
+                        <div class="mt-6">
+                            <button class="add-to-cart-btn text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" 
+                                data-id="{{ $marketplaceProduct->id }}" 
+                                data-name="{{ $marketplaceProduct->name }}" 
+                                data-price="{{ $marketplaceProduct->price }}" 
+                                data-icon='<img src="{{ asset("storage/" . $marketplaceProduct->image_path) }}" class="w-12 h-12 object-cover rounded">'
+                            >
+                                Tambah ke Keranjang
+                            </button>
+                        </div>
+                        
+                        @if(Auth::check() && Auth::user()->role === 'admin')
                         <div class="flex">
                             <div class="mt-7">
                                 <a href="{{ route('marketplace.edit', $marketplaceProduct->id) }}"
@@ -141,6 +155,7 @@
                                 </form>
                             </div>
                         </div>
+                        @endif
                     </div>
                 @endforeach
             </section>
