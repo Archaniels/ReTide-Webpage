@@ -89,11 +89,16 @@ class BlogPostsController extends Controller
         // return redirect('/blog/' . $id . '/edit')->with('success', 'Blog berhasil diperbarui!');
 
         // New Code: using NodeJS
-        Http::put("http://localhost:3000/blogs/$id", [
+        $data = [
             'title' => $request->input('title'),
             'content' => $request->input('content'),
-            'image_path' => $request->input('image_path'),
-        ]);
+        ];
+
+        if ($request->hasFile('image_path')) {
+            $data['image_path'] = $request->file('image_path')->store('blog_posts', 'public');
+        }
+
+        Http::put("http://localhost:3000/blogs/$id", $data);
 
         return redirect()->route('blog.index')->with('success', 'Blog berhasil diperbarui!');
     }
