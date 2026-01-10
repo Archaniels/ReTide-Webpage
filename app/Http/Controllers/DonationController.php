@@ -47,15 +47,75 @@ class DonationController extends Controller
         return view('donation_success');
     }
 
+    public function showUpdates(Donation $donation)
+    {
+        // Pastikan user adalah pemilik donasi atau admin
+        if ($donation->user_id !== auth()->id() && auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
+        // Fetch updates from Node.js API
+        $updates = [];
+        try {
+            $response = Http::get("http://localhost:3000/donation-updates/{$donation->id}");
+            if ($response->successful()) {
+                $updates = $response->json();
+            }
+        } catch (\Exception $e) {
+            $updates = [];
+        }
+
+        return view('donation_updates', compact('donation', 'updates'));
+    }
+
     public function adminIndex()
     {
         $donations = Donation::with('user')->latest()->get();
         return view('admin.donations.index', compact('donations'));
     }
 
+    public function adminCreate()
+    {
+        return view('admin.donations.create');
+    }
+
+    public function adminStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'amount' => 'required|integer|min:1000',
+            'message' => 'nullable|string|max:500',
+            'user_id' => 'nullable|exists:users,id',
+        ]);
+
+        Donation::create($request->only(['name', 'email', 'amount', 'message', 'user_id']));
+
+        return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil dibuat');
+    }
+
     public function adminDestroy(Donation $donation)
     {
         $donation->delete();
         return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil dihapus');
+    }
+
+    public function adminEdit(Donation $donation)
+    {
+        return view('admin.donations.edit', compact('donation'));
+    }
+
+    public function adminUpdate(Request $request, Donation $donation)
+    {
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
+            'amount' => 'required|integer|min:1000',
+            'message' => 'nullable|string|max:500',
+        ]);
+
+        $donation->update($request->only(['name', 'email', 'amount', 'message']));
+
+        return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil diperbarui');
     }
 }

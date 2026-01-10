@@ -2,9 +2,9 @@ const mysql = require("mysql");
 // require("dotenv").config();
 const db = mysql.createConnection({
     host: "127.0.0.1",
-    user: "Bagaskara",
+    user: "root",
     password: "",
-    database: "retide-database",
+    database: "retide",
 });
 db.connect((err) => {
     if (err) throw err;

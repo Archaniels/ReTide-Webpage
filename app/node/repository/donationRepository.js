@@ -21,9 +21,11 @@ const create = (data) => {
         const newUpdate = {
             id: donationUpdates.length + 1,
             ...data,
-            created_at: new Date()
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
         };
         donationUpdates.push(newUpdate);
+        console.log('All stored updates:', donationUpdates);
         resolve(newUpdate);
     });
 };
@@ -42,9 +44,30 @@ const destroy = (id) => {
     });
 };
 
+const findById = (id) => {
+    return new Promise((resolve, reject) => {
+        const update = donationUpdates.find(d => d.id == id);
+        resolve(update);
+    });
+};
+
+const update = (id, data) => {
+    return new Promise((resolve, reject) => {
+        const index = donationUpdates.findIndex(d => d.id == id);
+        if (index !== -1) {
+            donationUpdates[index] = { ...donationUpdates[index], ...data, updated_at: new Date() };
+            resolve(donationUpdates[index]);
+        } else {
+            reject(new Error("Update tidak ditemukan"));
+        }
+    });
+};
+
 module.exports = {
     findAll,
     findByDonationId,
+    findById,
     create,
+    update,
     destroy,
 };
