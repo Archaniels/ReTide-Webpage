@@ -1,21 +1,24 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
 const app = express();
-const productRoutes = require("./routes/productRoutes");
-const blogRoutes = require("./routes/blogRoutes");
-const donationUpdates = require("./routes/donationUpdates");
+const PORT = 3000;
 
+// Middleware
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-app.use("/products", productRoutes);
-app.use("/blogs", blogRoutes);
-app.use("/donation-updates", donationUpdates);
-
+// Routes
 app.get('/', (req, res) => {
-    res.send('Node API ReTide running');
+  res.json({ message: 'ReTide Node.js API is running', endpoints: ['/donation-updates'] });
 });
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.use('/donation-updates', require('./routes/donationUpdates'));
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Node.js API running on http://localhost:${PORT}`);
+}).on('error', (err) => {
+  console.error('Server error:', err);
 });

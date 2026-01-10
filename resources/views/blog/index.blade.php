@@ -88,7 +88,9 @@
 
     <!-- Create Blog Post Button -->
     <div class="justify-center text-center mt-7">
-        <a href="{{ route('blog.create') }}" class="btn btn-xs btn-info">✍️ Create Blog Post</a>
+        @if(Auth::check() && Auth::user()->role === 'admin')
+            <a href="{{ route('blog.create') }}" class="btn btn-xs btn-info">✍️ Create Blog Post</a>
+        @endif
     </div>
 
     <hr style="margin: 3rem 0; border: 1px solid #333;">
@@ -121,23 +123,25 @@
                     </div>
                 @endif
 
-                <div class="flex">
-                    <div class="mt-7">
-                        <a href="{{ route('blog.edit', $blogPosts->id) }}"
-                            class="text-white bg-green-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">✏️
-                            Edit</a>
+                @if(Auth::check() && Auth::user()->role === 'admin')
+                    <div class="flex">
+                        <div class="mt-7">
+                            <a href="{{ route('blog.edit', $blogPosts->id) }}"
+                                class="text-white bg-green-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">✏️
+                                Edit</a>
+                        </div>
+                        <div class="ml-3 mt-5">
+                            <form action="{{ route('blog.destroy', $blogPosts->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5"
+                                    onclick="return confirm('Yakin hapus?')">🗑️
+                                    Delete</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="ml-3 mt-5">
-                        <form action="{{ route('blog.destroy', $blogPosts->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5"
-                                onclick="return confirm('Yakin hapus?')">🗑️
-                                Delete</button>
-                        </form>
-                    </div>
-                </div>
+                @endif
             </div>
         @endforeach
     </section>

@@ -16,6 +16,10 @@ use App\Http\Controllers\Admin\DonationUpdateController;
 // });
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/donations', [DonationController::class, 'adminIndex'])->name('donations.index');
+    Route::get('/donations/create', [DonationController::class, 'adminCreate'])->name('donations.create');
+    Route::post('/donations', [DonationController::class, 'adminStore'])->name('donations.store');
+    Route::get('/donations/{donation}/edit', [DonationController::class, 'adminEdit'])->name('donations.edit');
+    Route::put('/donations/{donation}', [DonationController::class, 'adminUpdate'])->name('donations.update');
     Route::delete('/donations/{donation}', [DonationController::class, 'adminDestroy'])->name('donations.destroy');
     Route::get('/donations/{donation}/updates', [DonationUpdateController::class, 'index'])
         ->name('donations.updates.index');
@@ -25,6 +29,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::post('/donations/{donation}/updates', [DonationUpdateController::class, 'store'])
         ->name('donations.updates.store');
+
+    Route::get('/donations/{donation}/updates/{update}/edit', [DonationUpdateController::class, 'edit'])
+        ->name('donations.updates.edit');
+
+    Route::put('/donations/{donation}/updates/{update}', [DonationUpdateController::class, 'update'])
+        ->name('donations.updates.update');
+
+    Route::delete('/donations/{donation}/updates/{update}', [DonationUpdateController::class, 'destroy'])
+        ->name('donations.updates.destroy');
 });
 
 Route::middleware('guest')->group(function () {
@@ -64,23 +77,30 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/donation', [DonationController::class, 'index'])->name('donation.index');
     Route::post('/donation', [DonationController::class, 'store'])->name('donation.store');
     Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
+    Route::get('/donation/{donation}/updates', [DonationController::class, 'showUpdates'])->name('donation.updates');
 
 
-    // Blog Posts CRUD
+    // Blog Posts
     Route::get('/blog', [BlogPostsController::class, 'index'])->name('blog.index');
-    Route::get('/blog/create', [BlogPostsController::class, 'create'])->name('blog.create');
-    Route::post('/blog', [BlogPostsController::class, 'store'])->name('blog.store');
-    Route::get('/blog/{id}/edit', [BlogPostsController::class, 'edit'])->name('blog.edit');
-    Route::put('/blog/{id}', [BlogPostsController::class, 'update'])->name('blog.update');
-    Route::delete('/blog/{id}', [BlogPostsController::class, 'destroy'])->name('blog.destroy');
 
-    // Marketplace Products CRUD
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/blog/create', [BlogPostsController::class, 'create'])->name('blog.create');
+        Route::post('/blog', [BlogPostsController::class, 'store'])->name('blog.store');
+        Route::get('/blog/{id}/edit', [BlogPostsController::class, 'edit'])->name('blog.edit');
+        Route::put('/blog/{id}', [BlogPostsController::class, 'update'])->name('blog.update');
+        Route::delete('/blog/{id}', [BlogPostsController::class, 'destroy'])->name('blog.destroy');
+    });
+
+    // Marketplace Products
     Route::get('/marketplace', [MarketplaceProductController::class, 'index'])->name('marketplace.index');
-    Route::get('/marketplace/create', [MarketplaceProductController::class, 'create'])->name('marketplace.create');
-    Route::post('/marketplace', [MarketplaceProductController::class, 'store'])->name('marketplace.store');
-    Route::get('/marketplace/{id}/edit', [MarketplaceProductController::class, 'edit'])->name('marketplace.edit');
-    Route::put('/marketplace/{id}', [MarketplaceProductController::class, 'update'])->name('marketplace.update');
-    Route::delete('/marketplace/{id}', [MarketplaceProductController::class, 'destroy'])->name('marketplace.destroy');
+
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/marketplace/create', [MarketplaceProductController::class, 'create'])->name('marketplace.create');
+        Route::post('/marketplace', [MarketplaceProductController::class, 'store'])->name('marketplace.store');
+        Route::get('/marketplace/{id}/edit', [MarketplaceProductController::class, 'edit'])->name('marketplace.edit');
+        Route::put('/marketplace/{id}', [MarketplaceProductController::class, 'update'])->name('marketplace.update');
+        Route::delete('/marketplace/{id}', [MarketplaceProductController::class, 'destroy'])->name('marketplace.destroy');
+    });
 
     // Account Page CRUD
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');

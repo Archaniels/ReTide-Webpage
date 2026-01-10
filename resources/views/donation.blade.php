@@ -91,6 +91,23 @@
 
     <section class="donation-form-section">
     
+      <!-- ADMIN DONATION MANAGEMENT SECTION -->
+      @if(auth()->check() && auth()->user()->role === 'admin')
+        <div class="mb-8 p-6 bg-blue-900 rounded-lg border-l-4 border-blue-400">
+          <div class="flex justify-between items-center">
+            <div>
+              <h2 class="text-2xl font-semibold text-white mb-2">
+                  Kelola Donasi
+              </h2>
+              <p class="text-gray-300">Sebagai admin, Anda bisa kelola semua data donasi</p>
+            </div>
+            <a href="{{ route('admin.donations.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+              → Dashboard Admin
+            </a>
+          </div>
+        </div>
+      @endif
+      
       <!-- JUDUL FORM -->
       <h2 class="text-xl font-semibold text-white mb-6">
           Formulir Donasi
@@ -158,6 +175,25 @@
             <button class="toggle-timeline mt-4 bg-blue-500 text-white px-4 py-2 rounded" data-donation-id="{{ $donation->id }}">
               Lihat Perjalanan Donasi
             </button>
+
+            <!-- Admin Action Buttons -->
+            @if(auth()->check() && auth()->user()->role === 'admin')
+              <div class="flex gap-2 mt-4">
+                <a href="{{ route('admin.donations.edit', $donation->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm">
+                  ✏️ Edit
+                </a>
+                <a href="{{ route('admin.donations.updates.create', $donation->id) }}" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
+                  📝 Tambah Update
+                </a>
+                <form method="POST" action="{{ route('admin.donations.destroy', $donation->id) }}" style="display:inline;">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" onclick="return confirm('Yakin hapus?')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
+                    🗑️ Hapus
+                  </button>
+                </form>
+              </div>
+            @endif
           </div>
 
           <div class="timeline-container mt-4" id="timeline-{{ $donation->id }}" style="display:none;">
@@ -225,7 +261,8 @@
         url: 'http://localhost:3000/donation-updates/' + donationId,
         type: 'GET',
         success: function(data) {
-          if (data.length > 0) {
+          console.log('Timeline data received:', data);
+          if (data && data.length > 0) {
             var html = '<div class="timeline">';
             data.forEach(function(update) {
               html += `
@@ -245,8 +282,9 @@
             timelineContent.html('<p class="text-gray-300">Belum ada update untuk donasi ini.</p>');
           }
         },
-        error: function() {
-          timelineContent.html('<p class="text-red-300">Error loading updates.</p>');
+        error: function(xhr, status, error) {
+          console.error('Error loading timeline:', error);
+          timelineContent.html('<p class="text-red-300">Error loading updates: ' + error + '</p>');
         }
       });
     }
