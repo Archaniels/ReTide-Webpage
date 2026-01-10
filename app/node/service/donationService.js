@@ -24,6 +24,10 @@ const updateUpdate = async (id, data) => {
     return await donationRepository.update(id, data);
 };
 
+const deleteUpdate = async (id) => {
+    return await donationRepository.destroy(id);
+};
+
 module.exports = {
     getAllUpdates,
     getUpdatesByDonationId,

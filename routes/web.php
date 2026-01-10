@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\DonationUpdateController;
 // });
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/donations', [DonationController::class, 'adminIndex'])->name('donations.index');
+    Route::get('/donations/create', [DonationController::class, 'adminCreate'])->name('donations.create');
+    Route::post('/donations', [DonationController::class, 'adminStore'])->name('donations.store');
     Route::get('/donations/{donation}/edit', [DonationController::class, 'adminEdit'])->name('donations.edit');
     Route::put('/donations/{donation}', [DonationController::class, 'adminUpdate'])->name('donations.update');
     Route::delete('/donations/{donation}', [DonationController::class, 'adminDestroy'])->name('donations.destroy');
@@ -75,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/donation', [DonationController::class, 'index'])->name('donation.index');
     Route::post('/donation', [DonationController::class, 'store'])->name('donation.store');
     Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
+    Route::get('/donation/{donation}/updates', [DonationController::class, 'showUpdates'])->name('donation.updates');
 
 
     // Blog Posts
