@@ -1,8 +1,8 @@
 {
     "version": 2,
     "functions": {
-        "api/index.php": {
-            "runtime": "vercel-php@0.7.2",
+        "api/*.php": {
+            "runtime": "vercel-php@0.6.0",
             "memory": 1024,
             "maxDuration": 10
         }
@@ -15,9 +15,6 @@
         {
             "src": "/(favicon.ico|robots.txt)",
             "dest": "/public/$1"
-        },
-        {
-            "handle": "filesystem"
         },
         {
             "src": "/(.*)",
