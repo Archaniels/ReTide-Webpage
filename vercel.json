@@ -9,15 +9,15 @@
     },
     "routes": [
         {
-            "handle": "filesystem"
-        },
-        {
-            "src": "/(build|assets)/(.*)",
+            "src": "/(css|js|images|fonts|build|assets)/(.*)",
             "dest": "/public/$1/$2"
         },
         {
             "src": "/(favicon.ico|robots.txt)",
             "dest": "/public/$1"
+        },
+        {
+            "handle": "filesystem"
         },
         {
             "src": "/(.*)",
