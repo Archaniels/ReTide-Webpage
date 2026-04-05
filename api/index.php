@@ -1,6 +1,10 @@
 <?php
 
-// Ensure required storage directories exist in /tmp on Vercel
+/**
+ * Vercel Serverless Function Entry Point for Laravel
+ */
+
+// Define required directories in /tmp for write access
 $directories = [
     '/tmp/storage/bootstrap/cache',
     '/tmp/storage/framework/cache',
@@ -15,9 +19,5 @@ foreach ($directories as $directory) {
     }
 }
 
-/**
- * Forward Vercel requests to the Laravel index.php.
- *
- * Vercel's serverless functions look for an entry point in the api/ directory.
- */
+// Map the request to public/index.php
 require __DIR__ . '/../public/index.php';
