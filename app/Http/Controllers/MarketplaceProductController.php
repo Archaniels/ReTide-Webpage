@@ -105,7 +105,7 @@ class MarketplaceProductController extends Controller
             return view("marketplace.edit", compact("product"));
         }
 
-        return redirect()->route('marketplace.index')->with('error', 'Product not found');
+        return redirect()->route('admin.marketplace.index')->with('error', 'Product not found');
     }
 
     /**

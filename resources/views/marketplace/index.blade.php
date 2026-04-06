@@ -96,12 +96,7 @@
                 </button>
             </div>
 
-            <!-- Create Marketplace Product Button -->
-            <div class="justify-center text-center mt-7">
-                @if(Auth::check() && Auth::user()->role === 'admin')
-                    <a href="{{ route('marketplace.create') }}" class="btn btn-xs btn-info">✍️ Create Marketplace Product</a>
-                @endif
-            </div>
+
 
             <section class="products-section mt-10">
                 @foreach($products as $marketplaceProduct)
@@ -127,35 +122,17 @@
 
                         <!-- Add to Cart -->
                         <div class="mt-6">
-                            <button class="add-to-cart-btn text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" 
-                                data-id="{{ $marketplaceProduct->id }}" 
-                                data-name="{{ $marketplaceProduct->name }}" 
-                                data-price="{{ $marketplaceProduct->price }}" 
+                            <button class="add-to-cart-btn text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full"
+                                data-id="{{ $marketplaceProduct->id }}"
+                                data-name="{{ $marketplaceProduct->name }}"
+                                data-price="{{ $marketplaceProduct->price }}"
                                 data-icon='<img src="{{ asset("storage/" . $marketplaceProduct->image_path) }}" class="w-12 h-12 object-cover rounded">'
                             >
                                 Tambah ke Keranjang
                             </button>
                         </div>
-                        
-                        @if(Auth::check() && Auth::user()->role === 'admin')
-                        <div class="flex">
-                            <div class="mt-7">
-                                <a href="{{ route('marketplace.edit', $marketplaceProduct->id) }}"
-                                    class="text-white bg-green-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">✏️
-                                    Edit</a>
-                            </div>
-                            <div class="ml-3 mt-5">
-                                <form action="{{ route('marketplace.destroy', $marketplaceProduct->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5"
-                                        onclick="return confirm('Yakin hapus?')">🗑️
-                                        Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                        @endif
+
+
                     </div>
                 @endforeach
             </section>

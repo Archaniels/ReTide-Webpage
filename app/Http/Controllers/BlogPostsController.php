@@ -75,7 +75,7 @@ class BlogPostsController extends Controller
             return view("blog.edit", compact("blog"));
         }
 
-        return redirect()->route('blog.index')->with('error', 'Blog not found');
+        return redirect()->route('admin.blogs.index')->with('error', 'Blog not found');
     }
 
     /**
