@@ -23,8 +23,8 @@ $app = Application::configure(basePath: dirname(__DIR__))
 if (isset($_SERVER['LARAVEL_STORAGE_PATH'])) {
     $app->useStoragePath($_SERVER['LARAVEL_STORAGE_PATH']);
 } elseif (isset($_SERVER['VERCEL'])) {
-    // $app->useStoragePath('/tmp/storage');
-    $app->useStoragePath('/tmp');
+    $app->useStoragePath('/tmp/storage');
+    // $app->useStoragePath('/tmp');
 }
 
 return $app;
