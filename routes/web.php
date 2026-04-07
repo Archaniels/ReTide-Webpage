@@ -13,6 +13,21 @@ use App\Http\Controllers\Admin\AccountController as AdminAccountController;
 use App\Http\Controllers\Admin\MarketplaceController as AdminMarketplaceController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 
+// Publicly Accessible Routes (checking if admin to redirect)
+Route::middleware(['not_admin'])->group(function () {
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
+
+    Route::get('/about', function () {
+        return view('about');
+    });
+
+    Route::get('/contact', function () {
+        return view('contact');
+    });
+});
+
 // Admin Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -60,22 +75,6 @@ Route::middleware('guest')->group(function () {
 // Authenticated Normal User Routes
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['not_admin'])->group(function () {
-        Route::get('/', function () {
-            return view('home');
-        })->name('home');
-
-        Route::get('/about', function () {
-            return view('about');
-        });
-
-        Route::get('/contact', function () {
-            return view('contact');
-        });
-
-        Route::get('/account', function () {
-            return view('account');
-        });
-
         // Public Blog
         Route::get('/blog', [BlogPostsController::class, 'index'])->name('blog.index');
 

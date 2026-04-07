@@ -38,9 +38,9 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
             if (auth()->user()->isAdmin()) {
-                return redirect()->route('admin.dashboard');
+                return redirect()->intended(route('admin.dashboard'));
             }
-            return redirect('/'); 
+            return redirect()->intended('/'); 
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.']);
