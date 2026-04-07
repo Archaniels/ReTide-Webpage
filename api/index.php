@@ -1,29 +1,24 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
+// Force storage to /tmp — /var/task is read-only on Vercel
+$_SERVER['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 
-$app = Application::configure(basePath: dirname(__DIR__))
-    ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        commands: __DIR__.'/../routes/console.php',
-        health: '/up',
-    )
-    ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
-            'not_admin' => \App\Http\Middleware\RedirectIfAdmin::class,
-        ]);
-    })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        //
-    })->create();
+$directories = [
+    '/tmp/storage/bootstrap/cache',
+    '/tmp/storage/framework/cache/data',
+    '/tmp/storage/framework/sessions',
+    '/tmp/storage/framework/views',
+    '/tmp/storage/logs',
+];
 
-if (isset($_SERVER['LARAVEL_STORAGE_PATH'])) {
-    $app->useStoragePath($_SERVER['LARAVEL_STORAGE_PATH']);
-} elseif (isset($_SERVER['VERCEL'])) {
-    $app->useStoragePath('/tmp/storage');
+foreach ($directories as $directory) {
+    if (!is_dir($directory)) {
+        mkdir($directory, 0755, true);
+    }
 }
 
-return $app;
+if (function_exists('opcache_reset')) {
+    opcache_reset();
+}
+
+require __DIR__ . '/../public/index.php';
