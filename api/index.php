@@ -1,5 +1,9 @@
 <?php
 
+// Force storage to /tmp before Laravel boots — /var/task is read-only on Vercel.
+// Must be in $_SERVER so bootstrap/app.php picks it up.
+$_SERVER['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
+
 $directories = [
     '/tmp/storage/bootstrap/cache',
     '/tmp/storage/framework/cache/data',
@@ -14,7 +18,6 @@ foreach ($directories as $directory) {
     }
 }
 
-// Prevent stale opcode cache from serving wrong paths across invocations
 if (function_exists('opcache_reset')) {
     opcache_reset();
 }
