@@ -1,25 +1,29 @@
 <?php
 
-// Force storage to /tmp before Laravel boots — /var/task is read-only on Vercel.
-// Must be in $_SERVER so bootstrap/app.php picks it up.
-$_SERVER['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
 
-$directories = [
-    '/tmp/storage/bootstrap/cache',
-    '/tmp/storage/framework/cache/data',
-    '/tmp/storage/framework/sessions',
-    '/tmp/storage/framework/views',
-    '/tmp/storage/logs',
-];
+$app = Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'not_admin' => \App\Http\Middleware\RedirectIfAdmin::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        //
+    })->create();
 
-foreach ($directories as $directory) {
-    if (!is_dir($directory)) {
-        mkdir($directory, 0755, true);
-    }
+if (isset($_SERVER['LARAVEL_STORAGE_PATH'])) {
+    $app->useStoragePath($_SERVER['LARAVEL_STORAGE_PATH']);
+} elseif (isset($_SERVER['VERCEL'])) {
+    $app->useStoragePath('/tmp/storage');
 }
 
-if (function_exists('opcache_reset')) {
-    opcache_reset();
-}
-
-require __DIR__ . '/../public/index.php';
+return $app;
