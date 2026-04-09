@@ -41,5 +41,6 @@ if (env('VERCEL') || env('VERCEL_ENV')) {
     if (!is_dir($viewCompiledPath)) {
         mkdir($viewCompiledPath, 0755, true);
     }
+}
 
 return $app;
