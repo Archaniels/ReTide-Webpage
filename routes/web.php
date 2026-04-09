@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\MarketplaceProductController;
 use App\Http\Controllers\AccountController;

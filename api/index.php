@@ -9,6 +9,10 @@ $directories = [
     '/tmp/storage/framework/sessions',
     '/tmp/storage/framework/views',
     '/tmp/storage/logs',
+    '/tmp/views',
+    '/tmp/cache',
+    '/tmp/sessions',
+    '/tmp/logs',
 ];
 
 foreach ($directories as $directory) {
