@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\MarketplaceProductController;
 use App\Http\Controllers\AccountController;
@@ -11,6 +12,29 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
 use App\Http\Controllers\Admin\MarketplaceController as AdminMarketplaceController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
+
+/*
+|--------------------------------------------------------------------------
+| TEMPORARY
+|--------------------------------------------------------------------------
+*/
+Route::get('/debug-boot', function () {
+    try {
+        // Attempt to resolve a core service to trigger the error
+        app('view');
+        return 'View service resolved successfully!';
+    } catch (\Throwable $e) {
+        // Log the full exception to Vercel's STDERR
+        Log::error('BOOT DEBUG: ' . $e->getMessage());
+        Log::error('BOOT DEBUG TRACE: ' . $e->getTraceAsString());
+
+        // Also dump it to the browser output
+        return response()->make(
+            '<pre>' . e($e) . '</pre>',
+            500
+        )->header('Content-Type', 'text/html');
+    }
+});
 
 // Publicly Accessible Routes (checking if admin to redirect)
 Route::middleware(['not_admin'])->group(function () {
@@ -30,7 +54,7 @@ Route::middleware(['not_admin'])->group(function () {
 // Admin Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // User Accounts Management
     Route::get('/accounts', [AdminAccountController::class, 'index'])->name('accounts.index');
     Route::patch('/accounts/{user}/role', [AdminAccountController::class, 'updateRole'])->name('accounts.updateRole');
