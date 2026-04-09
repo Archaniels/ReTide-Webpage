@@ -26,4 +26,14 @@ if (isset($_SERVER['LARAVEL_STORAGE_PATH'])) {
     $app->useStoragePath('/tmp/storage');
 }
 
+/*
+|--------------------------------------------------------------------------
+| Vercel /tmp Directory Overrides
+|--------------------------------------------------------------------------
+*/
+if (env('VERCEL') || env('VERCEL_ENV')) {
+    $app->useStoragePath('/tmp/laravel-storage');
+    $app->useDatabasePath('/tmp/laravel-db');
+}
+
 return $app;
