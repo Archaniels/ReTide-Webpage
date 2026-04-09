@@ -34,6 +34,12 @@ if (isset($_SERVER['LARAVEL_STORAGE_PATH'])) {
 if (env('VERCEL') || env('VERCEL_ENV')) {
     $app->useStoragePath('/tmp/laravel-storage');
     $app->useDatabasePath('/tmp/laravel-db');
-}
+
+    // CREATE THE DIRECTORIES (Required for View Service)
+    $storagePath = '/tmp/laravel-storage';
+    $viewCompiledPath = $storagePath . '/framework/views';
+    if (!is_dir($viewCompiledPath)) {
+        mkdir($viewCompiledPath, 0755, true);
+    }
 
 return $app;
