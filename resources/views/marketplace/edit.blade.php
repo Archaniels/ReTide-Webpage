@@ -107,7 +107,7 @@
         </div>
     @endif
 
-    <form action="{{ route('marketplace.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="max-w-sm mx-auto
+    <form action="{{ route('admin.marketplace.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="max-w-sm mx-auto
         space-y-4 mt-6">
         @csrf
         @method('PUT')

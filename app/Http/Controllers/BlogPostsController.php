@@ -46,7 +46,7 @@ class BlogPostsController extends Controller
             'content' => $request->input('content'),
             'image_path' => $imagePath,
         ]);
-        return redirect('/blog/create')->with('success', 'Blog berhasil ditambahkan!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog berhasil ditambahkan!');
     }
 
     /**
@@ -100,7 +100,7 @@ class BlogPostsController extends Controller
 
         Http::put("http://localhost:3000/blogs/$id", $data);
 
-        return redirect()->route('blog.index')->with('success', 'Blog berhasil diperbarui!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog berhasil diperbarui!');
     }
 
     /**
@@ -115,6 +115,6 @@ class BlogPostsController extends Controller
         // New Code: using NodeJS
         Http::delete("http://localhost:3000/blogs/$id");
 
-        return redirect()->route('blog.index')->with('success', 'Blog berhasil dihapus!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog berhasil dihapus!');
     }
 }

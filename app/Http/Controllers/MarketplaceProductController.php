@@ -76,7 +76,7 @@ class MarketplaceProductController extends Controller
         //     'image_path' => $imagePath,
         // ]);
 
-        return redirect()->route('marketplace.index')->with('success', 'Product berhasil ditambahkan!');
+        return redirect()->route('admin.marketplace.index')->with('success', 'Product berhasil ditambahkan!');
     }
 
     /**
@@ -145,7 +145,7 @@ class MarketplaceProductController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('marketplace.index')->with('success', 'Product berhasil diperbarui!');
+        return redirect()->route('admin.marketplace.index')->with('success', 'Product berhasil diperbarui!');
     }
 
     /**
@@ -160,6 +160,6 @@ class MarketplaceProductController extends Controller
         // New Code: using NodeJS
         Http::delete("http://localhost:3000/products/$id");
 
-        return redirect()->route('marketplace.index')->with('success', 'Product berhasil dihapus!');
+        return redirect()->route('admin.marketplace.index')->with('success', 'Product berhasil dihapus!');
     }
 }

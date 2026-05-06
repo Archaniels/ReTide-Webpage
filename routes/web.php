@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
 use App\Http\Controllers\Admin\MarketplaceController as AdminMarketplaceController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
+use App\Http\Controllers\Admin\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/donations/{donation}/updates', [DonationUpdateController::class, 'index'])->name('donations.updates.index');
     Route::get('/donations/{donation}/updates/create', [DonationUpdateController::class, 'create'])->name('donations.updates.create');
     Route::post('/donations/{donation}/updates', [DonationUpdateController::class, 'store'])->name('donations.updates.store');
+
+    // Payments Management
+    Route::get('/payments/test', [PaymentController::class, 'test'])->name('payments.test');
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+    Route::get('/payments/{payment}', [PaymentController::class, 'show'])->name('payments.show');
 });
 
 // Guest Routes

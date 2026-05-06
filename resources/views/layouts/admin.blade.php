@@ -70,6 +70,9 @@
             <a href="{{ route('admin.donations.index') }}" class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 {{ request()->routeIs('admin.donations.*') ? 'bg-primary text-black' : 'text-secondary hover:bg-gray-800 hover:text-primary' }}">
                 <i class="fas fa-hand-holding-heart w-6"></i> <span>Donations</span>
             </a>
+            <a href="{{ route('admin.payments.index') }}" class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 {{ request()->routeIs('admin.payments.*') ? 'bg-primary text-black' : 'text-secondary hover:bg-gray-800 hover:text-primary' }}">
+                <i class="fas fa-credit-card w-6"></i> <span>Payments</span>
+            </a>
         </nav>
         <div class="p-4 border-t border-gray-800">
             <form method="POST" action="{{ route('logout') }}">

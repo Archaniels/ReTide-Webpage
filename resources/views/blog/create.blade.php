@@ -99,7 +99,7 @@
         </div>
     @endif
 
-    <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data"
         class="max-w-sm mx-auto space-y-4 mt-6">
         @csrf
         <div>

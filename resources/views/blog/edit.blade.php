@@ -113,7 +113,7 @@
     @endif
 
     <!-- Edit Form -->
-    <form action="{{ route('blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ route('admin.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data"
         class="max-w-sm mx-auto space-y-4 mt-6">
         @csrf
         @method('PUT')
