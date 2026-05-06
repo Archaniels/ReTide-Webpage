@@ -98,7 +98,7 @@
 
 
 
-            <section class="products-section mt-10">
+            <section class="products-section mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 @foreach($products as $marketplaceProduct)
                     <div class="blog-item">
                         <img src="{{ asset('storage/' . $marketplaceProduct->image_path) }}"

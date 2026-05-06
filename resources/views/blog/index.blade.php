@@ -92,7 +92,7 @@
         <h2 class="section-title font-semibold text-[#7ae0d3] text-4xl justify-center text-center">All Blog Posts</h2>
     </section>
 
-    <section class="blog-post">
+    <section class="blog-post grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 px-4 max-w-screen-xl mx-auto">
         @foreach($blog as $blogPosts)
             <div class="blog-item">
                 <img src="{{ asset('storage/' . $blogPosts->image_path) }}"
