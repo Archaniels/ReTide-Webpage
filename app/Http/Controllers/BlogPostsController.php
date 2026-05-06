@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
-use Illuminate\Support\Facades\Http;
 
 class BlogPostsController extends Controller
 {
@@ -62,20 +61,8 @@ class BlogPostsController extends Controller
      */
     public function edit(string $id)
     {
-        // Old Code: using Laravel Eloquent
-        // $blog = BlogPost::findOrFail($id);
-        // return view('blog.edit', compact('blog'));
-
-        // New Code: using NodeJS
-        $response = Http::get("http://localhost:3000/blogs/$id");
-        if ($response->successful()) {
-            $blogData = $response->json();
-            $blog = (object) $blogData;
-            $blog->image = $blogData['image_path'] ?? null;
-            return view("blog.edit", compact("blog"));
-        }
-
-        return redirect()->route('admin.blogs.index')->with('error', 'Blog not found');
+        $blog = BlogPost::findOrFail($id);
+        return view('blog.edit', compact('blog'));
     }
 
     /**
@@ -83,12 +70,14 @@ class BlogPostsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Old Code: using Laravel Eloquent
-        // $blog = BlogPost::findOrFail($id);
-        $request->all();
-        // return redirect('/blog/' . $id . '/edit')->with('success', 'Blog berhasil diperbarui!');
+        $blog = BlogPost::findOrFail($id);
 
-        // New Code: using NodeJS
+        $request->validate([
+            'title' => 'required|min:5|max:100',
+            'content' => 'required|min:5|max:3000',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
         $data = [
             'title' => $request->input('title'),
             'content' => $request->input('content'),
@@ -98,7 +87,7 @@ class BlogPostsController extends Controller
             $data['image_path'] = $request->file('image_path')->store('blog_posts', 'public');
         }
 
-        Http::put("http://localhost:3000/blogs/$id", $data);
+        $blog->update($data);
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog berhasil diperbarui!');
     }
@@ -108,12 +97,8 @@ class BlogPostsController extends Controller
      */
     public function destroy(string $id)
     {
-        // $blog = BlogPost::findOrFail($id);
-        // $blog->delete();
-        // return redirect('/blog/')->with('success', 'Blog berhasil dihapus!');
-
-        // New Code: using NodeJS
-        Http::delete("http://localhost:3000/blogs/$id");
+        $blog = BlogPost::findOrFail($id);
+        $blog->delete();
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog berhasil dihapus!');
     }

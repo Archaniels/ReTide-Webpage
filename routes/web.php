@@ -112,6 +112,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Donation
         Route::get('/donation', [DonationController::class, 'index'])->name('donation.index');
+        Route::get('/donation/{donation}/updates', [DonationController::class, 'updates'])->name('donation.updates');
         Route::post('/donation', [DonationController::class, 'store'])->name('donation.store');
         Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
 

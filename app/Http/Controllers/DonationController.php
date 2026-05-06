@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\DonationUpdate;
-use Illuminate\Support\Facades\Http;
-
 
 class DonationController extends Controller
 {
-        public function index()
+    public function index()
     {
         // 1. Ambil donasi dari user yang login
         $donations = Donation::where('user_id', auth()->id())->latest()->get();
@@ -19,6 +17,12 @@ class DonationController extends Controller
         $totalDonations = Donation::sum('amount');
 
         return view('donation', compact('donations', 'totalDonations'));
+    }
+
+    public function updates(Donation $donation)
+    {
+        $updates = DonationUpdate::where('donation_id', $donation->id)->latest()->get();
+        return response()->json($updates);
     }
 
     public function store(Request $request)

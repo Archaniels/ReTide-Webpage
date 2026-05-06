@@ -222,7 +222,7 @@
       var timelineContent = $('#timeline-' + donationId).find('.timeline-content');
 
       $.ajax({
-        url: 'http://localhost:3000/donation-updates/' + donationId,
+        url: '/donation/' + donationId + '/updates',
         type: 'GET',
         success: function(data) {
           if (data.length > 0) {
