@@ -118,6 +118,28 @@ function checkout() {
     updateCart();
 }
 
+// Show Toast Notification
+function showToast(message) {
+    // Create container if it doesn't exist
+    if ($(".toast-container").length === 0) {
+        $("body").append('<div class="toast-container"></div>');
+    }
+
+    const toast = $(`
+        <div class="toast-message">
+            <i class="fas fa-check-circle"></i>
+            <span>${message}</span>
+        </div>
+    `);
+
+    $(".toast-container").append(toast);
+
+    // Remove toast after animation ends (3 seconds total)
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
 // Event listener
 $(document).ready(function () {
     // Print
@@ -125,13 +147,29 @@ $(document).ready(function () {
 
     // Add to cart
     $(document).on("click", ".add-to-cart-btn", function () {
+        const $btn = $(this);
+        const originalContent = $btn.html();
+        
         const product = {
-            id: $(this).data("id"),
-            name: $(this).data("name"),
-            price: parseInt($(this).data("price")),
-            icon: $(this).data("icon"), // html string
+            id: $btn.data("id"),
+            name: $btn.data("name"),
+            price: parseInt($btn.data("price")),
+            icon: $btn.data("icon"), // html string
         };
+        
+        // Add to cart logic
         addToCart(product);
+
+        // UI Feedback: Button Animation
+        $btn.addClass("btn-added").prop("disabled", true).html('<i class="fas fa-check"></i> Added!');
+        
+        // UI Feedback: Toast
+        showToast(`${product.name} ditambahkan ke keranjang!`);
+
+        // Revert button after 2 seconds
+        setTimeout(() => {
+            $btn.removeClass("btn-added").prop("disabled", false).html(originalContent);
+        }, 2000);
     });
 
     // Cart
