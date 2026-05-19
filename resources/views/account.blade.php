@@ -109,18 +109,22 @@
                     </form>
 
                     <div class="pt-8 border-t border-gray-800">
-                        <h2 class="text-lg font-bold text-red-500 mb-2">Hapus Akun</h2>
-                        <p class="text-gray-500 text-xs mb-4">Tindakan ini permanen. Seluruh data Anda akan dihapus dari sistem kami.</p>
+                        <h2 class="text-xl font-semibold text-white mb-2">Hapus Akun</h2>
+                        <p class="text-gray-400 text-sm mb-6">Tindakan ini permanen. Seluruh data Anda akan dihapus dari sistem kami.</p>
                         
-                        <div class="flex flex-col space-y-3">
+                        <div class="flex flex-col space-y-4 items-start">
                             <form action="{{ route('account.destroy') }}" method="POST" onsubmit="return confirm('Yakin ingin hapus?')">
                                 @csrf @method('DELETE')
-                                <button class="text-red-500 text-sm hover:underline transition font-medium">Hapus akun saya secara permanen</button>
+                                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-md font-bold transition text-sm">
+                                    Hapus akun saya secara permanen
+                                </button>
                             </form>
                             
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button class="text-gray-500 text-sm hover:text-white underline transition italic">Keluar (Logout)</button>
+                                <button type="submit" class="text-gray-400 text-sm hover:text-white transition underline italic">
+                                    Keluar (Logout)
+                                </button>
                             </form>
                         </div>
                     </div>

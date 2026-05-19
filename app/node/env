@@ -1,0 +1,23 @@
+# Old: mysql
+# Supabase: pgsql
+DB_CONNECTION=mysql
+# Old: 
+# Supabase: aws-1-ap-southeast-1.pooler.supabase.com
+DB_HOST=127.0.0.1
+# Old: 3306
+# Supabase:5432 
+DB_PORT=3306
+# Supabase; postgres
+# Old: retide-database
+DB_DATABASE=retide-database
+# Old: Bagaskara
+# Supabase: postgres.iddpamblyzgqftpcpfua
+DB_USERNAME=Bagaskara
+# # @Bagaskara1234567890
+# Supabase: 4aHDHD531whV7GoX
+# Old: no password
+DB_PASSWORD=
+
+# # Supabase API Settings
+# SUPABASE_URL=https://iddpamblyzgqftpcpfua.supabase.co
+# SUPABASE_KEY=sb_publishable_itRtclFFLcpdDdHG-QPGyQ_93G6j7qm
