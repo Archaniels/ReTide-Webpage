@@ -74,15 +74,6 @@ class CartController extends Controller
 
         $orderId = 'MKT-' . time() . '-' . auth()->id();
 
-        // Create Payment record
-        Payment::create([
-            'order_id' => $orderId,
-            'payment_type' => 'marketplace',
-            'status' => 'pending',
-            'gross_amount' => $totalAmount,
-            'user_id' => auth()->id(),
-        ]);
-
         $params = [
             'transaction_details' => [
                 'order_id' => $orderId,
@@ -93,16 +84,37 @@ class CartController extends Controller
                 'email' => auth()->user()->email,
             ],
             'item_details' => $itemDetails,
+            'callbacks' => [
+                'finish' => route('marketplace.success'),
+                'unfinish' => route('marketplace.index'),
+                'error' => route('marketplace.index'),
+            ],
         ];
 
         try {
-            $redirectUrl = Snap::createTransaction($params)->redirect_url;
+            $snapResponse = Snap::createTransaction($params);
+            $redirectUrl = $snapResponse->redirect_url;
+            
+            // Create Payment record ONLY if Snap transaction succeeded
+            Payment::create([
+                'order_id' => $orderId,
+                'payment_type' => 'marketplace',
+                'status' => 'pending',
+                'gross_amount' => $totalAmount,
+                'user_id' => auth()->id(),
+                'payload' => [
+                    'redirect_url' => $snapResponse->redirect_url,
+                    'token' => $snapResponse->token,
+                    'created_at' => now()->toDateTimeString(),
+                ],
+            ]);
             
             // Clear the cart session after creating transaction
             session()->forget('cart');
 
             return redirect()->away($redirectUrl);
         } catch (\Exception $e) {
+            \Log::error('Midtrans Snap Error (Marketplace): ' . $e->getMessage());
             return back()->with('error', 'Failed to create payment: ' . $e->getMessage());
         }
     }

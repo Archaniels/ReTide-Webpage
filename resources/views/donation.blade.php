@@ -28,6 +28,60 @@
 
   <!-- Script -->
   <script src="{{ asset('assets/js/donation.js') }}" defer></script>
+  <style>
+    /* Toast Notification (copied from marketplace.css for consistency) */
+    .toast-container {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 1000;
+    }
+    .toast-message {
+        background-color: #63CFC0;
+        color: black;
+        padding: 12px 24px;
+        border-radius: 8px;
+        margin-top: 8px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+  </style>
+  <script>
+    function showToast(message) {
+        if ($(".toast-container").length === 0) {
+            $("body").append('<div class="toast-container"></div>');
+        }
+        const toast = $(`
+            <div class="toast-message">
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            </div>
+        `);
+        $(".toast-container").append(toast);
+        setTimeout(() => { toast.remove(); }, 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+            showToast("{{ session('success') }}");
+        @endif
+        @if(session('error'))
+            showToast("{{ session('error') }}");
+        @endif
+    });
+  </script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
 

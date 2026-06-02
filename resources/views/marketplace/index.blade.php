@@ -31,6 +31,16 @@
 
     <!-- Script -->
     <script src="{{ asset('assets/js/marketplace.js') }}" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+                showToast("{{ session('success') }}");
+            @endif
+            @if(session('error'))
+                showToast("{{ session('error') }}");
+            @endif
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
 

@@ -54,15 +54,6 @@ class DonationController extends Controller
 
         $orderId = 'DON-' . time() . '-' . auth()->id();
 
-        // Create Payment record
-        Payment::create([
-            'order_id' => $orderId,
-            'payment_type' => 'donation',
-            'status' => 'pending',
-            'gross_amount' => $request->amount,
-            'user_id' => auth()->id(),
-        ]);
-
         $params = [
             'transaction_details' => [
                 'order_id' => $orderId,
@@ -80,12 +71,34 @@ class DonationController extends Controller
                     'name' => 'Donation for ReTide',
                 ]
             ],
+            'callbacks' => [
+                'finish' => route('donation.success'),
+                'unfinish' => route('donation.index'),
+                'error' => route('donation.index'),
+            ],
         ];
 
         try {
-            $redirectUrl = Snap::createTransaction($params)->redirect_url;
+            $snapResponse = Snap::createTransaction($params);
+            $redirectUrl = $snapResponse->redirect_url;
+
+            // Create Payment record ONLY if Snap transaction succeeded
+            Payment::create([
+                'order_id' => $orderId,
+                'payment_type' => 'donation',
+                'status' => 'pending',
+                'gross_amount' => $request->amount,
+                'user_id' => auth()->id(),
+                'payload' => [
+                    'redirect_url' => $snapResponse->redirect_url,
+                    'token' => $snapResponse->token,
+                    'created_at' => now()->toDateTimeString(),
+                ],
+            ]);
+
             return redirect()->away($redirectUrl);
         } catch (\Exception $e) {
+            \Log::error('Midtrans Snap Error (Donation): ' . $e->getMessage());
             return back()->with('error', 'Failed to create donation payment: ' . $e->getMessage());
         }
     }
