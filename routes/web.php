@@ -7,6 +7,7 @@ use App\Http\Controllers\MarketplaceProductController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Api\PaymentWebhookController;
 use App\Http\Controllers\Admin\DonationUpdateController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -121,6 +122,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/account', [AccountController::class, 'index'])->name('account.index');
         Route::put('/account', [AccountController::class, 'update'])->name('account.update');
         Route::delete('/account', [AccountController::class, 'destroy'])->name('account.destroy');
+
+        // Cart & Marketplace Checkout
+        Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+        Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -9,18 +9,39 @@ function printProduct() {
 
 // Add
 function addToCart(product) {
-    const itemAda = cart.find((item) => item.id === product.id);
+    $.ajax({
+        url: '/cart/add',
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+            product_id: product.id
+        },
+        success: function(response) {
+            const itemAda = cart.find((item) => item.id === product.id);
 
-    if (itemAda) {
-        itemAda.jumlah++;
-    } else {
-        cart.push({
-            ...product,
-            jumlah: 1,
-        });
-    }
+            if (itemAda) {
+                itemAda.jumlah++;
+            } else {
+                cart.push({
+                    ...product,
+                    jumlah: 1,
+                });
+            }
 
-    updateCart();
+            updateCart();
+        },
+        error: function(xhr) {
+            console.error('Error adding to cart:', xhr);
+            if (xhr.status === 401) {
+                alert('Silakan login terlebih dahulu');
+                window.location.href = '/login';
+            } else {
+                alert('Gagal menambahkan ke keranjang');
+            }
+        }
+    });
 }
 
 // Update
@@ -56,7 +77,7 @@ function updateCart() {
 // Update total
 function updateTotal() {
     const total = cart.reduce((sum, item) => sum + item.price * item.jumlah, 0);
-    $("#total-price").text(total);
+    $("#total-price").text(total.toLocaleString('id-ID'));
 }
 
 // Increase
@@ -107,15 +128,7 @@ function checkout() {
         return;
     }
 
-    const total = cart.reduce((sum, item) => sum + item.price * item.jumlah, 0);
-    const itemCount = cart.reduce((sum, item) => sum + item.jumlah, 0);
-
-    alert(
-        `Checkout berhasil!\n\nTotal Item: ${itemCount}\nTotal Pembayaran: Rp ${total}\n\nTerima kasih telah berbelanja!`
-    );
-
-    cart = [];
-    updateCart();
+    window.location.href = '/cart/checkout';
 }
 
 // Show Toast Notification
