@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MarketplaceProduct;
+use App\Models\Payment;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class CartController extends Controller
 {
@@ -43,10 +46,63 @@ class CartController extends Controller
      */
     public function checkout()
     {
-        // Clear the cart session after "purchase"
-        session()->forget('cart');
+        $cart = session()->get('cart', []);
 
-        return redirect()->route('marketplace.index')
-            ->with('success', 'Purchase successful! Your order is being processed.');
+        if (empty($cart)) {
+            return redirect()->route('marketplace.index')->with('error', 'Cart is empty!');
+        }
+
+        $totalAmount = 0;
+        $itemDetails = [];
+
+        foreach ($cart as $id => $details) {
+            $totalAmount += $details['price'] * $details['quantity'];
+            $itemDetails[] = [
+                'id' => $id,
+                'price' => $details['price'],
+                'quantity' => $details['quantity'],
+                'name' => $details['name'],
+            ];
+        }
+
+        // Set Midtrans configuration
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$isProduction = config('midtrans.is_production');
+        Config::$isSanitized = config('midtrans.is_sanitized');
+        Config::$is3ds = config('midtrans.is_3ds');
+
+        $orderId = 'MKT-' . time() . '-' . auth()->id();
+
+        // Create Payment record
+        Payment::create([
+            'order_id' => $orderId,
+            'payment_type' => 'marketplace',
+            'status' => 'pending',
+            'gross_amount' => $totalAmount,
+            'user_id' => auth()->id(),
+        ]);
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => $totalAmount,
+            ],
+            'customer_details' => [
+                'first_name' => auth()->user()->name,
+                'email' => auth()->user()->email,
+            ],
+            'item_details' => $itemDetails,
+        ];
+
+        try {
+            $redirectUrl = Snap::createTransaction($params)->redirect_url;
+            
+            // Clear the cart session after creating transaction
+            session()->forget('cart');
+
+            return redirect()->away($redirectUrl);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to create payment: ' . $e->getMessage());
+        }
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\MarketplaceProductController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\Api\PaymentWebhookController;
 use App\Http\Controllers\Admin\DonationUpdateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
@@ -124,3 +125,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+// Midtrans Webhook Notification
+Route::post('/payment/notification', [PaymentWebhookController::class, 'handleNotification'])->name('payment.notification');

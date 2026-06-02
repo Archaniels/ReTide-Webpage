@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\DonationUpdate;
+use App\Models\Payment;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class DonationController extends Controller
 {
@@ -34,8 +37,7 @@ class DonationController extends Controller
             'message' => 'nullable|string|max:500',
         ]);
 
-
-        Donation::create([
+        $donation = Donation::create([
             'name'   => $request->name ?: auth()->user()->name,
             'email'  => $request->email ?: auth()->user()->email,
             'amount' => $request->amount,
@@ -43,7 +45,48 @@ class DonationController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('donation.success');
+        // Set Midtrans configuration
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$isProduction = config('midtrans.is_production');
+        Config::$isSanitized = config('midtrans.is_sanitized');
+        Config::$is3ds = config('midtrans.is_3ds');
+
+        $orderId = 'DON-' . time() . '-' . auth()->id();
+
+        // Create Payment record
+        Payment::create([
+            'order_id' => $orderId,
+            'payment_type' => 'donation',
+            'status' => 'pending',
+            'gross_amount' => $request->amount,
+            'user_id' => auth()->id(),
+        ]);
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => (int) $request->amount,
+            ],
+            'customer_details' => [
+                'first_name' => $donation->name,
+                'email' => $donation->email,
+            ],
+            'item_details' => [
+                [
+                    'id' => 'donation-' . $donation->id,
+                    'price' => (int) $request->amount,
+                    'quantity' => 1,
+                    'name' => 'Donation for ReTide',
+                ]
+            ],
+        ];
+
+        try {
+            $redirectUrl = Snap::createTransaction($params)->redirect_url;
+            return redirect()->away($redirectUrl);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to create donation payment: ' . $e->getMessage());
+        }
     }
 
     public function success()
