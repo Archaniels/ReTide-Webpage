@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test';
  */
 test('TC001 - Marketplace: Verify product creation fails with empty required fields', async ({ page }) => {
     const baseURL = 'https://retide-app-archaniels-projects.vercel.app';
-    
+
     // 1. Login as Admin
     await page.goto(`${baseURL}/login`);
     await page.fill('#email', 'admin123@gmail.com');

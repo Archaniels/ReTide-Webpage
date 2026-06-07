@@ -21,6 +21,10 @@ use App\Http\Controllers\Admin\PaymentController;
 | TEMPORARY
 |--------------------------------------------------------------------------
 */
+Route::get('/test/landing', function () {
+    return view('test.testLandingPage');
+});
+
 Route::get('/debug-boot', function () {
     try {
         // Attempt to resolve a core service to trigger the error

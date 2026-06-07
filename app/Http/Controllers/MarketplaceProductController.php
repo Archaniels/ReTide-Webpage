@@ -32,7 +32,7 @@ class MarketplaceProductController extends Controller
         $request->validate([
             'name' => 'required|min:5|max:100',
             'description' => 'required|min:5|max:3000',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0|max:99999999.99',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -79,7 +79,7 @@ class MarketplaceProductController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0|max:99999999.99',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
