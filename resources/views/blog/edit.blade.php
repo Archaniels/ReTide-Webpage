@@ -126,7 +126,7 @@
         </div>
         <!-- Content Form -->
         <div>
-            <label for="content" class="block mb-2.5 text-sm font-medium text-heading">Content (Min 5, Max 3000)</label>
+            <label for="content" class="block mb-2.5 text-sm font-medium text-heading">Content (Min 10, Max 5000)</label>
             <textarea type="text" id="content" name="content"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
                 placeholder="" required>{{ old('content', $blog->content) }}</textarea>
@@ -135,19 +135,22 @@
         <div>
             <label for="image_path" class="block mb-2.5 text-sm font-medium text-heading">Image (Optional, image must be
                 in
-                .jpeg, .png, .jpg, or .gif, max 2MB)</label>
+                .jpeg, .png, or .jpg, max 5MB)</label>
             <input type="file" id="image_path" name="image_path"
                 class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
                 placeholder="" />
         </div>
 
-        <!-- Cancel and Update Button -->
-        <button type="reset"
-            class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">
-            <a href="/blog">Cancel</a></button>
-        <button type="submit"
-            class="text-black bg-[#7ae0d3] box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">
-            <a href="/blog">Update</a></button>
+        <div class="flex gap-3">
+            <a href="{{ route('admin.blogs.index') }}"
+                class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5 inline-block text-center">
+                Cancel
+            </a>
+            <button type="submit"
+                class="text-black bg-[#7ae0d3] box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">
+                Update
+            </button>
+        </div>
     </form>
 
     <!-- Footer -->

@@ -31,8 +31,8 @@ class BlogPostsController extends Controller
     {
         $request->validate([
             'title' => 'required|min:5|max:100',
-            'content' => 'required|min:5|max:3000',
-            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'content' => 'required|min:10|max:5000',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
         ]);
 
         $imagePath = null;
@@ -74,8 +74,8 @@ class BlogPostsController extends Controller
 
         $request->validate([
             'title' => 'required|min:5|max:100',
-            'content' => 'required|min:5|max:3000',
-            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'content' => 'required|min:10|max:5000',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
         ]);
 
         $data = [

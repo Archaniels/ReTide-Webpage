@@ -306,6 +306,69 @@
       });
     }
   </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form.donation-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const amountStr = form.querySelector('input[name="amount"]').value;
+                const name = form.querySelector('input[name="name"]').value;
+                const email = form.querySelector('input[name="email"]').value;
+                
+                let errors = [];
+                
+                if (!amountStr || amountStr.trim() === '' || !name || name.trim() === '' || !email || email.trim() === '') {
+                    errors.push('This field is required');
+                } else {
+                    if (amountStr && amountStr.trim() !== '') {
+                        if (/[a-zA-Z]/.test(amountStr)) {
+                            errors.push('Please enter a valid numeric amount.');
+                        } else if (/[^\d.\-]/.test(amountStr)) {
+                            errors.push('Numeric values only.');
+                        } else {
+                            const amount = parseFloat(amountStr);
+                            if (isNaN(amount)) {
+                                errors.push('Please enter a valid numeric amount.');
+                            } else if (amount <= 0) {
+                                errors.push('Donation amount must be greater than 0.');
+                            } else if (amount < 1.00) {
+                                errors.push('Minimum donation amount is $1.00.');
+                            } else if (amount > 10000.00) {
+                                errors.push('Maximum donation amount is $10,000.00.');
+                            }
+                        }
+                    }
+
+                    if (errors.length === 0 && name && name.trim() !== '') {
+                        if (name.length < 2) {
+                            errors.push('Name must be at least 2 characters long.');
+                        } else if (name.length > 50) {
+                            errors.push('Name cannot exceed 50 characters.');
+                        } else if (/[0-9]/.test(name)) {
+                            errors.push('Name can only contain alphabetic characters.');
+                        } else if (/[^a-zA-Z\s\-]/.test(name)) {
+                            errors.push('Name contains invalid characters.');
+                        }
+                    }
+
+                    if (errors.length === 0 && email && email.trim() !== '') {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(email)) {
+                            errors.push('Please enter a valid email address.');
+                        }
+                    }
+                }
+
+                if (errors.length > 0) {
+                    e.preventDefault();
+                    if (typeof showToast === 'function') {
+                        showToast(errors[0]);
+                    }
+                }
+            });
+        }
+    });
+  </script>
 </body>
 
 </html>
