@@ -32,6 +32,7 @@ jobs:
 
     - name: Prepare Laravel Environment
       run: |
+        mkdir -p bootstrap/cache
         cp .env.example .env
         php artisan key:generate
         touch database/database.sqlite
