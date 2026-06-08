@@ -37,7 +37,7 @@
     </div>
 
     <!-- Navbar -->
-    <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
+    <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
