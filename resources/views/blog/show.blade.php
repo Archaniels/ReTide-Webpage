@@ -17,13 +17,14 @@
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <!-- Lenis by Darkroom Engineering -->
+    <!-- Lenis by Darkroom Engineering
     <script src="https://unpkg.com/lenis@1.3.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.15/dist/lenis.css">
 
-    <!-- GSAP + ScrollTrigger -->
+     GSAP + ScrollTrigger
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    -->
 
     <!-- Flowbite -->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
@@ -49,8 +50,8 @@
                     <ul class="flex space-x-8 text-sm font-medium">
                         <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
                         <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
-                        <li><a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="/marketplace" class="text-brand transition-colors">Marketplace</a></li>
+                        <li><a href="/blog" class="text-[#63cfc0] hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/marketplace" class="text-gray-300 transition-colors">Marketplace</a></li>
                         <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
                     </ul>
                 </nav>

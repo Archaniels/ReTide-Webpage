@@ -134,100 +134,99 @@
     </header>
   </div>
 
-  <div class="donation-container" style="margin-top: 120px;">
-    <div class="header">
-      <h1 class="font-semibold text-[#7ae0d3]">Donation</h1>
-      <p>Berikan kontribusi Anda untuk mendukung kegiatan konservasi laut kami.</p>
-      <div class="total-donations mt-4 p-4 bg-blue-900 rounded-lg">
-        <h3 class="text-white text-lg font-semibold">Total Donasi Terkumpul</h3>
-        <p class="text-[#7ae0d3] text-2xl font-bold">Rp {{ number_format($totalDonations, 0, ',', '.') }}</p>
+  <div class="donation-layout">
+    <div class="donation-hero">
+      <h1 class="hero-title">Bantu Kami Melindungi Lautan</h1>
+      <p class="hero-subtitle">Setiap kontribusi Anda menjadi langkah nyata dalam memulihkan ekosistem dan mendukung komunitas pesisir.</p>
+      
+      <div class="total-donations-widget">
+        <h3 class="widget-title">Total Donasi Terkumpul</h3>
+        <p class="widget-amount">Rp {{ number_format($totalDonations, 0, ',', '.') }}</p>
+        <div class="widget-bar">
+           <div class="widget-progress" style="width: 75%;"></div>
+        </div>
+        <p class="widget-caption">Bersama kita bisa mencapai lebih banyak.</p>
       </div>
     </div>
 
-    <section class="donation-form-section">
-    
-      <!-- JUDUL FORM -->
-      <h2 class="text-xl font-semibold text-white mb-6">
-          Formulir Donasi
-      </h2>
+    <div class="donation-sidebar">
+      <section class="donation-form-section">
+        <h2 class="form-title">Pilih Nominal Donasi</h2>
+        
+        <form method="POST" action="{{ route('donation.store') }}" class="donation-form" id="donationForm">
+            @csrf
 
-      <form method="POST" action="{{ route('donation.store') }}" class="donation-form">
-          @csrf
+            <div class="amount-presets">
+                <button type="button" class="preset-btn" data-amount="25000">Rp 25.000</button>
+                <button type="button" class="preset-btn" data-amount="50000">Rp 50.000</button>
+                <button type="button" class="preset-btn" data-amount="100000">Rp 100.000</button>
+                <button type="button" class="preset-btn active" data-amount="custom">Lainnya</button>
+            </div>
 
-          <div class="mb-4">
-              <label class="block text-sm text-gray-300 mb-2">
-                  Nama Lengkap
-              </label>
-              <input type="text" name="name" value="{{ auth()->user()->name }}" class="w-full input-style" readonly>
-          </div>
+            <div class="input-group" id="custom-amount-wrapper">
+                <label class="input-label">Nominal (Rp)</label>
+                <input type="number" id="amount-input" name="amount" min="1000" class="input-style" placeholder="Masukkan nominal">
+            </div>
 
-          <div class="mb-4">
-              <label class="block text-sm text-gray-300 mb-2">
-                  Email
-              </label>
-              <input type="email" name="email" value="{{ auth()->user()->email }}" class="w-full input-style" readonly>
-          </div>
+            <div class="input-group">
+                <label class="input-label">Nama Lengkap</label>
+                <input type="text" name="name" value="{{ auth()->user()->name }}" class="input-style" readonly>
+            </div>
 
-          <div class="mb-4">
-              <label class="block text-sm text-gray-300 mb-2">
-                  Nominal Donasi (Rp)
-              </label>
-              <input type="number" name="amount" min="1000" class="w-full input-style">
-          </div>
+            <div class="input-group">
+                <label class="input-label">Email</label>
+                <input type="email" name="email" value="{{ auth()->user()->email }}" class="input-style" readonly>
+            </div>
 
-          <div class="mb-6">
-              <label class="block text-sm text-gray-300 mb-2">
-                  Pesan atau Dukungan
-              </label>
-              <textarea name="message" rows="3" class="w-full input-style"
-                  placeholder="Tulis pesan Anda..."></textarea>
-          </div>
+            <div class="input-group">
+                <label class="input-label">Pesan atau Dukungan (Opsional)</label>
+                <textarea name="message" rows="3" class="input-style" placeholder="Tulis harapan Anda..."></textarea>
+            </div>
 
-          <button type="submit" class="btn btn-primary">
-            Simpan Donasi
-          </button>
-      </form>
-
-    </section>
-
-    <section class="donation-list-section">
-      <h2 class="section-title">Daftar Donasi</h2>
-
-      @forelse ($donations as $donation)
-        <div class="donation-card">
-          <div class="donation-header">
-            <h3 class="donor-name">{{ $donation->name ?? 'Anonim' }}</h3>
-            <span class="donation-date">
-              {{ $donation->created_at->format('d M Y H:i') }}
-            </span>
-          </div>
-
-          <div class="donation-body">
-            <p><span>Email:</span> {{ $donation->email ?? '-' }}</p>
-            <p class="donation-amount">
-              Rp {{ number_format($donation->amount, 0, ',', '.') }}
-            </p>
-            <p class="donation-message">
-              {{ $donation->message ?? 'Tanpa pesan' }}
-            </p>
-            <button class="toggle-timeline mt-4 bg-blue-500 text-white px-4 py-2 rounded" data-donation-id="{{ $donation->id }}">
-              Lihat Perjalanan Donasi
+            <button type="submit" class="btn btn-primary">
+              Donasi Sekarang
             </button>
-          </div>
+        </form>
+      </section>
+    </div>
+  </div>
 
-          <div class="timeline-container mt-4" id="timeline-{{ $donation->id }}" style="display:none;">
-            <h4 class="text-white">Perjalanan Donasi</h4>
-            <div class="timeline-content">
-              <!-- Updates will be loaded here -->
+  <section class="donation-feed-section">
+      <h2 class="feed-title">Kontributor Terbaru</h2>
+      <div class="donation-feed">
+        @forelse ($donations as $donation)
+          <div class="feed-item-wrapper">
+            <div class="feed-item">
+              <div class="feed-avatar">
+                {{ strtoupper(substr($donation->name ?? 'A', 0, 1)) }}
+              </div>
+              <div class="feed-content">
+                <div class="feed-header">
+                  <span class="feed-name">{{ $donation->name ?? 'Anonim' }}</span>
+                  <span class="feed-amount">Rp {{ number_format($donation->amount, 0, ',', '.') }}</span>
+                </div>
+                @if($donation->message)
+                  <p class="feed-message">"{{ $donation->message }}"</p>
+                @endif
+                <div class="feed-meta">
+                  <span class="feed-date">{{ $donation->created_at->diffForHumans() }}</span>
+                  <button class="toggle-timeline-link" data-donation-id="{{ $donation->id }}">Lihat Perjalanan</button>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-container" id="timeline-{{ $donation->id }}" style="display:none;">
+              <div class="timeline-content">
+                <!-- Updates will be loaded here -->
+              </div>
             </div>
           </div>
-        </div>
-      @empty
-        <p class="empty-donation">Belum ada donasi.</p>
-      @endforelse
-    </section>
+        @empty
+          <p class="empty-donation">Belum ada donasi.</p>
+        @endforelse
+      </div>
+  </section>
 
-    {{-- ================= TIMELINE DONASI (USER) - Per donasi ================= --}}
+  {{-- ================= TIMELINE DONASI (USER) - Per donasi ================= --}}
 
   </div>
 
@@ -251,7 +250,7 @@
   <script>
     // Toggle timeline for each donation
     $(document).ready(function() {
-      $('.toggle-timeline').click(function() {
+      $('.toggle-timeline-link').click(function() {
         var donationId = $(this).data('donation-id');
         var timelineRow = $('#timeline-' + donationId);
         var timelineContent = timelineRow.find('.timeline-content');
@@ -308,6 +307,29 @@
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Preset Buttons Logic
+        const presetBtns = document.querySelectorAll('.preset-btn');
+        const amountInput = document.getElementById('amount-input');
+        const customWrapper = document.getElementById('custom-amount-wrapper');
+
+        presetBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                presetBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const val = this.getAttribute('data-amount');
+                if (val === 'custom') {
+                    customWrapper.style.display = 'block';
+                    amountInput.value = '';
+                    amountInput.focus();
+                } else {
+                    customWrapper.style.display = 'none';
+                    amountInput.value = val;
+                }
+            });
+        });
+
+        // Validation Form Logic
         const form = document.querySelector('form.donation-form');
         if (form) {
             form.addEventListener('submit', function(e) {
@@ -318,7 +340,7 @@
                 let errors = [];
                 
                 if (!amountStr || amountStr.trim() === '' || !name || name.trim() === '' || !email || email.trim() === '') {
-                    errors.push('This field is required');
+                    errors.push('All fields are required');
                 } else {
                     if (amountStr && amountStr.trim() !== '') {
                         if (/[a-zA-Z]/.test(amountStr)) {
@@ -331,10 +353,8 @@
                                 errors.push('Please enter a valid numeric amount.');
                             } else if (amount <= 0) {
                                 errors.push('Donation amount must be greater than 0.');
-                            } else if (amount < 1.00) {
-                                errors.push('Minimum donation amount is $1.00.');
-                            } else if (amount > 10000.00) {
-                                errors.push('Maximum donation amount is $10,000.00.');
+                            } else if (amount < 1000) {
+                                errors.push('Minimum donation amount is Rp 1000.');
                             }
                         }
                     }
