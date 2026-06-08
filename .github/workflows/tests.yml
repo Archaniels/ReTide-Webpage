@@ -19,14 +19,14 @@ jobs:
         php-version: '8.2'
         coverage: pcov
 
+    # 1. Create necessary directories and set full write permissions early
+    - name: Prepare Directories and Permissions
+      run: |
+        mkdir -p storage bootstrap/cache
+        chmod -R 777 storage bootstrap/cache
+
     - name: Install Composer Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-    - name: Run Artisan Commands
-      run: |
-        php artisan config:clear
-        php artisan cache:clear
-        php artisan config:cache
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -36,13 +36,15 @@ jobs:
     - name: Install NPM Dependencies
       run: npm install
 
+    # 2. Safely run Artisan commands now that directories are writable
     - name: Prepare Laravel Environment
       run: |
-        mkdir -p bootstrap/cache
         cp .env.example .env
         php artisan key:generate
         touch database/database.sqlite
         php artisan migrate --force
+        php artisan config:clear
+        php artisan cache:clear
 
     - name: Build Frontend Assets
       run: npm run build
