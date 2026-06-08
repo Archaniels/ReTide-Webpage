@@ -28,20 +28,32 @@
 </head>
 
 <body>
-    <header class="w-full py-6">
-        <div class="flex flex-col items-center">
-            <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8 mb-6" alt="ReTide Logo">
-            <nav>
-                <ul class="flex space-x-8 text-sm font-medium">
-                    <li><a href="/" class="nav-link">Home</a></li>
-                    <li><a href="/about" class="nav-link">About Us</a></li>
-                    <li><a href="/blog" class="nav-link">Blog</a></li>
-                    <li><a href="/contact" class="nav-link">Contact</a></li>
-                    <li><a href="/account" class="text-tosca underline">Account</a></li>
-                    <li><a href="/marketplace" class="nav-link">Marketplace</a></li>
-                    <li><a href="/donation" class="nav-link">Donation</a></li>
-                </ul>
-            </nav>
+    <!-- Navbar -->
+    <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8" alt="ReTide Logo" />
+                    </a>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8 text-sm font-medium">
+                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="/account" class="text-[#63cfc0] hover:text-white transition-colors">Account</a></li>
+                        <li><a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/marketplace" class="text-gray-300 transition-colors">Marketplace</a></li>
+                        <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
+                    </ul>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="/account" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
 
