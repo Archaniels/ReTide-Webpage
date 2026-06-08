@@ -44,7 +44,7 @@ class CartController extends Controller
     /**
      * Show the checkout page.
      */
-    public function checkout()
+    public function checkout(Payment $payment)
     {
         $cart = session()->get("cart", []);
 
@@ -59,13 +59,13 @@ class CartController extends Controller
             $totalAmount += $details["price"] * $details["quantity"];
         }
 
-        return view("checkout", compact("cart", "totalAmount"));
+        return view("checkout", compact("cart", "totalAmount", "snapToken"));
     }
 
     /**
      * Process checkout and redirect to Midtrans.
      */
-    public function process(Request $request)
+    public function process(Request $request, Payment $payment)
     {
         $cart = session()->get("cart", []);
 
