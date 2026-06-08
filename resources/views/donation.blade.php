@@ -15,6 +15,9 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <!-- Libraries -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -155,13 +158,13 @@
             </div>
 
             <div class="input-group">
-                <label class="input-label">Nama Lengkap</label>
-                <input type="text" name="name" value="{{ auth()->user()->name }}" class="input-style" readonly>
+                <label class="input-label">Identity Name</label>
+                <input type="text" name="name" value="{{ auth()->user()->name }}" class="input-style" placeholder="Masukkan nama identitas">
             </div>
 
             <div class="input-group">
                 <label class="input-label">Email</label>
-                <input type="email" name="email" value="{{ auth()->user()->email }}" class="input-style" readonly>
+                <input type="email" name="email" value="{{ auth()->user()->email }}" class="input-style bg-[#1a1a1a] text-[#666] cursor-not-allowed" readonly>
             </div>
 
             <div class="input-group">
@@ -365,10 +368,6 @@
                             errors.push('Name must be at least 2 characters long.');
                         } else if (name.length > 50) {
                             errors.push('Name cannot exceed 50 characters.');
-                        } else if (/[0-9]/.test(name)) {
-                            errors.push('Name can only contain alphabetic characters.');
-                        } else if (/[^a-zA-Z\s\-]/.test(name)) {
-                            errors.push('Name contains invalid characters.');
                         }
                     }
 
