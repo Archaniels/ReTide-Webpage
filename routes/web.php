@@ -112,6 +112,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['not_admin'])->group(function () {
         // Public Blog
         Route::get('/blog', [BlogPostsController::class, 'index'])->name('blog.index');
+        Route::get('/blog/{id}', [BlogPostsController::class, 'show'])->name('blog.show');
 
         // Public Marketplace
         Route::get('/marketplace', [MarketplaceProductController::class, 'index'])->name('marketplace.index');

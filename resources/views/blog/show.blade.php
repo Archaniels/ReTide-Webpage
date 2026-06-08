@@ -30,10 +30,9 @@
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
     <!-- Custom Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
 
-    <title>Blog | Re:Tide</title>
+    <title>{{ $blogPost->title }} | Blog | Re:Tide</title>
 </head>
 
 <body class="bg-[#121212] text-gray-100 font-['Poppins']">
@@ -77,32 +76,28 @@
         </nav>
     </header>
 
-    <div class="pt-[160px] pb-16 max-w-screen-xl mx-auto px-4">
-        <h1 class="font-bold text-[#63CFC0] text-5xl md:text-6xl text-center tracking-tight">Our Blog</h1>
-        <p class="text-center text-gray-400 mt-6 text-lg max-w-2xl mx-auto">Stories, news, and the latest updates about ocean conservation and our journey towards a sustainable circular economy.</p>
-    </div>
+    <main class="pt-[140px] pb-24 px-4 max-w-screen-xl mx-auto">
+        <a href="{{ route('blog.index') }}" class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-[#63CFC0] mb-8 transition-colors group">
+            <svg class="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Back to Blog
+        </a>
 
-    <section class="pb-24 px-4 max-w-screen-xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($blog as $blogPosts)
-                <a href="{{ route('blog.show', $blogPosts->id) }}" class="group block h-full flex flex-col bg-[#1E1E1E] border border-[#2A2A2A] rounded-2xl overflow-hidden hover:border-[#63CFC0] transition-all duration-300 hover:shadow-[0_0_20px_rgba(99,207,192,0.1)]">
-                    <div class="relative h-56 overflow-hidden bg-[#121212]">
-                        <img src="{{ asset('storage/' . $blogPosts->image_path) }}"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Blog Image">
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-semibold text-white mb-3 line-clamp-2 group-hover:text-[#63CFC0] transition-colors">{{ $blogPosts->title }}</h3>
-                        <p class="text-gray-400 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">{{ $blogPosts->content }}</p>
-                        <div class="flex items-center text-xs text-gray-500 mt-auto pt-4 border-t border-[#2A2A2A]">
-                            @if($blogPosts->created_at)
-                                <span>{{ $blogPosts->created_at->format('F j, Y') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-    </section>
+        <article class="max-w-[75ch] mx-auto">
+            <header class="mb-10 text-center">
+                @if($blogPost->created_at)
+                    <div class="text-sm text-[#63CFC0] font-medium mb-4 uppercase tracking-wider">{{ $blogPost->created_at->format('F j, Y') }}</div>
+                @endif
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">{{ $blogPost->title }}</h1>
+                <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden border border-[#2A2A2A] bg-[#1E1E1E]">
+                    <img src="{{ asset('storage/' . $blogPost->image_path) }}" class="w-full h-full object-cover" alt="Blog cover image">
+                </div>
+            </header>
+
+            <div class="text-gray-300 text-lg leading-relaxed whitespace-pre-wrap">
+                {!! nl2br(e($blogPost->content)) !!}
+            </div>
+        </article>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-[#1E1E1E] border border-[#2A2A2A] m-4 rounded-xl">
