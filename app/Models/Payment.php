@@ -10,18 +10,18 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'order_id',
-        'transaction_id',
-        'payment_type',
-        'status',
-        'gross_amount',
-        'user_id',
-        'payload',
+        "order_id",
+        "transaction_id",
+        "payment_type",
+        "status",
+        "gross_amount",
+        "user_id",
+        "payload",
     ];
 
     protected $casts = [
-        'payload' => 'array',
-        'gross_amount' => 'decimal:2',
+        "payload" => "array",
+        "gross_amount" => "decimal:2",
     ];
 
     public function user()
