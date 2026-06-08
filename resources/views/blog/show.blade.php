@@ -45,30 +45,30 @@
                 </a>
             </div>
         </nav>
-        <nav class="backdrop-blur-lg border-y border-[#2A2A2A]">
+        <nav class="backdrop-blur-lg border-y border-default border-default">
             <div class="max-w-screen-xl px-4 py-3 mx-auto">
                 <div class="flex items-center justify-center">
                     <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
                         <li>
-                            <a href="/" class="text-white hover:text-[#63CFC0] transition-colors" aria-current="page">Home</a>
+                            <a href="/" class="text-heading hover:underline" aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="/about" class="text-white hover:text-[#63CFC0] transition-colors">About Us</a>
+                            <a href="/about" class="text-heading hover:underline">About Us</a>
                         </li>
                         <li>
-                            <a href="/blog" class="text-[#63CFC0] transition-colors">Blog</a>
+                            <a href="/blog" class="text-heading hover:underline">Blog</a>
                         </li>
                         <li>
-                            <a href="/contact" class="text-white hover:text-[#63CFC0] transition-colors">Contact</a>
+                            <a href="/contact" class="text-heading hover:underline">Contact</a>
                         </li>
                         <li>
-                            <a href="/account" class="text-white hover:text-[#63CFC0] transition-colors">Account</a>
+                            <a href="/account" class="text-heading hover:underline">Account</a>
                         </li>
                         <li>
-                            <a href="/marketplace" class="text-white hover:text-[#63CFC0] transition-colors">Marketplace</a>
+                            <a href="/marketplace" class="text-heading hover:underline">Marketplace</a>
                         </li>
                         <li>
-                            <a href="/donation" class="text-white hover:text-[#63CFC0] transition-colors">Donation</a>
+                            <a href="/donation" class="text-heading hover:underline">Donation</a>
                         </li>
                     </ul>
                 </div>
@@ -100,17 +100,17 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#1E1E1E] border border-[#2A2A2A] m-4 rounded-xl">
+    <footer class="bg-neutral-primary-soft border border-default m-4 rounded-xl border-gray-900">
         <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-            <span class="text-sm text-gray-400 sm:text-center">© 2025 <a href="{{ url('/') }}"
-                    class="hover:text-[#63CFC0] transition-colors">Re:Tide</a>. All Rights Reserved.
+            <span class="text-sm text-body sm:text-center">© 2025 <a href="{{ url('/') }}"
+                    class="hover:underline">Re:Tide</a>. All Rights Reserved.
             </span>
-            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-400 sm:mt-0">
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-body sm:mt-0">
                 <li>
-                    <a href="/about" class="hover:text-[#63CFC0] transition-colors me-4 md:me-6">About</a>
+                    <a href="/about" class="hover:underline me-4 md:me-6">About</a>
                 </li>
                 <li>
-                    <a href="/contact" class="hover:text-[#63CFC0] transition-colors">Contact</a>
+                    <a href="/contact" class="hover:underline">Contact</a>
                 </li>
             </ul>
         </div>
