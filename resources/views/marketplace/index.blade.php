@@ -76,7 +76,7 @@
                         <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
                         <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
                         <li><a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="/marketplace" class="text-brand transition-colors">Marketplace</a></li>
+                        <li><a href="/marketplace" class="text-[#63cfc0] transition-colors">Marketplace</a></li>
                         <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
                     </ul>
                 </nav>
