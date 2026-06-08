@@ -17,13 +17,14 @@
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <!-- Lenis by Darkroom Engineering -->
+    <!-- Lenis by Darkroom Engineering
     <script src="https://unpkg.com/lenis@1.3.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.15/dist/lenis.css">
 
-    <!-- GSAP + ScrollTrigger -->
+     GSAP + ScrollTrigger
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script> 
+    -->
 
     <!-- Flowbite -->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
@@ -36,7 +37,7 @@
     <title>Blog | Re:Tide</title>
 </head>
 
-<body class="bg-[#121212] text-gray-100 font-['Poppins']">
+<body class="bg-[#050505] text-gray-100 font-['Poppins']">
     <!-- Navbar -->
     <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
