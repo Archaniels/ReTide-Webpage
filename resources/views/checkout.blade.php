@@ -88,12 +88,9 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('cart.process') }}" method="POST" class="mt-8">
-                        @csrf
-                        <button type="submit" id= "pay-button" class="w-full bg-[#63CFC0] hover:bg-[#7ae0d3] text-black font-bold text-lg py-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(99,207,192,0.3)] flex items-center justify-center">
-                            <i class="fas fa-lock mr-2"></i> Pay Securely Now
-                        </button>
-                    </form>
+                    <button type="button" id="pay-button" class="w-full bg-[#63CFC0] hover:bg-[#7ae0d3] text-black font-bold text-lg py-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(99,207,192,0.3)] flex items-center justify-center">
+                        <i class="fas fa-lock mr-2"></i> Pay Securely Now
+                    </button>
 
                     <div class="flex justify-center space-x-3 mt-6 text-gray-500">
                         <i class="fab fa-cc-visa text-2xl"></i>
@@ -128,19 +125,15 @@
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
     <script type="text/javascript">
           document.getElementById('pay-button').onclick = function(){
-            // SnapToken acquired from previous step
-            snap.pay('{{ $payment->snap_token }}', {
-              // Optional
+            snap.pay('{{ $snapToken }}', {
               onSuccess: function(result){
-                /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
               },
-              // Optional
               onPending: function(result){
-                /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
               },
-              // Optional
               onError: function(result){
-                /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
               }
             });
           };

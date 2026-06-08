@@ -42,9 +42,9 @@ class CartController extends Controller
     }
 
     /**
-     * Show the checkout page.
+     * Show the checkout page and prepare a Midtrans Snap token.
      */
-    public function checkout(Payment $payment)
+    public function checkout()
     {
         $cart = session()->get("cart", []);
 
@@ -55,11 +55,56 @@ class CartController extends Controller
         }
 
         $totalAmount = 0;
+        $itemDetails = [];
         foreach ($cart as $id => $details) {
             $totalAmount += $details["price"] * $details["quantity"];
+            $itemDetails[] = [
+                "id"       => (string) $id,
+                "price"    => $details["price"],
+                "quantity" => $details["quantity"],
+                "name"     => substr($details["name"], 0, 50),
+            ];
         }
 
-        return view("checkout", compact("cart", "totalAmount"));
+        // Configure Midtrans
+        \Midtrans\Config::$serverKey    = config("midtrans.server_key");
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized  = true;
+        \Midtrans\Config::$is3ds        = true;
+
+        $orderId = "MKT-" . time() . "-" . auth()->id();
+
+        $params = [
+            "transaction_details" => [
+                "order_id"     => $orderId,
+                "gross_amount" => $totalAmount,
+            ],
+            "customer_details" => [
+                "first_name" => auth()->user()->name,
+                "email"      => auth()->user()->email,
+            ],
+            "item_details" => $itemDetails,
+            "callbacks" => [
+                "finish"   => route("marketplace.success"),
+                "unfinish" => route("marketplace.index"),
+                "error"    => route("marketplace.index"),
+            ],
+        ];
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $payment = Payment::create([
+            "order_id"     => $orderId,
+            "payment_type" => "marketplace",
+            "status"       => "pending",
+            "gross_amount" => $totalAmount,
+            "user_id"      => auth()->id(),
+        ]);
+
+        $payment->snap_token = $snapToken;
+        $payment->save();
+
+        return view("checkout", compact("cart", "totalAmount", "payment", "snapToken"));
     }
 
     /**
