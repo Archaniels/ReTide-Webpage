@@ -2,9 +2,13 @@ name: Tests
 
 on:
   push:
-    branches: [ "production" ]
+    branches:
+      - production
+      - preview
   pull_request:
-    branches: [ "production" ]
+    branches:
+      - production
+      - preview
 
 jobs:
   test:
