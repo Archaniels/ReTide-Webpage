@@ -14,6 +14,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -37,46 +40,32 @@
     </div>
 
     <!-- Navbar -->
-    <header class="fixed w-full z-20 top-0 start-0">
-        <nav class="backdrop-blur-lg">
-            <div class="flex flex-wrap justify-center items-center mx-auto max-w-screen-xl p-4">
-                <a href="assets/img/ReTide_Logo.png" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="assets/img/ReTide_Logo.png" class="h-7" alt="ReTide Logo" />
-                </a>
-                <!-- <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <a href="/login" class="text-sm font-medium text-fg-brand hover:underline">Login</a>
-                </div> -->
-            </div>
-        </nav>
-        <nav class="backdrop-blur-lg border-y border-default border-default">
-            <div class="max-w-screen-xl px-4 py-3 mx-auto">
-                <div class="flex items-center justify-center">
-                    <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                        <li>
-                            <a href="/" class="text-heading hover:underline" aria-current="page">Home</a>
-                        </li>
-                        <li>
-                            <a href="/about" class="text-heading hover:underline">About Us</a>
-                        </li>
-                        <li>
-                            <a href="/blog" class="text-heading hover:underline">Blog</a>
-                        </li>
-                        <li>
-                            <a href="/contact" class="text-heading hover:underline">Contact</a>
-                        </li>
-                        <li>
-                            <a href="/account" class="text-heading hover:underline">Account</a>
-                        </li>
-                        <li>
-                            <a href="/marketplace" class="text-heading hover:underline">Marketplace</a>
-                        </li>
-                        <li>
-                            <a href="/donation" class="text-heading hover:underline">Donation</a>
-                        </li>
+    <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8" alt="ReTide Logo" />
+                    </a>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8 text-sm font-medium">
+                        <li><a href="/" class="text-[#63cfc0] hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="/account" class="text-gray-300 hover:text-white transition-colors">Account</a></li>
+                        <li><a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/marketplace" class="text-gray-300 transition-colors">Marketplace</a></li>
+                        <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
                     </ul>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="/account" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </a>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
 
@@ -119,21 +108,36 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-neutral-primary-soft border border-default m-4 rounded-xl border-gray-900">
-        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-            <span class="text-sm text-body sm:text-center">© 2025 <a href="http://127.0.0.1:8001/"
-                    class="hover:underline">Re:Tide</a>. All Rights Reserved.
-            </span>
-            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-body sm:mt-0">
-                <li>
-                    <a href="/about" class="hover:underline me-4 md:me-6">About</a>
-                </li>
-                <li>
-                    <a href="/contact" class="hover:underline">Contact</a>
-                </li>
+    <footer class="bg-surface border-t border-border mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:flex md:items-center md:justify-between">
+            <div class="flex justify-center md:justify-start mb-4 md:mb-0">
+                <span class="text-sm text-gray-400">
+                    &copy; 2025 <a href="/" class="hover:text-white transition-colors font-semibold">Re:Tide</a>. All Rights Reserved.
+                </span>
+            </div>
+            <ul class="flex justify-center space-x-6 text-sm font-medium text-gray-400">
+                <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
         </div>
     </footer>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #63CFC0;
+        }
+    </style>
 
 </body>
 

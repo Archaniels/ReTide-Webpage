@@ -42,9 +42,28 @@ class CartController extends Controller
     }
 
     /**
-     * Simulate a successful checkout process.
+     * Show the checkout page.
      */
     public function checkout()
+    {
+        $cart = session()->get('cart', []);
+
+        if (empty($cart)) {
+            return redirect()->route('marketplace.index')->with('error', 'Cart is empty!');
+        }
+
+        $totalAmount = 0;
+        foreach ($cart as $id => $details) {
+            $totalAmount += $details['price'] * $details['quantity'];
+        }
+
+        return view('checkout', compact('cart', 'totalAmount'));
+    }
+
+    /**
+     * Process checkout and redirect to Midtrans.
+     */
+    public function process(Request $request)
     {
         $cart = session()->get('cart', []);
 
@@ -58,10 +77,10 @@ class CartController extends Controller
         foreach ($cart as $id => $details) {
             $totalAmount += $details['price'] * $details['quantity'];
             $itemDetails[] = [
-                'id' => $id,
+                'id' => (string)$id,
                 'price' => $details['price'],
                 'quantity' => $details['quantity'],
-                'name' => $details['name'],
+                'name' => substr($details['name'], 0, 50),
             ];
         }
 

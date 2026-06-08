@@ -14,130 +14,120 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <!-- Lenis by Darkroom Engineering -->
+    <!-- Lenis by Darkroom Engineering
     <script src="https://unpkg.com/lenis@1.3.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.15/dist/lenis.css">
 
-    <!-- GSAP + ScrollTrigger -->
+     GSAP + ScrollTrigger
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script> 
+    -->
 
     <!-- Flowbite -->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
     <!-- Custom Scripts -->
-    <!-- <script src="{{ asset('assets/js/account.js') }}" defer></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
 
     <title>Blog | Re:Tide</title>
 </head>
 
-<body class="defaultTheme">
+<body class="bg-[#050505] text-gray-100 font-['Poppins']">
     <!-- Navbar -->
-    <header class="fixed w-full z-20 top-0 start-0">
-        <nav class="backdrop-blur-lg">
-            <div class="flex flex-wrap justify-center items-center mx-auto max-w-screen-xl p-4">
-                <a href="assets/img/ReTide_Logo.png" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="assets/img/ReTide_Logo.png" class="h-7" alt="ReTide Logo" />
-                </a>
-                <!-- <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <a href="/login" class="text-sm font-medium text-fg-brand hover:underline">Login</a>
-                </div> -->
-            </div>
-        </nav>
-        <nav class="backdrop-blur-lg border-y border-default border-default">
-            <div class="max-w-screen-xl px-4 py-3 mx-auto">
-                <div class="flex items-center justify-center">
-                    <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                        <li>
-                            <a href="/" class="text-heading hover:underline" aria-current="page">Home</a>
-                        </li>
-                        <li>
-                            <a href="/about" class="text-heading hover:underline">About Us</a>
-                        </li>
-                        <li>
-                            <a href="/blog" class="text-heading hover:underline">Blog</a>
-                        </li>
-                        <li>
-                            <a href="/contact" class="text-heading hover:underline">Contact</a>
-                        </li>
-                        <li>
-                            <a href="/account" class="text-heading hover:underline">Account</a>
-                        </li>
-                        <li>
-                            <a href="/marketplace" class="text-heading hover:underline">Marketplace</a>
-                        </li>
-                        <li>
-                            <a href="/donation" class="text-heading hover:underline">Donation</a>
-                        </li>
+    <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8" alt="ReTide Logo" />
+                    </a>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8 text-sm font-medium">
+                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="/account" class="text-gray-300 hover:text-white transition-colors">Account</a></li>
+                        <li><a href="/blog" class="text-[#63cfc0] hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/marketplace" class="text-gray-300 transition-colors">Marketplace</a></li>
+                        <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
                     </ul>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="/account" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </a>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <div style="margin-top: 150px;">
-        <h1 class="font-semibold text-[#7ae0d3] text-5xl justify-center text-center">Blog</h1>
-        <p class="text-center" style="margin-top: 16px;">Cerita, berita, dan update terbaru tentang pelestarian laut</p>
+    <div class="pt-[160px] pb-16 max-w-screen-xl mx-auto px-4">
+        <h1 class="font-bold text-[#63CFC0] text-5xl md:text-6xl text-center tracking-tight">Our Blog</h1>
+        <p class="text-center text-gray-400 mt-6 text-lg max-w-2xl mx-auto">Stories, news, and the latest updates about ocean conservation and our journey towards a sustainable circular economy.</p>
     </div>
 
-    <hr style="margin: 3rem 0; border: 1px solid #333;">
-
-    <section class="blog-list">
-        <h2 class="section-title font-semibold text-[#7ae0d3] text-4xl justify-center text-center">All Blog Posts</h2>
-    </section>
-
-    <section class="blog-post grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 px-4 max-w-screen-xl mx-auto">
-        @foreach($blog as $blogPosts)
-            <div class="blog-item">
-                <img src="{{ asset('storage/' . $blogPosts->image_path) }}"
-                    class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Blog Image">
-
-                <h3 class="text-2xl font-bold mt-6">{{ $blogPosts->title }}</h3>
-
-                <p class="text-base">{{ $blogPosts->content }}</p>
-
-                @if($blogPosts->created_at)
-                    <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
-                        <p class="font-semibold">Created At:</p>
-                        <span class="ml-1 italic">{{ $blogPosts->created_at->format('F j, Y, g:i a') }}</span>
+    <section class="pb-24 px-4 max-w-screen-xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($blog as $blogPosts)
+                <a href="{{ route('blog.show', $blogPosts->id) }}" class="group block h-full flex flex-col bg-[#1E1E1E] border border-[#2A2A2A] rounded-2xl overflow-hidden hover:border-[#63CFC0] transition-all duration-300 hover:shadow-[0_0_20px_rgba(99,207,192,0.1)]">
+                    <div class="relative h-56 overflow-hidden bg-[#121212]">
+                        <img src="{{ asset('storage/' . $blogPosts->image_path) }}"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Blog Image">
                     </div>
-                @endif
-
-                @if($blogPosts->updated_at)
-                    <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
-                        <p class="font-semibold">Updated At:</p>
-                        <span class="ml-1 italic">{{ $blogPosts->updated_at->format('F j, Y, g:i a') }}</span>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-semibold text-white mb-3 line-clamp-2 group-hover:text-[#63CFC0] transition-colors">{{ $blogPosts->title }}</h3>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">{{ $blogPosts->content }}</p>
+                        <div class="flex items-center text-xs text-gray-500 mt-auto pt-4 border-t border-[#2A2A2A]">
+                            @if($blogPosts->created_at)
+                                <span>{{ $blogPosts->created_at->format('F j, Y') }}</span>
+                            @endif
+                        </div>
                     </div>
-                @endif
-
-
-            </div>
-        @endforeach
+                </a>
+            @endforeach
+        </div>
     </section>
-
 
     <!-- Footer -->
-    <footer class="bg-neutral-primary-soft border border-default m-4 rounded-xl border-gray-900">
-        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-            <span class="text-sm text-body sm:text-center">© 2025 <a href="http://127.0.0.1:8001/"
-                    class="hover:underline">Re:Tide</a>. All Rights Reserved.
-            </span>
-            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-body sm:mt-0">
-                <li>
-                    <a href="/about" class="hover:underline me-4 md:me-6">About</a>
-                </li>
-                <li>
-                    <a href="/contact" class="hover:underline">Contact</a>
-                </li>
+    <footer class="bg-surface border-t border-border mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:flex md:items-center md:justify-between">
+            <div class="flex justify-center md:justify-start mb-4 md:mb-0">
+                <span class="text-sm text-gray-400">
+                    &copy; 2025 <a href="/" class="hover:text-white transition-colors font-semibold">Re:Tide</a>. All Rights Reserved.
+                </span>
+            </div>
+            <ul class="flex justify-center space-x-6 text-sm font-medium text-gray-400">
+                <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
         </div>
     </footer>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #63CFC0;
+        }
+    </style>
 </body>
 
 </html>
