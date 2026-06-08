@@ -1,0 +1,62 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "production" ]
+  pull_request:
+    branches: [ "production" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        coverage: pcov
+
+    # 1. Create necessary directories and set full write permissions early
+    - name: Prepare Directories and Permissions
+      run: |
+        mkdir -p storage bootstrap/cache
+        chmod -R 777 storage bootstrap/cache
+
+    - name: Install Composer Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install NPM Dependencies
+      run: npm install
+
+    # 2. Safely run Artisan commands now that directories are writable
+    - name: Prepare Laravel Environment
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+        touch database/database.sqlite
+        php artisan migrate --force
+        php artisan config:clear
+        php artisan cache:clear
+
+    - name: Build Frontend Assets
+      run: npm run build
+
+    - name: Run Code Coverage Test
+      run: php artisan test --coverage --min=0
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+
+    # - name: Install Playwright Browsers
+    #   run: npx playwright install --with-deps
+
+    # - name: Run Playwright tests
+    #   run: npx playwright test
