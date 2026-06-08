@@ -1,11 +1,4 @@
-// products array disabled
 let cart = [];
-
-// Render - Disabled as we use Blade
-function printProduct() {
-    // const grid = $('#products-grid');
-    // ...
-}
 
 // Add
 function addToCart(product) {
@@ -19,7 +12,7 @@ function addToCart(product) {
             product_id: product.id
         },
         success: function(response) {
-            const itemAda = cart.find((item) => item.id === product.id);
+            const itemAda = cart.find((item) => item.id == product.id);
 
             if (itemAda) {
                 itemAda.jumlah++;
@@ -31,14 +24,17 @@ function addToCart(product) {
             }
 
             updateCart();
+            openCart();
         },
         error: function(xhr) {
             console.error('Error adding to cart:', xhr);
             if (xhr.status === 401) {
-                alert('Silakan login terlebih dahulu');
-                window.location.href = '/login';
+                showToast('Silakan login terlebih dahulu', 'error');
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 1500);
             } else {
-                alert('Gagal menambahkan ke keranjang');
+                showToast('Gagal menambahkan ke keranjang', 'error');
             }
         }
     });
@@ -48,28 +44,49 @@ function addToCart(product) {
 function updateCart() {
     const cartCount = cart.reduce((sum, item) => sum + item.jumlah, 0);
     $("#cart-count").text(cartCount);
+    
+    // Animate cart count
+    $("#cart-count").addClass('scale-150');
+    setTimeout(() => $("#cart-count").removeClass('scale-150'), 200);
 
     const cartItems = $("#cart-items");
     cartItems.empty();
 
-    cart.forEach((item) => {
-        const cartItem = `
-            <div class="cart-item">
-                <div class="cart-item-image">${item.icon}</div>
-                <div class="cart-item-info">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-price">Rp ${item.price}</div>
-                    <div class="cart-item-controls">
-                        <button class="qty-btn qty-minus" data-id="${item.id}">-</button>
-                        <span class="qty-display">${item.jumlah}</span>
-                        <button class="qty-btn qty-plus" data-id="${item.id}">+</button>
-                        <button class="remove-btn" data-id="${item.id}">Hapus</button>
-                    </div>
-                </div>
+    if (cart.length === 0) {
+        cartItems.append(`
+            <div class="flex flex-col items-center justify-center h-full text-gray-500 py-10">
+                <i class="fas fa-shopping-basket text-5xl mb-4 opacity-50"></i>
+                <p>Your cart is empty.</p>
             </div>
-        `;
-        cartItems.append(cartItem);
-    });
+        `);
+    } else {
+        cart.forEach((item) => {
+            const cartItem = `
+                <div class="flex items-center gap-4 bg-[#111] border border-[#222] p-3 rounded-xl relative group">
+                    <div class="w-20 h-20 bg-[#1a1a1a] rounded-lg overflow-hidden flex-shrink-0 border border-[#333]">
+                        ${item.icon}
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="text-white font-medium text-sm mb-1">${item.name}</h4>
+                        <div class="text-[#63CFC0] font-bold text-sm mb-2">Rp ${parseInt(item.price).toLocaleString('id-ID')}</div>
+                        <div class="flex items-center space-x-3 bg-[#1a1a1a] rounded-lg w-fit px-2 py-1">
+                            <button class="qty-btn qty-minus text-gray-400 hover:text-white" data-id="${item.id}">
+                                <i class="fas fa-minus text-xs"></i>
+                            </button>
+                            <span class="qty-display text-white font-medium w-6 text-center text-sm">${item.jumlah}</span>
+                            <button class="qty-btn qty-plus text-gray-400 hover:text-white" data-id="${item.id}">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="remove-btn absolute top-3 right-3 text-gray-500 hover:text-red-500 transition-colors bg-[#111] rounded-full p-1 opacity-0 group-hover:opacity-100" data-id="${item.id}" title="Remove Item">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            `;
+            cartItems.append(cartItem);
+        });
+    }
 
     updateTotal();
 }
@@ -82,7 +99,7 @@ function updateTotal() {
 
 // Increase
 function tambahKuantitas(productId) {
-    const item = cart.find((item) => item.id === productId);
+    const item = cart.find((item) => item.id == productId);
     if (item) {
         item.jumlah++;
         updateCart();
@@ -91,7 +108,7 @@ function tambahKuantitas(productId) {
 
 // Decrease
 function kurangKuantitas(productId) {
-    const item = cart.find((item) => item.id === productId);
+    const item = cart.find((item) => item.id == productId);
     if (item) {
         if (item.jumlah > 1) {
             item.jumlah--;
@@ -104,60 +121,80 @@ function kurangKuantitas(productId) {
 
 // Remove
 function removeFromCart(productId) {
-    cart = cart.filter((item) => item.id !== productId);
+    cart = cart.filter((item) => item.id != productId);
     updateCart();
 }
 
 // Clear
 function clearCart() {
-    if (confirm("Apakah Anda yakin ingin mengosongkan keranjang?")) {
+    if (cart.length > 0 && confirm("Are you sure you want to clear your cart?")) {
         cart = [];
         updateCart();
     }
 }
 
-// Toggle cart
-function toggleCart() {
-    $("#cart-section").toggle(300);
+// Cart UI Logic
+function openCart() {
+    $("#cart-overlay").removeClass("hidden");
+    // slight delay for overlay fade
+    setTimeout(() => {
+        $("#cart-overlay").removeClass("opacity-0").addClass("opacity-100");
+    }, 10);
+    $("#cart-section").removeClass("translate-x-full");
+}
+
+function closeCart() {
+    $("#cart-section").addClass("translate-x-full");
+    $("#cart-overlay").removeClass("opacity-100").addClass("opacity-0");
+    setTimeout(() => {
+        $("#cart-overlay").addClass("hidden");
+    }, 300);
 }
 
 // Checkout
 function checkout() {
     if (cart.length === 0) {
-        alert("Keranjang belanja Anda kosong!");
+        showToast("Your cart is empty!", "error");
         return;
     }
-
     window.location.href = '/cart/checkout';
 }
 
 // Show Toast Notification
-function showToast(message) {
-    // Create container if it doesn't exist
+function showToast(message, type = "success") {
     if ($(".toast-container").length === 0) {
-        $("body").append('<div class="toast-container"></div>');
+        $("body").append('<div class="toast-container fixed bottom-8 right-8 z-[100] flex flex-col gap-3"></div>');
     }
 
+    const isSuccess = type === "success";
+    const bgColor = isSuccess ? "bg-[#63CFC0]" : "bg-red-500";
+    const textColor = isSuccess ? "text-black" : "text-white";
+    const icon = isSuccess ? "fa-check-circle" : "fa-exclamation-circle";
+
     const toast = $(`
-        <div class="toast-message">
-            <i class="fas fa-check-circle"></i>
+        <div class="toast-message ${bgColor} ${textColor} px-6 py-4 rounded-xl font-medium shadow-2xl flex items-center gap-3 transform translate-x-[120%] transition-transform duration-300">
+            <i class="fas ${icon} text-xl"></i>
             <span>${message}</span>
         </div>
     `);
 
     $(".toast-container").append(toast);
 
-    // Remove toast after animation ends (3 seconds total)
+    // Slide in
+    requestAnimationFrame(() => {
+        toast.removeClass("translate-x-[120%]");
+    });
+
+    // Remove after 3s
     setTimeout(() => {
-        toast.remove();
+        toast.addClass("translate-x-[120%]");
+        setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
 
 // Event listener
 $(document).ready(function () {
-    // Print
-    // printProduct();
-
+    
     // Add to cart
     $(document).on("click", ".add-to-cart-btn", function () {
         const $btn = $(this);
@@ -170,45 +207,42 @@ $(document).ready(function () {
             icon: $btn.data("icon"), // html string
         };
         
-        // Add to cart logic
         addToCart(product);
 
         // UI Feedback: Button Animation
-        $btn.addClass("btn-added").prop("disabled", true).html('<i class="fas fa-check"></i> Added!');
+        $btn.addClass("bg-green-500 text-white").removeClass("hover:bg-[#63CFC0] text-black bg-[#1a1a1a]")
+            .html('<i class="fas fa-check"></i>')
+            .prop("disabled", true);
         
-        // UI Feedback: Toast
-        showToast(`${product.name} ditambahkan ke keranjang!`);
-
-        // Revert button after 2 seconds
+        // Revert button after 1.5 seconds
         setTimeout(() => {
-            $btn.removeClass("btn-added").prop("disabled", false).html(originalContent);
-        }, 2000);
+            $btn.removeClass("bg-green-500 text-white").addClass("hover:bg-[#63CFC0] bg-[#1a1a1a]")
+                .html(originalContent)
+                .prop("disabled", false);
+        }, 1500);
     });
 
-    // Cart
-    $("#cart-btn").click(toggleCart);
-    $("#close-cart").click(toggleCart);
+    // Cart toggles
+    $("#cart-btn").click(openCart);
+    $("#close-cart, #cart-overlay").click(closeCart);
 
     // jumlah controls
     $(document).on("click", ".qty-plus", function () {
-        const productId = parseInt($(this).data("id"));
-        tambahKuantitas(productId);
+        tambahKuantitas($(this).data("id"));
     });
 
     $(document).on("click", ".qty-minus", function () {
-        const productId = parseInt($(this).data("id"));
-        kurangKuantitas(productId);
+        kurangKuantitas($(this).data("id"));
     });
 
     // Remove item
     $(document).on("click", ".remove-btn", function () {
-        const productId = parseInt($(this).data("id"));
-        removeFromCart(productId);
+        removeFromCart($(this).data("id"));
     });
-
-    // Clear cart
-    $("#clear-cart").click(clearCart);
 
     // Checkout
     $(".checkout-btn").click(checkout);
+    
+    // Initial empty state render
+    updateCart();
 });

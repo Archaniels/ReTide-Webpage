@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <!-- Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/marketplace.css') }}">
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: '#63CFC0',
+                        brandHover: '#7ae0d3',
+                        surface: '#0b0b0b',
+                        surfaceHover: '#151515',
+                        border: '#222222'
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -21,10 +40,6 @@
     <!-- Lenis by Darkroom Engineering -->
     <script src="https://unpkg.com/lenis@1.3.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.15/dist/lenis.css">
-
-    <!-- GSAP + ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -37,156 +52,175 @@
                 showToast("{{ session('success') }}");
             @endif
             @if(session('error'))
-                showToast("{{ session('error') }}");
+                showToast("{{ session('error') }}", "error");
             @endif
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
 
     <title>Marketplace | Re:Tide</title>
 </head>
 
-<body class="defaultTheme">
-    <div style="width: 100%; height: 100px;"><img src="assets/img/TopDecoration.png" alt="ReTide Logo"></div>
-
-    <div class="smoothen-gradient-box" style="margin-top: -248px;"></div>
-
-    <div class="marketplace-page">
-        <!-- Navbar -->
-        <header class="fixed w-full z-20 top-0 start-0">
-            <nav class="backdrop-blur-lg">
-                <div class="flex flex-wrap justify-center items-center mx-auto max-w-screen-xl p-4">
-                    <a href="assets/img/ReTide_Logo.png" class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src="assets/img/ReTide_Logo.png" class="h-7" alt="ReTide Logo" />
+<body class="bg-[#050505] text-white font-sans antialiased selection:bg-[#63CFC0] selection:text-black">
+    <!-- Navbar -->
+    <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8" alt="ReTide Logo" />
                     </a>
-                    <!-- <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <a href="/login" class="text-sm font-medium text-fg-brand hover:underline">Login</a>
-                </div> -->
                 </div>
-            </nav>
-            <nav class="backdrop-blur-lg border-y border-default border-default">
-                <div class="max-w-screen-xl px-4 py-3 mx-auto">
-                    <div class="flex items-center justify-center">
-                        <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                            <li>
-                                <a href="/" class="text-heading hover:underline" aria-current="page">Home</a>
-                            </li>
-                            <li>
-                                <a href="/about" class="text-heading hover:underline">About Us</a>
-                            </li>
-                            <li>
-                                <a href="/blog" class="text-heading hover:underline">Blog</a>
-                            </li>
-                            <li>
-                                <a href="/contact" class="text-heading hover:underline">Contact</a>
-                            </li>
-                            <li>
-                                <a href="/account" class="text-heading hover:underline">Account</a>
-                            </li>
-                            <li>
-                                <a href="/marketplace" class="text-heading hover:underline">Marketplace</a>
-                            </li>
-                            <li>
-                                <a href="/donation" class="text-heading hover:underline">Donation</a>
-                            </li>
-                        </ul>
-                    </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8 text-sm font-medium">
+                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/marketplace" class="text-brand transition-colors">Marketplace</a></li>
+                        <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
+                    </ul>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="/account" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </a>
                 </div>
-            </nav>
-        </header>
-
-        <!-- Header -->
-        <div class="marketplace-container" style="margin-top: 60px;">
-            <div class="header">
-                <h1 class="font-semibold text-[#7ae0d3]">Marketplace</h1>
-                <p>Produk ramah lingkungan dari sampah laut yang didaur ulang</p>
             </div>
+        </div>
+    </header>
 
-            <!-- Cart Button -->
-            <div class="cart-toggle" style="margin-top: 20px; float: right; margin-right: 20px;">
-                <button id="cart-btn" class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                    Keranjang (<span id="cart-count">0</span>)
-                </button>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 overflow-hidden border-b border-border">
+        <div class="absolute inset-0 bg-[url('{{ asset('assets/img/TopDecoration.png') }}')] opacity-5 bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#050505]"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
+            <span class="text-brand font-semibold tracking-wider uppercase text-sm mb-4 block">Ocean-Friendly Economy</span>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+                Sustainable Marketplace
+            </h1>
+            <p class="mt-4 max-w-2xl text-lg md:text-xl text-gray-400 mx-auto">
+                Discover premium eco-friendly products crafted from recycled ocean waste. Every purchase directly supports marine conservation initiatives.
+            </p>
+        </div>
+    </section>
+
+    <!-- Floating Cart Button -->
+    <button id="cart-btn" class="fixed bottom-8 right-8 z-[60] bg-brand hover:bg-brandHover text-black rounded-full shadow-[0_8px_30px_rgba(99,207,192,0.3)] w-16 h-16 flex items-center justify-center transition-all hover:scale-105">
+        <i class="fas fa-shopping-bag text-2xl"></i>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg">0</span>
+    </button>
+
+    <!-- Products Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-white mb-2">Curated Collection</h2>
+                <p class="text-gray-400">Transforming waste into worth.</p>
             </div>
-
-
-
-            <section class="products-section mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-                @foreach($products as $marketplaceProduct)
-                    <div class="blog-item">
-                        <img src="{{ asset('storage/' . $marketplaceProduct->image_path) }}"
-                            class="w-full h-64 object-cover border border-[#222] rounded-lg" alt="Product Image">
-
-                        <h3 class="text-2xl font-bold mt-6 text-[#7ae0d3]">{{ $marketplaceProduct->name }}</h3>
-
-                        <p class="text-base">{{ $marketplaceProduct->description }}</p>
-
-                        <h3 class="text-2xl font-bold mt-6">{{ 'Rp ' . number_format($marketplaceProduct->price, 0, ',', '.') }}</h3>
-
-                        <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
-                            <p class="font-semibold">Created At:</p>
-                            <span class="ml-1 italic">{{ $marketplaceProduct->created_at->format('F j, Y, g:i a') }}</span>
-                        </div>
-
-                        <div class="flex bg-[#181818] mt-6 rounded-lg p-3 border border-[#222]">
-                            <p class="font-semibold">Updated At:</p>
-                            <span class="ml-1 italic">{{ $marketplaceProduct->updated_at->format('F j, Y, g:i a') }}</span>
-                        </div>
-
-                        <!-- Add to Cart -->
-                        <div class="mt-6">
-                            <button class="add-to-cart-btn text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full"
-                                data-id="{{ $marketplaceProduct->id }}"
-                                data-name="{{ $marketplaceProduct->name }}"
-                                data-price="{{ $marketplaceProduct->price }}"
-                                data-icon='<img src="{{ asset("storage/" . $marketplaceProduct->image_path) }}" class="w-12 h-12 object-cover rounded">'
-                            >
-                                Tambah ke Keranjang
-                            </button>
-                        </div>
-
-
-                    </div>
-                @endforeach
-            </section>
-
-            <!-- Shopping Cart -->
-            <section class="cart-section" id="cart-section" style="display: none;">
-                <div class="cart-header">
-                    <h2 class="section-title">Keranjang Belanja</h2>
-                    <button id="close-cart" class="btn-close">✕</button>
-                </div>
-                <div class="cart-items" id="cart-items">
-                    <!-- Cart items akan di-render oleh JavaScript -->
-                </div>
-                <div class="cart-footer">
-                    <div class="cart-total">
-                        <h3>Total: Rp <span id="total-price">0</span></h3>
-                    </div>
-                    <button class="btn checkout-btn">Checkout</button>
-                    <button class="btn delete-btn clear-cart-btn" id="clear-cart">Kosongkan Keranjang</button>
-                </div>
-            </section>
         </div>
 
-        <!-- Footer -->
-        <footer class="bg-neutral-primary-soft border border-default m-4 rounded-xl border-gray-900">
-            <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-                <span class="text-sm text-body sm:text-center">© 2025 <a href="http://127.0.0.1:8001/"
-                        class="hover:underline">Re:Tide</a>. All Rights Reserved.
-                </span>
-                <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-body sm:mt-0">
-                    <li>
-                        <a href="/about" class="hover:underline me-4 md:me-6">About</a>
-                    </li>
-                    <li>
-                        <a href="/contact" class="hover:underline">Contact</a>
-                    </li>
-                </ul>
+        @if($products->count() > 0)
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                @foreach($products as $product)
+                    <div class="bg-surface rounded-2xl overflow-hidden border border-border hover:border-brand transition-colors duration-300 group flex flex-col h-full">
+                        <div class="relative aspect-[4/3] overflow-hidden bg-[#111]">
+                            <img src="{{ asset('storage/' . $product->image_path) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="{{ $product->name }}">
+                            <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-white/10">
+                                Eco-Certified
+                            </div>
+                        </div>
+                        
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">{{ $product->name }}</h3>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2 flex-grow">{{ $product->description }}</p>
+                            
+                            <div class="flex items-center justify-between mt-auto pt-4 border-t border-border">
+                                <span class="text-xl font-bold text-white">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                
+                                <button class="add-to-cart-btn bg-[#1a1a1a] hover:bg-brand text-white hover:text-black w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                                    data-id="{{ $product->id }}"
+                                    data-name="{{ $product->name }}"
+                                    data-price="{{ $product->price }}"
+                                    data-icon='<img src="{{ asset("storage/" . $product->image_path) }}" class="w-full h-full object-cover rounded">'
+                                    title="Add to Cart"
+                                >
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        </footer>
-    </div>
-</body>
+        @else
+            <div class="text-center py-20 bg-surface rounded-2xl border border-border">
+                <i class="fas fa-box-open text-6xl text-gray-600 mb-4"></i>
+                <h3 class="text-xl font-semibold text-white mb-2">No Products Yet</h3>
+                <p class="text-gray-400">Check back later for our new eco-friendly collection.</p>
+            </div>
+        @endif
+    </main>
 
+    <!-- Slide-out Cart -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
+    <section class="cart-section fixed top-0 right-0 h-screen w-full sm:w-[450px] bg-[#050505] border-l border-border z-[80] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl" id="cart-section">
+        <!-- Header -->
+        <div class="p-6 border-b border-border flex justify-between items-center bg-[#0a0a0a]">
+            <h2 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-shopping-bag mr-3 text-brand"></i> Your Cart
+            </h2>
+            <button id="close-cart" class="text-gray-400 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-border">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Items -->
+        <div class="cart-items flex-grow overflow-y-auto p-6 space-y-4 custom-scrollbar" id="cart-items">
+            <!-- Rendered by JS -->
+        </div>
+        
+        <!-- Footer -->
+        <div class="p-6 bg-[#0a0a0a] border-t border-border">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-gray-400">Total</span>
+                <span class="text-2xl font-bold text-white">Rp <span id="total-price">0</span></span>
+            </div>
+            <button class="checkout-btn w-full bg-brand hover:bg-brandHover text-black font-bold text-lg py-4 rounded-xl transition-all flex justify-center items-center shadow-[0_4px_20px_rgba(99,207,192,0.2)] hover:shadow-[0_4px_25px_rgba(99,207,192,0.4)] hover:-translate-y-1">
+                <i class="fas fa-lock mr-2"></i> Checkout Securely
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-border mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:flex md:items-center md:justify-between">
+            <div class="flex justify-center md:justify-start mb-4 md:mb-0">
+                <span class="text-sm text-gray-400">
+                    &copy; 2025 <a href="/" class="hover:text-white transition-colors font-semibold">Re:Tide</a>. All Rights Reserved.
+                </span>
+            </div>
+            <ul class="flex justify-center space-x-6 text-sm font-medium text-gray-400">
+                <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #63CFC0;
+        }
+    </style>
+</body>
 </html>
