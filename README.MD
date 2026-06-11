@@ -1,5 +1,8 @@
+<p align="center">
 ![ReTide Logo](public/assets/img/ReTide_Logo.png)
+</p>
 
+<p align="center">
 [![codecov](https://codecov.io/github/Archaniels/ReTide-Webpage/graph/badge.svg?token=2H4WCUKVNV)](https://codecov.io/github/Archaniels/ReTide-Webpage)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
@@ -10,6 +13,7 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
+</p>
 
 # Project Overview
 ## Background
