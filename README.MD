@@ -3,6 +3,7 @@
 ![ReTide Logo](public/assets/img/ReTide_Logo.png)
 
 [![codecov](https://codecov.io/github/Archaniels/ReTide-Webpage/graph/badge.svg?token=2H4WCUKVNV)](https://codecov.io/github/Archaniels/ReTide-Webpage)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Archaniels/ReTide-Webpage/badge)](https://scorecard.dev/viewer/?uri=github.com/Archaniels/ReTide-Webpage)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
