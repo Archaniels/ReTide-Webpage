@@ -3,7 +3,6 @@
 [![codecov](https://codecov.io/github/Archaniels/ReTide-Webpage/graph/badge.svg?token=2H4WCUKVNV)](https://codecov.io/github/Archaniels/ReTide-Webpage)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
