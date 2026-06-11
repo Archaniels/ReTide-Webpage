@@ -11,7 +11,6 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Archaniels_ReTide-Webpage&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
-[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=Archaniels_ReTide-Webpage)
 
 # Project Overview
 ## Background
