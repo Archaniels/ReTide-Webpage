@@ -54,10 +54,23 @@ jobs:
       run: npm run build
 
     - name: Run Code Coverage Test
-      run: php artisan test --coverage --min=0
+      run: php artisan test --coverage-clover=coverage.xml --min=0
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
+
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        fail_ci_if_error: true
+
+    - name: Archive Code Coverage Results
+      uses: actions/upload-artifact@v5
+      with:
+        name: code-coverage-report
+        path: coverage.xml
 
     # - name: Install Playwright Browsers
     #   run: npx playwright install --with-deps
