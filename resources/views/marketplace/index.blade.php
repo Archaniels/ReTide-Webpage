@@ -25,8 +25,11 @@
                     colors: {
                         brand: '#63CFC0',
                         brandHover: '#7ae0d3',
+                        background: '#050505',
                         surface: '#0b0b0b',
                         surfaceHover: '#151515',
+                        surfaceElevated: '#111111',
+                        surfaceActive: '#1a1a1a',
                         border: '#222222'
                     }
                 }
@@ -61,7 +64,7 @@
     <title>Marketplace | Re:Tide</title>
 </head>
 
-<body class="bg-[#050505] text-white font-sans antialiased selection:bg-[#63CFC0] selection:text-black">
+<body class="bg-background text-white font-sans antialiased selection:bg-brand selection:text-black">
     <!-- Navbar -->
     <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,10 +97,9 @@
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 overflow-hidden border-b border-border">
         <div class="absolute inset-0 bg-[url('{{ asset('assets/img/TopDecoration.png') }}')] opacity-5 bg-cover bg-center"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#050505]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
-            <span class="text-brand font-semibold tracking-wider uppercase text-sm mb-4 block">Ocean-Friendly Economy</span>
             <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
                 Sustainable Marketplace
             </h1>
@@ -126,8 +128,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 @foreach($products as $product)
                     <div class="bg-surface rounded-2xl overflow-hidden border border-border hover:border-brand transition-colors duration-300 group flex flex-col h-full">
-                        <div class="relative aspect-[4/3] overflow-hidden bg-[#111]">
-                            <img src="{{ asset('storage/' . $product->image_path) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="{{ $product->name }}">
+                        <div class="relative aspect-[4/3] overflow-hidden bg-surfaceElevated">
+                            <img src="{{ asset('storage/' . $product->image_path) }}" class="w-full h-full object-cover transition-opacity duration-700" alt="{{ $product->name }}" loading="lazy">
                             <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-white/10">
                                 Eco-Certified
                             </div>
@@ -140,7 +142,7 @@
                             <div class="flex items-center justify-between mt-auto pt-4 border-t border-border">
                                 <span class="text-xl font-bold text-white">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                                 
-                                <button class="add-to-cart-btn bg-[#1a1a1a] hover:bg-brand text-white hover:text-black w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                                <button class="add-to-cart-btn bg-surfaceActive hover:bg-brand text-white hover:text-black w-10 h-10 rounded-full flex items-center justify-center transition-all"
                                     data-id="{{ $product->id }}"
                                     data-name="{{ $product->name }}"
                                     data-price="{{ $product->price }}"
@@ -165,13 +167,13 @@
 
     <!-- Slide-out Cart -->
     <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
-    <section class="cart-section fixed top-0 right-0 h-screen w-full sm:w-[450px] bg-[#050505] border-l border-border z-[80] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl" id="cart-section">
+    <section class="cart-section fixed top-0 right-0 h-screen w-full sm:w-[450px] bg-background border-l border-border z-[80] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl" id="cart-section">
         <!-- Header -->
-        <div class="p-6 border-b border-border flex justify-between items-center bg-[#0a0a0a]">
+        <div class="p-6 border-b border-border flex justify-between items-center bg-surface">
             <h2 class="text-xl font-bold text-white flex items-center">
                 <i class="fas fa-shopping-bag mr-3 text-brand"></i> Your Cart
             </h2>
-            <button id="close-cart" class="text-gray-400 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-border">
+            <button id="close-cart" aria-label="Close cart" class="text-gray-400 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-border">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -182,7 +184,7 @@
         </div>
         
         <!-- Footer -->
-        <div class="p-6 bg-[#0a0a0a] border-t border-border">
+        <div class="p-6 bg-surface border-t border-border">
             <div class="flex justify-between items-center mb-6">
                 <span class="text-gray-400">Total</span>
                 <span class="text-2xl font-bold text-white">Rp <span id="total-price">0</span></span>
