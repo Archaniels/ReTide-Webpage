@@ -13,6 +13,20 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#63CFC0',
+                            light: '#7ae0d3'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -35,48 +49,52 @@
 
 <body class="defaultTheme">
     <!-- Navbar -->
-    <header class="fixed w-full z-20 top-0 start-0">
-        <nav class="backdrop-blur-lg">
-            <div class="flex flex-wrap justify-center items-center mx-auto max-w-screen-xl p-4">
-                <a href="assets/img/ReTide_Logo.png" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="assets/img/ReTide_Logo.png" class="h-7" alt="ReTide Logo" />
-                </a>
-            </div>
-        </nav>
-        <nav class="backdrop-blur-lg border-y border-default border-default">
-            <div class="max-w-screen-xl px-4 py-3 mx-auto">
-                <div class="flex items-center justify-center">
-                    <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                        <li>
-                            <a href="/" class="text-heading hover:underline" aria-current="page">Home</a>
-                        </li>
-                        <li>
-                            <a href="/about" class="text-heading hover:underline">About Us</a>
-                        </li>
-                        <li>
-                            <a href="/blog" class="text-heading hover:underline">Blog</a>
-                        </li>
-                        <li>
-                            <a href="/contact" class="text-heading hover:underline">Contact</a>
-                        </li>
-                        <li>
-                            <a href="/account" class="text-heading hover:underline">Account</a>
-                        </li>
-                        <li>
-                            <a href="/marketplace" class="text-heading hover:underline">Marketplace</a>
-                        </li>
-                        <li>
-                            <a href="/donation" class="text-heading hover:underline">Donation</a>
-                        </li>
+    <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8" alt="ReTide Logo" />
+                    </a>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8 text-sm font-medium">
+                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="/account" class="text-gray-300 hover:text-white transition-colors">Account</a></li>
+                        <li><a href="/blog" class="text-brand hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/marketplace" class="text-gray-300 transition-colors">Marketplace</a></li>
+                        <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
                     </ul>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="/account" class="hidden md:block text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </a>
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
                 </div>
             </div>
-        </nav>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#121212] border-b border-white/5 absolute w-full transition-all duration-300">
+            <ul class="px-4 pt-2 pb-6 space-y-4 text-sm font-medium">
+                <li><a href="/" class="block text-gray-300 hover:text-white transition-colors">Home</a></li>
+                <li><a href="/about" class="block text-gray-300 hover:text-white transition-colors">About</a></li>
+                <li><a href="/contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/account" class="block text-gray-300 hover:text-white transition-colors">Account</a></li>
+                <li><a href="/blog" class="block text-brand hover:text-white transition-colors">Blog</a></li>
+                <li><a href="/marketplace" class="block text-gray-300 transition-colors">Marketplace</a></li>
+                <li><a href="/donation" class="block text-gray-300 hover:text-white transition-colors">Donation</a></li>
+            </ul>
+        </div>
     </header>
 
-    <div style="margin-top: 150px;">
-        <h1 class="font-semibold text-[#7ae0d3] text-5xl justify-center text-center">Add Your Own Blog Post</h1>
-        <p class="text-center" style="margin-top: 16px;">Add new blog post!</p>
+    <div class="pt-32 pb-8 max-w-screen-xl mx-auto px-4">
+        <h1 class="font-semibold text-brand text-5xl justify-center text-center">Add Your Own Blog Post</h1>
+        <p class="text-center mt-4">Add new blog post!</p>
     </div>
 
     @if(session('success'))
@@ -100,34 +118,34 @@
     @endif
 
     <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data"
-        class="max-w-sm mx-auto space-y-4 mt-6">
+        class="max-w-2xl mx-auto space-y-6 mt-6 px-4">
         @csrf
         <div>
             <label for="title" class="block mb-2.5 text-sm font-medium text-heading">Title (Min 5, Max 100)</label>
             <input type="text" id="title" name="title" value="{{ old('title') }}"
-                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 placeholder:text-body"
+                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-brand block w-full px-3.5 py-3 placeholder:text-body"
                 placeholder="" required />
         </div>
         <div>
             <label for="content" class="block mb-2.5 text-sm font-medium text-heading">Content (Min 10, Max 5000)</label>
-            <textarea id="content" name="content"
-                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
+            <textarea id="content" name="content" rows="6"
+                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-brand block w-full px-3.5 py-3 shadow-xs placeholder:text-body"
                 placeholder="" required>{{ old('content') }}</textarea>
         </div>
         <div>
             <label for="image_path" class="block mb-2.5 text-sm font-medium text-heading">Image (Optional, image must be
                 in .jpeg, .png, or .jpg, max 5MB)</label>
             <input type="file" id="image_path" name="image_path"
-                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body" />
+                class="bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-brand block w-full px-3.5 py-3 shadow-xs placeholder:text-body" />
         </div>
 
-        <div class="flex gap-3">
+        <div class="flex justify-end gap-4 pt-4">
             <a href="/blog"
-                class="text-white bg-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5 inline-block text-center">
+                class="text-white bg-red-500/10 hover:bg-red-500/20 text-red-500 box-border border border-transparent font-medium leading-5 rounded-full text-sm px-6 py-2.5 inline-block text-center transition-colors">
                 Cancel
             </a>
             <button type="submit"
-                class="text-black bg-[#7ae0d3] box-border border border-transparent font-medium leading-5 rounded-full text-sm px-4 py-2.5">
+                class="text-black bg-brand hover:bg-brand-light box-border border border-transparent font-medium leading-5 rounded-full text-sm px-8 py-2.5 transition-colors">
                 Create
             </button>
         </div>
@@ -149,6 +167,17 @@
             </ul>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if(btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
