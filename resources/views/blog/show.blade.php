@@ -13,6 +13,20 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#63CFC0',
+                            light: '#7ae0d3'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -55,22 +69,37 @@
                         <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
                         <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
                         <li><a href="/account" class="text-gray-300 hover:text-white transition-colors">Account</a></li>
-                        <li><a href="/blog" class="text-[#63cfc0] hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/blog" class="text-brand hover:text-white transition-colors">Blog</a></li>
                         <li><a href="/marketplace" class="text-gray-300 transition-colors">Marketplace</a></li>
                         <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
                     </ul>
                 </nav>
                 <div class="flex items-center space-x-4">
-                    <a href="/account" class="text-gray-300 hover:text-white transition-colors">
+                    <a href="/account" class="hidden md:block text-gray-300 hover:text-white transition-colors">
                         <i class="fas fa-user-circle text-xl"></i>
                     </a>
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
                 </div>
             </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#121212] border-b border-white/5 absolute w-full transition-all duration-300">
+            <ul class="px-4 pt-2 pb-6 space-y-4 text-sm font-medium">
+                <li><a href="/" class="block text-gray-300 hover:text-white transition-colors">Home</a></li>
+                <li><a href="/about" class="block text-gray-300 hover:text-white transition-colors">About</a></li>
+                <li><a href="/contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/account" class="block text-gray-300 hover:text-white transition-colors">Account</a></li>
+                <li><a href="/blog" class="block text-brand hover:text-white transition-colors">Blog</a></li>
+                <li><a href="/marketplace" class="block text-gray-300 transition-colors">Marketplace</a></li>
+                <li><a href="/donation" class="block text-gray-300 hover:text-white transition-colors">Donation</a></li>
+            </ul>
         </div>
     </header>
 
     <main class="pt-[140px] pb-24 px-4 max-w-screen-xl mx-auto">
-        <a href="{{ route('blog.index') }}" class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-[#63CFC0] mb-8 transition-colors group">
+        <a href="{{ route('blog.index') }}" class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-brand mb-8 transition-colors group">
             <svg class="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             Back to Blog
         </a>
@@ -78,9 +107,9 @@
         <article class="max-w-[75ch] mx-auto">
             <header class="mb-10 text-center">
                 @if($blogPost->created_at)
-                    <div class="text-sm text-[#63CFC0] font-medium mb-4 uppercase tracking-wider">{{ $blogPost->created_at->format('F j, Y') }}</div>
+                    <div class="text-sm text-brand font-medium mb-4 uppercase tracking-wider">{{ $blogPost->created_at->format('F j, Y') }}</div>
                 @endif
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">{{ $blogPost->title }}</h1>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight break-words">{{ $blogPost->title }}</h1>
                 <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden border border-[#2A2A2A] bg-[#1E1E1E]">
                     <img src="{{ asset('storage/' . $blogPost->image_path) }}" class="w-full h-full object-cover" alt="Blog cover image">
                 </div>
@@ -123,6 +152,17 @@
             background: #63CFC0;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if(btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

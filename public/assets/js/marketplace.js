@@ -60,32 +60,33 @@ function updateCart() {
             </div>
         `);
     } else {
+        let cartHtml = '';
         cart.forEach((item) => {
-            const cartItem = `
-                <div class="flex items-center gap-4 bg-[#111] border border-[#222] p-3 rounded-xl relative group">
-                    <div class="w-20 h-20 bg-[#1a1a1a] rounded-lg overflow-hidden flex-shrink-0 border border-[#333]">
+            cartHtml += `
+                <div class="flex items-center gap-4 bg-surfaceElevated border border-border p-3 rounded-xl relative group">
+                    <div class="w-20 h-20 bg-surfaceActive rounded-lg overflow-hidden flex-shrink-0 border border-border">
                         ${item.icon}
                     </div>
                     <div class="flex-grow">
                         <h4 class="text-white font-medium text-sm mb-1">${item.name}</h4>
-                        <div class="text-[#63CFC0] font-bold text-sm mb-2">Rp ${parseInt(item.price).toLocaleString('id-ID')}</div>
-                        <div class="flex items-center space-x-3 bg-[#1a1a1a] rounded-lg w-fit px-2 py-1">
-                            <button class="qty-btn qty-minus text-gray-400 hover:text-white" data-id="${item.id}">
+                        <div class="text-brand font-bold text-sm mb-2">Rp ${parseInt(item.price).toLocaleString('id-ID')}</div>
+                        <div class="flex items-center space-x-3 bg-surfaceActive rounded-lg w-fit px-2 py-1">
+                            <button class="qty-btn qty-minus text-gray-400 hover:text-white p-2" aria-label="Decrease quantity" data-id="${item.id}">
                                 <i class="fas fa-minus text-xs"></i>
                             </button>
                             <span class="qty-display text-white font-medium w-6 text-center text-sm">${item.jumlah}</span>
-                            <button class="qty-btn qty-plus text-gray-400 hover:text-white" data-id="${item.id}">
+                            <button class="qty-btn qty-plus text-gray-400 hover:text-white p-2" aria-label="Increase quantity" data-id="${item.id}">
                                 <i class="fas fa-plus text-xs"></i>
                             </button>
                         </div>
                     </div>
-                    <button class="remove-btn absolute top-3 right-3 text-gray-500 hover:text-red-500 transition-colors bg-[#111] rounded-full p-1 opacity-0 group-hover:opacity-100" data-id="${item.id}" title="Remove Item">
+                    <button class="remove-btn absolute top-3 right-3 text-gray-500 hover:text-red-500 transition-colors bg-surfaceElevated rounded-full p-2 opacity-0 group-hover:opacity-100" aria-label="Remove item" data-id="${item.id}" title="Remove Item">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>
             `;
-            cartItems.append(cartItem);
         });
+        cartItems.append(cartHtml);
     }
 
     updateTotal();
@@ -167,7 +168,7 @@ function showToast(message, type = "success") {
     }
 
     const isSuccess = type === "success";
-    const bgColor = isSuccess ? "bg-[#63CFC0]" : "bg-red-500";
+    const bgColor = isSuccess ? "bg-brand" : "bg-red-500";
     const textColor = isSuccess ? "text-black" : "text-white";
     const icon = isSuccess ? "fa-check-circle" : "fa-exclamation-circle";
 
@@ -210,13 +211,13 @@ $(document).ready(function () {
         addToCart(product);
 
         // UI Feedback: Button Animation
-        $btn.addClass("bg-green-500 text-white").removeClass("hover:bg-[#63CFC0] text-black bg-[#1a1a1a]")
+        $btn.addClass("bg-green-500 text-white").removeClass("hover:bg-brand text-black bg-surfaceActive")
             .html('<i class="fas fa-check"></i>')
             .prop("disabled", true);
         
         // Revert button after 1.5 seconds
         setTimeout(() => {
-            $btn.removeClass("bg-green-500 text-white").addClass("hover:bg-[#63CFC0] bg-[#1a1a1a]")
+            $btn.removeClass("bg-green-500 text-white").addClass("hover:bg-brand bg-surfaceActive")
                 .html(originalContent)
                 .prop("disabled", false);
         }, 1500);

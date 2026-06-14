@@ -1,329 +1,289 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <!-- Style -->
-  <link rel="stylesheet" href="{{ URL::asset('assets/css/donation.css') }}">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+  <title>Donation | Re:Tide</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-  <!-- Libraries -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+  
   <!-- Lenis by Darkroom Engineering -->
   <script src="https://unpkg.com/lenis@1.3.14/dist/lenis.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.15/dist/lenis.css">
 
-  <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <!-- Script -->
   <script src="{{ asset('assets/js/donation.js') }}" defer></script>
+  <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
+
   <style>
-    /* Toast Notification (copied from marketplace.css for consistency) */
-    .toast-container {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 1000;
-    }
+    body { font-family: 'Inter', sans-serif; }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #63CFC0; }
+
+    /* Toast */
+    .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 1000; }
     .toast-message {
-        background-color: #63CFC0;
-        color: black;
-        padding: 12px 24px;
-        border-radius: 8px;
-        margin-top: 8px;
-        font-weight: bold;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        background-color: #63CFC0; color: black; padding: 12px 24px; border-radius: 8px; margin-top: 8px;
+        font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); display: flex; align-items: center; gap: 10px;
         animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
-        display: flex;
-        align-items: center;
-        gap: 10px;
     }
-    @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-    }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+    /* Timeline Styles */
+    .timeline { position: relative; margin-left: 20px; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background-color: #333; }
+    .timeline-item { position: relative; display: flex; gap: 20px; margin-bottom: 24px; }
+    .timeline-dot { width: 14px; height: 14px; background-color: #63CFC0; border-radius: 50%; margin-left: -2px; margin-top: 6px; flex-shrink: 0; box-shadow: 0 0 0 4px #0f0f0f; z-index: 10;}
   </style>
+
   <script>
     function showToast(message) {
-        if ($(".toast-container").length === 0) {
-            $("body").append('<div class="toast-container"></div>');
+        if (!document.querySelector(".toast-container")) {
+            document.body.insertAdjacentHTML("beforeend", '<div class="toast-container"></div>');
         }
-        const toast = $(`
-            <div class="toast-message">
-                <i class="fas fa-check-circle"></i>
-                <span>${message}</span>
-            </div>
-        `);
-        $(".toast-container").append(toast);
-        setTimeout(() => { toast.remove(); }, 3000);
+        const toast = document.createElement("div");
+        toast.className = "toast-message";
+        toast.innerHTML = `<i class="fas fa-check-circle"></i><span>${message}</span>`;
+        document.querySelector(".toast-container").appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        @if(session('success'))
-            showToast("{{ session('success') }}");
-        @endif
-        @if(session('error'))
-            showToast("{{ session('error') }}");
-        @endif
+        @if(session('success')) showToast("{{ session('success') }}"); @endif
+        @if(session('error')) showToast("{{ session('error') }}"); @endif
     });
   </script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="{{ URL::asset('assets/js/homepage-animation.js') }}"></script>
-
-  <title>Donation</title>
 </head>
 
-<body class="defaultTheme">
-  <div class="donation-page">
-    <!-- Navbar -->
-    <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0">
-                    <a href="/" class="flex items-center">
-                        <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8" alt="ReTide Logo" />
-                    </a>
-                </div>
-                <nav class="hidden md:block">
-                    <ul class="flex space-x-8 text-sm font-medium">
-                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
-                        <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
-                        <li><a href="/account" class="text-gray-300 hover:text-white transition-colors">Account</a></li>
-                        <li><a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="/marketplace" class="text-gray-300 transition-colors">Marketplace</a></li>
-                        <li><a href="/donation" class="text-[#63cfc0] hover:text-white transition-colors">Donation</a></li>
-                    </ul>
-                </nav>
-                <div class="flex items-center space-x-4">
-                    <a href="/account" class="text-gray-300 hover:text-white transition-colors">
-                        <i class="fas fa-user-circle text-xl"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-  </div>
-
-  <div class="donation-layout">
-    <div class="donation-hero">
-      <h1 class="hero-title">Bantu Kami Melindungi Lautan</h1>
-      <p class="hero-subtitle">Setiap kontribusi Anda menjadi langkah nyata dalam memulihkan ekosistem dan mendukung komunitas pesisir.</p>
-      
-      <div class="total-donations-widget">
-        <h3 class="widget-title">Total Donasi Terkumpul</h3>
-        <p class="widget-amount">Rp {{ number_format($totalDonations, 0, ',', '.') }}</p>
-        <div class="widget-bar">
-           <div class="widget-progress" style="width: 75%;"></div>
-        </div>
-        <p class="widget-caption">Bersama kita bisa mencapai lebih banyak.</p>
+<body class="bg-[#050505] text-white antialiased selection:bg-[#63cfc0] selection:text-black">
+  <!-- Navbar -->
+  <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/80 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-20">
+              <div class="flex-shrink-0">
+                  <a href="/" class="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">
+                      <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8" alt="ReTide Logo" />
+                  </a>
+              </div>
+              <nav class="hidden md:block">
+                  <ul class="flex space-x-8 text-sm font-medium">
+                      <li><a href="/" class="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">Home</a></li>
+                      <li><a href="/about" class="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">About</a></li>
+                      <li><a href="/contact" class="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">Contact</a></li>
+                      <li><a href="/account" class="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">Account</a></li>
+                      <li><a href="/blog" class="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">Blog</a></li>
+                      <li><a href="/marketplace" class="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">Marketplace</a></li>
+                      <li><a href="/donation" class="text-[#63cfc0] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">Donation</a></li>
+                  </ul>
+              </nav>
+              <div class="flex items-center space-x-4">
+                  <a href="/account" class="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">
+                      <i class="fas fa-user-circle text-xl"></i>
+                  </a>
+              </div>
+          </div>
       </div>
-    </div>
+  </header>
 
-    <div class="donation-sidebar">
-      <section class="donation-form-section">
-        <h2 class="form-title">Pilih Nominal Donasi</h2>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 min-h-screen">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-start">
+      
+      <!-- Hero & Widget -->
+      <div class="flex flex-col gap-8">
+        <div class="space-y-4">
+            <h1 class="text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-white">Bantu Kami Melindungi Lautan</h1>
+            <p class="text-lg text-gray-400 leading-relaxed max-w-xl">Setiap kontribusi Anda menjadi langkah nyata dalam memulihkan ekosistem dan mendukung komunitas pesisir.</p>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-[#63cfc0]/5 border border-[#63cfc0]/15">
+          <h3 class="text-sm font-semibold text-[#63cfc0] uppercase tracking-wider mb-2">Total Donasi Terkumpul</h3>
+          <p class="text-4xl font-bold text-white mb-5">Rp {{ number_format($totalDonations, 0, ',', '.') }}</p>
+          <div class="h-2 w-full bg-black/40 rounded-full overflow-hidden mb-3">
+             <div class="h-full bg-[#63cfc0] rounded-full transition-all duration-1000 ease-out" style="width: {{ $progressPercentage ?? 0 }}%;"></div>
+          </div>
+          <p class="text-sm text-gray-400">Target: Rp {{ number_format($donationGoal ?? 100000000, 0, ',', '.') }} &middot; Bersama kita bisa mencapai lebih banyak.</p>
+        </div>
+      </div>
+
+      <!-- Form Sidebar -->
+      <div class="bg-[#0f0f0f] border border-white/10 rounded-2xl p-8 shadow-xl">
+        <h2 class="text-2xl font-semibold text-white mb-6">Pilih Nominal Donasi</h2>
         
-        <form method="POST" action="{{ route('donation.store') }}" class="donation-form" id="donationForm">
+        <form method="POST" action="{{ route('donation.store') }}" class="flex flex-col gap-5" id="donationForm">
             @csrf
 
-            <div class="amount-presets">
-                <button type="button" class="preset-btn" data-amount="25000">Rp 25.000</button>
-                <button type="button" class="preset-btn" data-amount="50000">Rp 50.000</button>
-                <button type="button" class="preset-btn" data-amount="100000">Rp 100.000</button>
-                <button type="button" class="preset-btn active" data-amount="custom">Lainnya</button>
+            <div class="grid grid-cols-2 gap-3 mb-2">
+                <button type="button" class="preset-btn bg-[#1a1a1a] border border-[#333] text-white py-3 px-4 rounded-xl font-medium hover:border-[#63cfc0] hover:bg-[#63cfc0]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] transition-all" data-amount="25000">Rp 25.000</button>
+                <button type="button" class="preset-btn bg-[#1a1a1a] border border-[#333] text-white py-3 px-4 rounded-xl font-medium hover:border-[#63cfc0] hover:bg-[#63cfc0]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] transition-all" data-amount="50000">Rp 50.000</button>
+                <button type="button" class="preset-btn bg-[#1a1a1a] border border-[#333] text-white py-3 px-4 rounded-xl font-medium hover:border-[#63cfc0] hover:bg-[#63cfc0]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] transition-all" data-amount="100000">Rp 100.000</button>
+                <button type="button" class="preset-btn bg-[#63cfc0]/10 border border-[#63cfc0] text-[#63cfc0] py-3 px-4 rounded-xl font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] transition-all" data-amount="custom" aria-current="true">Lainnya</button>
             </div>
 
-            <div class="input-group" id="custom-amount-wrapper">
-                <label class="input-label">Nominal (Rp)</label>
-                <input type="number" id="amount-input" name="amount" min="1000" class="input-style" placeholder="Masukkan nominal">
+            <div class="flex flex-col gap-2" id="custom-amount-wrapper">
+                <label for="amount-input" class="text-sm font-medium text-gray-400">Nominal (Rp)</label>
+                <input type="number" id="amount-input" name="amount" min="1000" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors" placeholder="Masukkan nominal">
             </div>
 
-            <div class="input-group">
-                <label class="input-label">Identity Name</label>
-                <input type="text" name="name" value="{{ auth()->user()->name }}" class="input-style" placeholder="Masukkan nama identitas">
+            <div class="flex flex-col gap-2">
+                <label for="name-input" class="text-sm font-medium text-gray-400">Nama Lengkap</label>
+                <input type="text" id="name-input" name="name" value="{{ auth()->user()->name }}" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors" placeholder="Masukkan nama lengkap">
             </div>
 
-            <div class="input-group">
-                <label class="input-label">Email</label>
-                <input type="email" name="email" value="{{ auth()->user()->email }}" class="input-style bg-[#1a1a1a] text-[#666] cursor-not-allowed" readonly>
+            <div class="flex flex-col gap-2">
+                <label for="email-input" class="text-sm font-medium text-gray-400">Email</label>
+                <input type="email" id="email-input" name="email" value="{{ auth()->user()->email }}" class="w-full bg-[#1a1a1a] border border-[#333] text-gray-500 py-3 px-4 rounded-xl cursor-not-allowed focus:outline-none" readonly>
             </div>
 
-            <div class="input-group">
-                <label class="input-label">Pesan atau Dukungan (Opsional)</label>
-                <textarea name="message" rows="3" class="input-style" placeholder="Tulis harapan Anda..."></textarea>
+            <div class="flex flex-col gap-2">
+                <label for="message-input" class="text-sm font-medium text-gray-400">Pesan atau Dukungan (Opsional)</label>
+                <textarea id="message-input" name="message" rows="3" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors resize-y" placeholder="Tulis harapan Anda..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="w-full bg-[#63cfc0] text-black font-semibold py-3.5 rounded-full mt-4 hover:bg-[#7ae0d3] hover:-translate-y-px hover:shadow-lg hover:shadow-[#63cfc0]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f0f0f] transition-all">
               Donasi Sekarang
             </button>
         </form>
-      </section>
+      </div>
     </div>
-  </div>
 
-  <section class="donation-feed-section">
-      <h2 class="feed-title">Kontributor Terbaru</h2>
-      <div class="donation-feed">
+    <!-- Feed Section -->
+    <section class="max-w-3xl mx-auto mt-32">
+      <h2 class="text-2xl font-semibold text-white mb-8 text-center">Kontributor Terbaru</h2>
+      <div class="flex flex-col gap-4">
         @forelse ($donations as $donation)
-          <div class="feed-item-wrapper">
-            <div class="feed-item">
-              <div class="feed-avatar">
+          <div class="bg-[#0f0f0f] border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-colors">
+            <div class="flex gap-4 items-start">
+              <div class="w-12 h-12 rounded-full bg-[#1a1a1a] text-[#63cfc0] flex items-center justify-center font-semibold text-lg shrink-0 border border-[#333]">
                 {{ strtoupper(substr($donation->name ?? 'A', 0, 1)) }}
               </div>
-              <div class="feed-content">
-                <div class="feed-header">
-                  <span class="feed-name">{{ $donation->name ?? 'Anonim' }}</span>
-                  <span class="feed-amount">Rp {{ number_format($donation->amount, 0, ',', '.') }}</span>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-semibold text-white truncate">{{ $donation->name ?? 'Anonim' }}</span>
+                  <span class="font-medium text-[#63cfc0] whitespace-nowrap ml-4">Rp {{ number_format($donation->amount, 0, ',', '.') }}</span>
                 </div>
                 @if($donation->message)
-                  <p class="feed-message">"{{ $donation->message }}"</p>
+                  <p class="text-gray-400 text-sm mb-3">"{{ $donation->message }}"</p>
                 @endif
-                <div class="feed-meta">
-                  <span class="feed-date">{{ $donation->created_at->diffForHumans() }}</span>
-                  <button class="toggle-timeline-link" data-donation-id="{{ $donation->id }}">Lihat Perjalanan</button>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-gray-500">{{ $donation->created_at->diffForHumans() }}</span>
+                  <button class="toggle-timeline-link text-[#63cfc0] font-medium hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded transition-colors" data-donation-id="{{ $donation->id }}">Lihat Perjalanan</button>
                 </div>
               </div>
             </div>
-            <div class="timeline-container" id="timeline-{{ $donation->id }}" style="display:none;">
+            <div class="timeline-container hidden mt-6 pt-6 border-t border-white/5" id="timeline-{{ $donation->id }}">
               <div class="timeline-content">
                 <!-- Updates will be loaded here -->
               </div>
             </div>
           </div>
         @empty
-          <p class="empty-donation">Belum ada donasi.</p>
+          <p class="text-center text-gray-500 py-12">Belum ada donasi.</p>
         @endforelse
       </div>
-  </section>
-
-  {{-- ================= TIMELINE DONASI (USER) - Per donasi ================= --}}
-
-  </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-    <footer class="bg-surface border-t border-border mt-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:flex md:items-center md:justify-between">
-            <div class="flex justify-center md:justify-start mb-4 md:mb-0">
-                <span class="text-sm text-gray-400">
-                    &copy; 2025 <a href="/" class="hover:text-white transition-colors font-semibold">Re:Tide</a>. All Rights Reserved.
-                </span>
-            </div>
-            <ul class="flex justify-center space-x-6 text-sm font-medium text-gray-400">
-                <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
-            </ul>
-        </div>
-    </footer>
-
-    <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #050505;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #222;
-            border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #63CFC0;
-        }
-    </style>
+  <footer class="border-t border-white/10 mt-auto bg-[#0a0a0a]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:flex md:items-center md:justify-between">
+          <div class="flex justify-center md:justify-start mb-4 md:mb-0">
+              <span class="text-sm text-gray-500">
+                  &copy; 2025 <a href="/" class="hover:text-white transition-colors font-medium">Re:Tide</a>. All Rights Reserved.
+              </span>
+          </div>
+          <ul class="flex justify-center space-x-6 text-sm font-medium text-gray-500">
+              <li><a href="/about" class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">About Us</a></li>
+              <li><a href="/contact" class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">Contact</a></li>
+              <li><a href="/terms" class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] rounded">Terms of Service</a></li>
+          </ul>
+      </div>
+  </footer>
 
   <script>
-    // Toggle timeline for each donation
-    $(document).ready(function() {
-      $('.toggle-timeline-link').click(function() {
-        var donationId = $(this).data('donation-id');
-        var timelineRow = $('#timeline-' + donationId);
-        var timelineContent = timelineRow.find('.timeline-content');
-
-        if (timelineRow.is(':visible')) {
-          timelineRow.hide();
-        } else {
-          loadTimeline(donationId);
-          timelineRow.show();
-        }
-      });
-
-      // Auto update visible timelines every 30 seconds
-      setInterval(function() {
-        $('.timeline-container:visible').each(function() {
-          var donationId = $(this).attr('id').replace('timeline-', '');
-          loadTimeline(donationId);
+    // Timeline Fetching
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtns = document.querySelectorAll('.toggle-timeline-link');
+      
+      toggleBtns.forEach(btn => {
+        btn.addEventListener('click', async function() {
+          const donationId = this.getAttribute('data-donation-id');
+          const timelineContainer = document.getElementById('timeline-' + donationId);
+          const contentDiv = timelineContainer.querySelector('.timeline-content');
+          
+          if (timelineContainer.classList.contains('hidden')) {
+            timelineContainer.classList.remove('hidden');
+            if (!contentDiv.hasAttribute('data-loaded')) {
+              contentDiv.innerHTML = '<p class="text-gray-500 text-sm">Memuat pembaruan...</p>';
+              try {
+                const response = await fetch('/donation/' + donationId + '/updates');
+                const data = await response.json();
+                
+                if (data.length > 0) {
+                  let html = '<div class="timeline">';
+                  data.forEach(update => {
+                    html += `
+                      <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content-inner">
+                          <h4 class="text-white font-medium mb-1">${update.title}</h4>
+                          <p class="text-gray-400 text-sm mb-1">${update.description}</p>
+                          <span class="text-gray-600 text-xs">${new Date(update.created_at).toLocaleString('id-ID')}</span>
+                        </div>
+                      </div>
+                    `;
+                  });
+                  html += '</div>';
+                  contentDiv.innerHTML = html;
+                } else {
+                  contentDiv.innerHTML = '<p class="text-gray-500 text-sm">Belum ada update untuk donasi ini.</p>';
+                }
+                contentDiv.setAttribute('data-loaded', 'true');
+              } catch (e) {
+                contentDiv.innerHTML = '<p class="text-red-400 text-sm">Gagal memuat update.</p>';
+              }
+            }
+          } else {
+            timelineContainer.classList.add('hidden');
+          }
         });
-      }, 30000);
+      });
     });
 
-    function loadTimeline(donationId) {
-      var timelineContent = $('#timeline-' + donationId).find('.timeline-content');
-
-      $.ajax({
-        url: '/donation/' + donationId + '/updates',
-        type: 'GET',
-        success: function(data) {
-          if (data.length > 0) {
-            var html = '<div class="timeline">';
-            data.forEach(function(update) {
-              html += `
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <h4>${update.title}</h4>
-                    <p>${update.description}</p>
-                    <span class="timeline-date">${new Date(update.created_at).toLocaleString('id-ID')}</span>
-                  </div>
-                </div>
-              `;
-            });
-            html += '</div>';
-            timelineContent.html(html);
-          } else {
-            timelineContent.html('<p class="text-gray-300">Belum ada update untuk donasi ini.</p>');
-          }
-        },
-        error: function() {
-          timelineContent.html('<p class="text-red-300">Error loading updates.</p>');
-        }
-      });
-    }
-  </script>
-  <script>
+    // Preset Buttons Logic
     document.addEventListener('DOMContentLoaded', function() {
-        // Preset Buttons Logic
         const presetBtns = document.querySelectorAll('.preset-btn');
         const amountInput = document.getElementById('amount-input');
         const customWrapper = document.getElementById('custom-amount-wrapper');
 
+        const inactiveClasses = ['bg-[#1a1a1a]', 'border-[#333]', 'text-white'];
+        const activeClasses = ['bg-[#63cfc0]/10', 'border-[#63cfc0]', 'text-[#63cfc0]'];
+
         presetBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                presetBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
+                presetBtns.forEach(b => {
+                    b.removeAttribute('aria-current');
+                    b.classList.remove(...activeClasses);
+                    b.classList.add(...inactiveClasses);
+                });
+                
+                this.setAttribute('aria-current', 'true');
+                this.classList.remove(...inactiveClasses);
+                this.classList.add(...activeClasses);
 
                 const val = this.getAttribute('data-amount');
                 if (val === 'custom') {
-                    customWrapper.style.display = 'block';
+                    customWrapper.style.display = 'flex';
                     amountInput.value = '';
                     amountInput.focus();
                 } else {
@@ -333,8 +293,8 @@
             });
         });
 
-        // Validation Form Logic
-        const form = document.querySelector('form.donation-form');
+        // Form Validation
+        const form = document.getElementById('donationForm');
         if (form) {
             form.addEventListener('submit', function(e) {
                 const amountStr = form.querySelector('input[name="amount"]').value;
@@ -344,38 +304,17 @@
                 let errors = [];
                 
                 if (!amountStr || amountStr.trim() === '' || !name || name.trim() === '' || !email || email.trim() === '') {
-                    errors.push('All fields are required');
+                    errors.push('Semua field wajib diisi.');
                 } else {
-                    if (amountStr && amountStr.trim() !== '') {
-                        if (/[a-zA-Z]/.test(amountStr)) {
-                            errors.push('Please enter a valid numeric amount.');
-                        } else if (/[^\d.\-]/.test(amountStr)) {
-                            errors.push('Numeric values only.');
-                        } else {
-                            const amount = parseFloat(amountStr);
-                            if (isNaN(amount)) {
-                                errors.push('Please enter a valid numeric amount.');
-                            } else if (amount <= 0) {
-                                errors.push('Donation amount must be greater than 0.');
-                            } else if (amount < 1000) {
-                                errors.push('Minimum donation amount is Rp 1000.');
-                            }
-                        }
+                    const amount = parseFloat(amountStr);
+                    if (isNaN(amount) || amount < 1000) {
+                        errors.push('Minimal donasi adalah Rp 1.000.');
                     }
-
-                    if (errors.length === 0 && name && name.trim() !== '') {
-                        if (name.length < 2) {
-                            errors.push('Name must be at least 2 characters long.');
-                        } else if (name.length > 50) {
-                            errors.push('Name cannot exceed 50 characters.');
-                        }
+                    if (name.length < 2) {
+                        errors.push('Nama minimal 2 karakter.');
                     }
-
-                    if (errors.length === 0 && email && email.trim() !== '') {
-                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (!emailRegex.test(email)) {
-                            errors.push('Please enter a valid email address.');
-                        }
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        errors.push('Email tidak valid.');
                     }
                 }
 
@@ -390,5 +329,4 @@
     });
   </script>
 </body>
-
 </html>
