@@ -19,7 +19,11 @@ class DonationController extends Controller
         // 2. Total donasi keseluruhan
         $totalDonations = Donation::sum('amount');
 
-        return view('donation', compact('donations', 'totalDonations'));
+        // 3. Goal & Progress
+        $donationGoal = 100000000; // Rp 100.000.000
+        $progressPercentage = min(($totalDonations / $donationGoal) * 100, 100);
+
+        return view('donation', compact('donations', 'totalDonations', 'donationGoal', 'progressPercentage'));
     }
 
     public function updates(Donation $donation)
