@@ -119,7 +119,7 @@
                                     <time datetime="{{ $blogPosts->created_at->toIso8601String() }}">{{ $blogPosts->created_at->format('F j, Y') }}</time>
                                 @endif
                             </div>
-                            <h2 class="text-3xl md:text-4xl font-semibold text-white mb-4 group-hover:text-brand transition-colors leading-tight line-clamp-2 break-words">{{ $blogPosts->title }}</h2>
+                            <h2 class="text-3xl md:text-4xl font-semibold text-white mb-4 group-hover:text-brand transition-colors leading-tight line-clamp-2 break-words truncate max-w-[24ch]">{{ $blogPosts->title }}</h2>
                             <p class="text-gray-400 text-base md:text-lg mb-6 line-clamp-3 leading-relaxed">{{ $blogPosts->content }}</p>
                             <span class="inline-flex items-center text-sm font-semibold text-white group-hover:text-brand transition-colors">
                                 Read Article
