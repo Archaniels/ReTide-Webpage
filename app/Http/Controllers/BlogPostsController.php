@@ -37,7 +37,7 @@ class BlogPostsController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image_path')) {
-            $imagePath = cloudinary()->upload($request->file('image_path')->getRealPath(), ['folder' => 'blog_posts'])->getSecurePath();
+            $imagePath = cloudinary()->uploadApi()->upload($request->file('image_path')->getRealPath(), ['folder' => 'blog_posts'])['secure_url'];
         }
 
         BlogPost::create([
@@ -85,7 +85,7 @@ class BlogPostsController extends Controller
         ];
 
         if ($request->hasFile('image_path')) {
-            $data['image_path'] = cloudinary()->upload($request->file('image_path')->getRealPath(), ['folder' => 'blog_posts'])->getSecurePath();
+            $data['image_path'] = cloudinary()->uploadApi()->upload($request->file('image_path')->getRealPath(), ['folder' => 'blog_posts'])['secure_url'];
         }
 
         $blog->update($data);
