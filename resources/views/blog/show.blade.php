@@ -111,7 +111,7 @@
                 @endif
                 <h1 class="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight break-words">{{ $blogPost->title }}</h1>
                 <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden border border-[#2A2A2A] bg-[#1E1E1E]">
-                    <img src="{{ asset('storage/' . $blogPost->image_path) }}" class="w-full h-full object-cover" alt="Blog cover image">
+                    <img src="{{ $blogPost->image_path }}" class="w-full h-full object-cover" alt="Blog cover image">
                 </div>
             </header>
 

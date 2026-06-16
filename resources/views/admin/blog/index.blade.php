@@ -29,7 +29,7 @@
                     <td class="px-6 py-4">
                         @if($blog->image_path)
                             <div class="h-16 w-24 overflow-hidden rounded-lg border border-gray-700">
-                                <img src="{{ asset('storage/' . $blog->image_path) }}" alt="{{ $blog->title }}" class="h-full w-full object-cover">
+                                <img src="{{ $blog->image_path }}" alt="{{ $blog->title }}" class="h-full w-full object-cover">
                             </div>
                         @else
                             <div class="h-16 w-24 bg-gray-800 border border-gray-700 rounded-lg flex items-center justify-center text-gray-600">

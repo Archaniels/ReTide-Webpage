@@ -12,7 +12,7 @@ class BlogPostsController extends Controller
      */
     public function index()
     {
-        $blog = BlogPost::all();
+        $blog = BlogPost::latest()->get();
         return view('blog.index', ['blog' => $blog]);
     }
 
@@ -37,7 +37,7 @@ class BlogPostsController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image_path')) {
-            $imagePath = $request->file('image_path')->store('blog_posts', 'public');
+            $imagePath = cloudinary()->uploadApi()->upload($request->file('image_path')->getRealPath(), ['folder' => 'blog_posts'])['secure_url'];
         }
 
         BlogPost::create([
@@ -85,7 +85,7 @@ class BlogPostsController extends Controller
         ];
 
         if ($request->hasFile('image_path')) {
-            $data['image_path'] = $request->file('image_path')->store('blog_posts', 'public');
+            $data['image_path'] = cloudinary()->uploadApi()->upload($request->file('image_path')->getRealPath(), ['folder' => 'blog_posts'])['secure_url'];
         }
 
         $blog->update($data);

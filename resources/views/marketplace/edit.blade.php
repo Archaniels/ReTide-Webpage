@@ -97,12 +97,12 @@
                 <span class="font-semibold mr-2 text-left flex-auto">Product berhasil diupdate!</span>
             </div>
         </div>
-    @else
+    @elseif($errors->any())
         <div class="bg-transparent text-center py-4 lg:px-4">
             <div class="p-2 bg-red-800 items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex"
                 role="alert">
                 <span class="flex rounded-full bg-red-600 uppercase px-2 py-1 text-xs font-bold mr-3">Error</span>
-                <span class="font-semibold mr-2 text-left flex-auto">Terjadi kesalahan ketika menyimpan product!</span>
+                <span class="font-semibold mr-2 text-left flex-auto">{{ $errors->first() }}</span>
             </div>
         </div>
     @endif

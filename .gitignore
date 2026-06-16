@@ -25,6 +25,7 @@ Thumbs.db
 /.gemini
 /Documentation/GEMINI.md
 /Documentation/GITBOOK_SKILL.md
+/node_modules
 
 # Playwright
 node_modules/
