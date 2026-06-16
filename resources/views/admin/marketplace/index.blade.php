@@ -30,7 +30,7 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if($product->image_path)
                             <div class="h-16 w-16 overflow-hidden rounded-xl border border-gray-700">
-                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
+                                <img src="{{ $product->image_path }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
                             </div>
                         @else
                             <div class="h-16 w-16 bg-gray-800 border border-gray-700 rounded-xl flex items-center justify-center text-gray-600">

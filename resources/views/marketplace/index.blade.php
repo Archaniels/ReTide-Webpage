@@ -129,7 +129,7 @@
                 @foreach($products as $product)
                     <div class="bg-surface rounded-2xl overflow-hidden border border-border hover:border-brand transition-colors duration-300 group flex flex-col h-full">
                         <div class="relative aspect-[4/3] overflow-hidden bg-surfaceElevated">
-                            <img src="{{ asset('storage/' . $product->image_path) }}" class="w-full h-full object-cover transition-opacity duration-700" alt="{{ $product->name }}" loading="lazy">
+                            <img src="{{ $product->image_path }}" class="w-full h-full object-cover transition-opacity duration-700" alt="{{ $product->name }}" loading="lazy">
                             <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-white/10">
                                 Eco-Certified
                             </div>
@@ -146,7 +146,7 @@
                                     data-id="{{ $product->id }}"
                                     data-name="{{ $product->name }}"
                                     data-price="{{ $product->price }}"
-                                    data-icon='<img src="{{ asset("storage/" . $product->image_path) }}" class="w-full h-full object-cover rounded">'
+                                    data-icon='<img src="{{ $product->image_path }}" class="w-full h-full object-cover rounded">'
                                     title="Add to Cart"
                                 >
                                     <i class="fas fa-plus"></i>

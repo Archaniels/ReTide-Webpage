@@ -37,7 +37,7 @@ class BlogPostsController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image_path')) {
-            $imagePath = $request->file('image_path')->store('blog_posts', 'public');
+            $imagePath = $request->file('image_path')->storeOnCloudinary('blog_posts')->getSecurePath();
         }
 
         BlogPost::create([
@@ -85,7 +85,7 @@ class BlogPostsController extends Controller
         ];
 
         if ($request->hasFile('image_path')) {
-            $data['image_path'] = $request->file('image_path')->store('blog_posts', 'public');
+            $data['image_path'] = $request->file('image_path')->storeOnCloudinary('blog_posts')->getSecurePath();
         }
 
         $blog->update($data);
