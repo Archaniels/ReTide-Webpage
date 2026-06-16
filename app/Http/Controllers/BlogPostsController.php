@@ -12,7 +12,7 @@ class BlogPostsController extends Controller
      */
     public function index()
     {
-        $blog = BlogPost::all();
+        $blog = BlogPost::latest()->get();
         return view('blog.index', ['blog' => $blog]);
     }
 
