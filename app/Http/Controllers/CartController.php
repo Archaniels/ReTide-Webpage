@@ -41,6 +41,28 @@ class CartController extends Controller
         ]);
     }
 
+    public function sync(Request $request)
+    {
+        $frontendCart = $request->input("cart", []);
+        $cart = [];
+        
+        foreach ($frontendCart as $item) {
+            $cart[$item['id']] = [
+                "name" => $item['name'],
+                "quantity" => $item['quantity'],
+                "price" => $item['price'],
+                "image" => $item['image'],
+            ];
+        }
+
+        session()->put("cart", $cart);
+
+        return response()->json([
+            "status" => "success",
+            "message" => "Cart synced successfully!",
+        ]);
+    }
+
     /**
      * Show the checkout page and prepare a Midtrans Snap token.
      */

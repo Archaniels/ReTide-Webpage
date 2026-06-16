@@ -1,4 +1,4 @@
-let cart = [];
+let cart = window.INITIAL_CART || [];
 
 // Add
 function addToCart(product) {
@@ -158,7 +158,40 @@ function checkout() {
         showToast("Your cart is empty!", "error");
         return;
     }
-    window.location.href = '/cart/checkout';
+    
+    // Sync cart to backend first
+    const cartData = {};
+    cart.forEach(item => {
+        cartData[item.id] = {
+            id: item.id,
+            name: item.name,
+            quantity: item.jumlah,
+            price: item.price,
+            image: item.icon
+        };
+    });
+
+    // Disable button to prevent double clicks
+    const $btn = $(".checkout-btn");
+    const originalContent = $btn.html();
+    $btn.html('<i class="fas fa-spinner fa-spin mr-2"></i> Processing...').prop("disabled", true);
+
+    $.ajax({
+        url: '/cart/sync',
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: { cart: cartData },
+        success: function() {
+            window.location.href = '/cart/checkout';
+        },
+        error: function(xhr) {
+            console.error('Error syncing cart:', xhr);
+            showToast('Failed to prepare checkout', 'error');
+            $btn.html(originalContent).prop("disabled", false);
+        }
+    });
 }
 
 // Show Toast Notification
