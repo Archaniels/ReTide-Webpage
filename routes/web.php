@@ -117,6 +117,7 @@ Route::middleware(['auth'])->group(function () {
         // Public Marketplace
         Route::get('/marketplace', [MarketplaceProductController::class, 'index'])->name('marketplace.index');
         Route::get('/marketplace/success', function() {
+            session()->forget('cart');
             return view('marketplace_success');
         })->name('marketplace.success');
 
@@ -133,6 +134,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Cart & Marketplace Checkout
         Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+        Route::post('/cart/sync', [CartController::class, 'sync'])->name('cart.sync');
         Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
         Route::post('/cart/process', [CartController::class, 'process'])->name('cart.process');
     });

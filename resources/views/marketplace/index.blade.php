@@ -48,6 +48,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Script -->
+    <script>
+        const sessionCart = @json(session()->get('cart', []));
+        window.INITIAL_CART = [];
+        for (const [id, item] of Object.entries(sessionCart)) {
+            window.INITIAL_CART.push({
+                id: id,
+                name: item.name,
+                price: item.price,
+                icon: item.image,
+                jumlah: item.quantity
+            });
+        }
+    </script>
     <script src="{{ asset('assets/js/marketplace.js') }}" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
