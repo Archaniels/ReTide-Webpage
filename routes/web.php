@@ -133,6 +133,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Cart & Marketplace Checkout
         Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+        Route::post('/cart/sync', [CartController::class, 'sync'])->name('cart.sync');
         Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
         Route::post('/cart/process', [CartController::class, 'process'])->name('cart.process');
     });
