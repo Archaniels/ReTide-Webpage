@@ -117,6 +117,7 @@ Route::middleware(['auth'])->group(function () {
         // Public Marketplace
         Route::get('/marketplace', [MarketplaceProductController::class, 'index'])->name('marketplace.index');
         Route::get('/marketplace/success', function() {
+            session()->forget('cart');
             return view('marketplace_success');
         })->name('marketplace.success');
 
