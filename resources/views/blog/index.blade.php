@@ -110,7 +110,7 @@
                 <a href="{{ route('blog.show', $blogPosts->id) }}" class="group block">
                     <article class="flex flex-col gap-6">
                         <div class="relative w-full aspect-[16/9] overflow-hidden rounded-2xl bg-[#1E1E1E]">
-                            <img src="{{ asset('storage/' . $blogPosts->image_path) }}"
+                            <img src="{{ $blogPosts->image_path }}"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="{{ $blogPosts->title }}" loading="lazy">
                         </div>
                         <div class="flex flex-col items-start">
