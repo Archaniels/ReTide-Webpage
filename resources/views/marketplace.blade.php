@@ -43,46 +43,47 @@
 
     <div class="marketplace-page">
         <!-- Navbar -->
-        <header class="fixed w-full z-20 top-0 start-0">
-            <nav class="backdrop-blur-lg">
-                <div class="flex flex-wrap justify-center items-center mx-auto max-w-screen-xl p-4">
-                    <a href="assets/img/ReTide_Logo.png" class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src="assets/img/ReTide_Logo.png" class="h-7" alt="ReTide Logo" />
-                    </a>
-                    <!-- <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <a href="/login" class="text-sm font-medium text-fg-brand hover:underline">Login</a>
-                </div> -->
-                </div>
-            </nav>
-            <nav class="backdrop-blur-lg border-y border-default border-default">
-                <div class="max-w-screen-xl px-4 py-3 mx-auto">
-                    <div class="flex items-center justify-center">
-                        <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                            <li>
-                                <a href="/" class="text-heading hover:underline" aria-current="page">Home</a>
-                            </li>
-                            <li>
-                                <a href="/about" class="text-heading hover:underline">About Us</a>
-                            </li>
-                            <li>
-                                <a href="/blog" class="text-heading hover:underline">Blog</a>
-                            </li>
-                            <li>
-                                <a href="/contact" class="text-heading hover:underline">Contact</a>
-                            </li>
-                            <li>
-                                <a href="/account" class="text-heading hover:underline">Account</a>
-                            </li>
-                            <li>
-                                <a href="/marketplace" class="text-heading hover:underline">Marketplace</a>
-                            </li>
-                            <li>
-                                <a href="/donation" class="text-heading hover:underline">Donation</a>
-                            </li>
+        <header class="fixed w-full z-50 top-0 start-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <div class="flex-shrink-0">
+                        <a href="/" class="flex items-center">
+                            <img src="{{ asset('assets/img/ReTide_Logo.png') }}" class="h-8" alt="ReTide Logo" />
+                        </a>
+                    </div>
+                    <nav class="hidden md:block">
+                        <ul class="flex space-x-8 text-sm font-medium">
+                            <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                            <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                            <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                            <li><a href="/account" class="text-gray-300 hover:text-white transition-colors">Account</a></li>
+                            <li><a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                            <li><a href="/marketplace" class="text-[#63cfc0] hover:text-white transition-colors">Marketplace</a></li>
+                            <li><a href="/donation" class="text-gray-300 hover:text-white transition-colors">Donation</a></li>
                         </ul>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <a href="/account" class="hidden md:block text-gray-300 hover:text-white transition-colors">
+                            <i class="fas fa-user-circle text-xl"></i>
+                        </a>
+                        <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
                     </div>
                 </div>
-            </nav>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-[#121212] border-b border-white/5 absolute w-full transition-all duration-300">
+                <ul class="px-4 pt-2 pb-6 space-y-4 text-sm font-medium">
+                    <li><a href="/" class="block text-gray-300 hover:text-white transition-colors">Home</a></li>
+                    <li><a href="/about" class="block text-gray-300 hover:text-white transition-colors">About</a></li>
+                    <li><a href="/contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    <li><a href="/account" class="block text-gray-300 hover:text-white transition-colors">Account</a></li>
+                    <li><a href="/blog" class="block text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                    <li><a href="/marketplace" class="block text-[#63cfc0] hover:text-white transition-colors">Marketplace</a></li>
+                    <li><a href="/donation" class="block text-gray-300 hover:text-white transition-colors">Donation</a></li>
+                </ul>
+            </div>
         </header>
 
         <!-- Header -->
@@ -142,6 +143,17 @@
                 </ul>
             </div>
         </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if(btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
     </div>
 </body>
 
