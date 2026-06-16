@@ -99,11 +99,26 @@
                     </ul>
                 </nav>
                 <div class="flex items-center space-x-4">
-                    <a href="/account" class="text-gray-300 hover:text-white transition-colors">
+                    <a href="/account" class="hidden md:block text-gray-300 hover:text-white transition-colors">
                         <i class="fas fa-user-circle text-xl"></i>
                     </a>
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
                 </div>
             </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#121212] border-b border-white/5 absolute w-full transition-all duration-300">
+            <ul class="px-4 pt-2 pb-6 space-y-4 text-sm font-medium">
+                <li><a href="/" class="block text-gray-300 hover:text-white transition-colors">Home</a></li>
+                <li><a href="/about" class="block text-gray-300 hover:text-white transition-colors">About</a></li>
+                <li><a href="/contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/account" class="block text-gray-300 hover:text-white transition-colors">Account</a></li>
+                <li><a href="/blog" class="block text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                <li><a href="/marketplace" class="block text-[#63cfc0] hover:text-white transition-colors">Marketplace</a></li>
+                <li><a href="/donation" class="block text-gray-300 hover:text-white transition-colors">Donation</a></li>
+            </ul>
         </div>
     </header>
 
@@ -239,5 +254,16 @@
             background: #63CFC0;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if(btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
