@@ -10,16 +10,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->string('phone_number')->nullable()->after('email');
-    });
-}
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('phone_number')->nullable()->after('email');
+        });
+    }
 
-public function down()
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->dropColumn('phone_number');
-    });
-}
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('phone_number');
+        });
+    }
 };

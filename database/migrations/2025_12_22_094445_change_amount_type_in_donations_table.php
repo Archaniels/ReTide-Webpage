@@ -10,19 +10,19 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::table('donations', function (Blueprint $table) {
-        $table->bigInteger('amount')->change();
-    });
-}
+    {
+        Schema::table('donations', function (Blueprint $table) {
+            $table->bigInteger('amount')->change();
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
-{
-    Schema::table('donations', function (Blueprint $table) {
-        $table->integer('amount')->change();
-    });
-}
+    {
+        Schema::table('donations', function (Blueprint $table) {
+            $table->integer('amount')->change();
+        });
+    }
 };

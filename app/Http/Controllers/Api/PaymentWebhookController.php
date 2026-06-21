@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Midtrans\Config;
 use Midtrans\Notification;
-use Illuminate\Support\Facades\Log;
 
 class PaymentWebhookController extends Controller
 {
@@ -21,12 +21,13 @@ class PaymentWebhookController extends Controller
         Config::$is3ds = config('midtrans.is_3ds');
 
         try {
-            $notif = new Notification();
+            $notif = app(Notification::class);
         } catch (\Exception $e) {
-            Log::error('Midtrans Notification Error: ' . $e->getMessage());
+            Log::error('Midtrans Notification Error: '.$e->getMessage());
+
             return response()->json([
                 'status' => 'error',
-                'message' => 'Invalid notification payload'
+                'message' => 'Invalid notification payload',
             ], 400);
         }
 
@@ -35,13 +36,36 @@ class PaymentWebhookController extends Controller
         $orderId = $notif->order_id;
         $fraud = $notif->fraud_status;
 
-        $payment = Payment::where('order_id', $orderId)->first();
+        // Verify Midtrans Signature
+        $statusCode = $notif->status_code;
+        $grossAmount = $notif->gross_amount;
+        $signatureKey = $notif->signature_key;
+        $serverKey = config('midtrans.server_key');
 
-        if (!$payment) {
-            Log::warning('Payment record not found for Order ID: ' . $orderId);
+        $computedSignature = hash('sha512', $orderId.$statusCode.$grossAmount.$serverKey);
+
+        $formattedGross = is_numeric($grossAmount) && strpos((string) $grossAmount, '.') === false
+            ? number_format((float) $grossAmount, 2, '.', '')
+            : $grossAmount;
+        $computedSignatureFormatted = hash('sha512', $orderId.$statusCode.$formattedGross.$serverKey);
+
+        if ($signatureKey !== $computedSignature && $signatureKey !== $computedSignatureFormatted) {
+            Log::warning('Midtrans Webhook: Signature verification failed for Order ID: '.$orderId);
+
             return response()->json([
                 'status' => 'error',
-                'message' => 'Payment record not found'
+                'message' => 'Invalid signature key',
+            ], 403);
+        }
+
+        $payment = Payment::where('order_id', $orderId)->first();
+
+        if (! $payment) {
+            Log::warning('Payment record not found for Order ID: '.$orderId);
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Payment record not found',
             ], 404);
         }
 
@@ -54,15 +78,15 @@ class PaymentWebhookController extends Controller
                     $payment->status = 'success';
                 }
             }
-        } else if ($transaction == 'settlement') {
+        } elseif ($transaction == 'settlement') {
             $payment->status = 'success';
-        } else if ($transaction == 'pending') {
+        } elseif ($transaction == 'pending') {
             $payment->status = 'pending';
-        } else if ($transaction == 'deny') {
+        } elseif ($transaction == 'deny') {
             $payment->status = 'denied';
-        } else if ($transaction == 'expire') {
+        } elseif ($transaction == 'expire') {
             $payment->status = 'expired';
-        } else if ($transaction == 'cancel') {
+        } elseif ($transaction == 'cancel') {
             $payment->status = 'cancelled';
         }
 
@@ -73,7 +97,7 @@ class PaymentWebhookController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Notification handled'
+            'message' => 'Notification handled',
         ]);
     }
 }
