@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\MarketplaceProduct;
 use App\Models\Payment;
+use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
 
@@ -15,51 +15,52 @@ class CartController extends Controller
      */
     public function add(Request $request)
     {
-        $productId = $request->input("product_id");
+        $productId = $request->input('product_id');
         $product = MarketplaceProduct::findOrFail($productId);
 
         // Get existing cart from session or initialize empty array
-        $cart = session()->get("cart", []);
+        $cart = session()->get('cart', []);
 
         // Check if product is already in cart
         if (isset($cart[$productId])) {
-            $cart[$productId]["quantity"]++;
+            $cart[$productId]['quantity']++;
         } else {
             $cart[$productId] = [
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "image" => $product->image,
+                'name' => $product->name,
+                'quantity' => 1,
+                'price' => $product->price,
+                'image' => $product->image_path,
             ];
         }
 
-        session()->put("cart", $cart);
+        session()->put('cart', $cart);
 
         return response()->json([
-            "status" => "success",
-            "message" => $product->name . " added to cart!",
+            'status' => 'success',
+            'message' => $product->name.' added to cart!',
         ]);
     }
 
     public function sync(Request $request)
     {
-        $frontendCart = $request->input("cart", []);
+        $frontendCart = $request->input('cart', []);
         $cart = [];
-        
+
         foreach ($frontendCart as $item) {
+            $product = MarketplaceProduct::findOrFail($item['id']);
             $cart[$item['id']] = [
-                "name" => $item['name'],
-                "quantity" => $item['quantity'],
-                "price" => $item['price'],
-                "image" => $item['image'],
+                'name' => $product->name,
+                'quantity' => $item['quantity'],
+                'price' => $product->price,
+                'image' => $product->image_path,
             ];
         }
 
-        session()->put("cart", $cart);
+        session()->put('cart', $cart);
 
         return response()->json([
-            "status" => "success",
-            "message" => "Cart synced successfully!",
+            'status' => 'success',
+            'message' => 'Cart synced successfully!',
         ]);
     }
 
@@ -68,65 +69,65 @@ class CartController extends Controller
      */
     public function checkout()
     {
-        $cart = session()->get("cart", []);
+        $cart = session()->get('cart', []);
 
         if (empty($cart)) {
             return redirect()
-                ->route("marketplace.index")
-                ->with("error", "Cart is empty!");
+                ->route('marketplace.index')
+                ->with('error', 'Cart is empty!');
         }
 
         $totalAmount = 0;
         $itemDetails = [];
         foreach ($cart as $id => $details) {
-            $totalAmount += $details["price"] * $details["quantity"];
+            $totalAmount += $details['price'] * $details['quantity'];
             $itemDetails[] = [
-                "id"       => (string) $id,
-                "price"    => $details["price"],
-                "quantity" => $details["quantity"],
-                "name"     => substr($details["name"], 0, 50),
+                'id' => (string) $id,
+                'price' => $details['price'],
+                'quantity' => $details['quantity'],
+                'name' => substr($details['name'], 0, 50),
             ];
         }
 
         // Configure Midtrans
-        \Midtrans\Config::$serverKey    = config("midtrans.server_key");
-        \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$isSanitized  = true;
-        \Midtrans\Config::$is3ds        = true;
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$isProduction = false;
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
 
-        $orderId = "MKT-" . time() . "-" . auth()->id();
+        $orderId = 'MKT-'.time().'-'.auth()->id();
 
         $params = [
-            "transaction_details" => [
-                "order_id"     => $orderId,
-                "gross_amount" => $totalAmount,
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => $totalAmount,
             ],
-            "customer_details" => [
-                "first_name" => auth()->user()->name,
-                "email"      => auth()->user()->email,
+            'customer_details' => [
+                'first_name' => auth()->user()->name,
+                'email' => auth()->user()->email,
             ],
-            "item_details" => $itemDetails,
-            "callbacks" => [
-                "finish"   => route("marketplace.success"),
-                "unfinish" => route("marketplace.index"),
-                "error"    => route("marketplace.index"),
+            'item_details' => $itemDetails,
+            'callbacks' => [
+                'finish' => route('marketplace.success'),
+                'unfinish' => route('marketplace.index'),
+                'error' => route('marketplace.index'),
             ],
         ];
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $snapToken = Snap::getSnapToken($params);
 
         $payment = Payment::create([
-            "order_id"     => $orderId,
-            "payment_type" => "marketplace",
-            "status"       => "pending",
-            "gross_amount" => $totalAmount,
-            "user_id"      => auth()->id(),
+            'order_id' => $orderId,
+            'payment_type' => 'marketplace',
+            'status' => 'pending',
+            'gross_amount' => $totalAmount,
+            'user_id' => auth()->id(),
         ]);
 
         $payment->snap_token = $snapToken;
         $payment->save();
 
-        return view("checkout", compact("cart", "totalAmount", "payment", "snapToken"));
+        return view('checkout', compact('cart', 'totalAmount', 'payment', 'snapToken'));
     }
 
     /**
@@ -134,36 +135,36 @@ class CartController extends Controller
      */
     public function process(Request $request)
     {
-        $cart = session()->get("cart", []);
+        $cart = session()->get('cart', []);
 
         if (empty($cart)) {
             return redirect()
-                ->route("marketplace.index")
-                ->with("error", "Cart is empty!");
+                ->route('marketplace.index')
+                ->with('error', 'Cart is empty!');
         }
 
         $totalAmount = 0;
         $itemDetails = [];
 
         foreach ($cart as $id => $details) {
-            $totalAmount += $details["price"] * $details["quantity"];
+            $totalAmount += $details['price'] * $details['quantity'];
             $itemDetails[] = [
-                "id" => (string) $id,
-                "price" => $details["price"],
-                "quantity" => $details["quantity"],
-                "name" => substr($details["name"], 0, 50),
+                'id' => (string) $id,
+                'price' => $details['price'],
+                'quantity' => $details['quantity'],
+                'name' => substr($details['name'], 0, 50),
             ];
         }
 
         // Set Midtrans configuration
         // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = config("midtrans.server_key");
+        Config::$serverKey = config('midtrans.server_key');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
+        Config::$isProduction = false;
         // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
+        Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
+        Config::$is3ds = true;
 
         // Config::$serverKey = config("midtrans.server_key");
         // Config::$clientKey = config("midtrans.client_key");
@@ -171,31 +172,31 @@ class CartController extends Controller
         // Config::$isSanitized = config("midtrans.is_sanitized");
         // Config::$is3ds = config("midtrans.is_3ds");
 
-        $orderId = "MKT-" . time() . "-" . auth()->id();
+        $orderId = 'MKT-'.time().'-'.auth()->id();
 
         $params = [
-            "transaction_details" => [
-                "order_id" => $orderId,
-                "gross_amount" => $totalAmount,
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => $totalAmount,
             ],
-            "customer_details" => [
-                "first_name" => auth()->user()->name,
-                "email" => auth()->user()->email,
+            'customer_details' => [
+                'first_name' => auth()->user()->name,
+                'email' => auth()->user()->email,
             ],
-            "item_details" => $itemDetails,
-            "callbacks" => [
-                "finish" => route("marketplace.success"),
-                "unfinish" => route("marketplace.index"),
-                "error" => route("marketplace.index"),
+            'item_details' => $itemDetails,
+            'callbacks' => [
+                'finish' => route('marketplace.success'),
+                'unfinish' => route('marketplace.index'),
+                'error' => route('marketplace.index'),
             ],
         ];
 
         $transaction = Payment::create([
-            "order_id" => $orderId,
-            "payment_type" => "marketplace",
-            "status" => "pending",
-            "gross_amount" => $totalAmount,
-            "user_id" => auth()->id(),
+            'order_id' => $orderId,
+            'payment_type' => 'marketplace',
+            'status' => 'pending',
+            'gross_amount' => $totalAmount,
+            'user_id' => auth()->id(),
             // "payload" => [
             //     "redirect_url" => $snapResponse->redirect_url,
             //     "token" => $snapToken,
@@ -203,9 +204,14 @@ class CartController extends Controller
             // ],
         ]);
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $snapToken = Snap::getSnapToken($params);
         $transaction->snap_token = $snapToken;
         $transaction->save();
+
+        return response()->json([
+            'status' => 'success',
+            'snap_token' => $snapToken,
+        ]);
 
         // try {
         //     $snapResponse = \Midtrans\Snap::createTransaction($params);

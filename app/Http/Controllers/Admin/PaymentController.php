@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
-use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
 
@@ -16,6 +15,7 @@ class PaymentController extends Controller
     public function index()
     {
         $payments = Payment::with('user')->orderBy('created_at', 'desc')->paginate(10);
+
         return view('admin.payments.index', compact('payments'));
     }
 
@@ -39,7 +39,7 @@ class PaymentController extends Controller
         Config::$isSanitized = config('midtrans.is_sanitized');
         Config::$is3ds = config('midtrans.is_3ds');
 
-        $orderId = 'TEST-' . time() . '-' . rand(1000, 9999);
+        $orderId = 'TEST-'.time().'-'.rand(1000, 9999);
         $amount = 10000;
 
         $params = [
@@ -58,15 +58,16 @@ class PaymentController extends Controller
                     'price' => $amount,
                     'quantity' => 1,
                     'name' => 'Test Donation/Payment',
-                ]
+                ],
             ],
         ];
 
         try {
             $redirectUrl = Snap::createTransaction($params)->redirect_url;
+
             return redirect()->away($redirectUrl);
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to create test transaction: ' . $e->getMessage());
+            return back()->with('error', 'Failed to create test transaction: '.$e->getMessage());
         }
     }
 }

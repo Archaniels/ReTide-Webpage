@@ -6,6 +6,8 @@
 |--------------------------------------------------------------------------
 */
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\RedirectIfAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -18,8 +20,8 @@ $app = Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
-            'not_admin' => \App\Http\Middleware\RedirectIfAdmin::class,
+            'admin' => AdminMiddleware::class,
+            'not_admin' => RedirectIfAdmin::class,
         ]);
 
         $middleware->validateCsrfTokens(except: [

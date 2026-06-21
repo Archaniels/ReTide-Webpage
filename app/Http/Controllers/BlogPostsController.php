@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\BlogPost;
+use Illuminate\Http\Request;
 
 class BlogPostsController extends Controller
 {
@@ -13,6 +13,7 @@ class BlogPostsController extends Controller
     public function index()
     {
         $blog = BlogPost::latest()->get();
+
         return view('blog.index', ['blog' => $blog]);
     }
 
@@ -45,6 +46,7 @@ class BlogPostsController extends Controller
             'content' => $request->input('content'),
             'image_path' => $imagePath,
         ]);
+
         return redirect()->route('admin.blogs.index')->with('success', 'Blog berhasil ditambahkan!');
     }
 
@@ -54,6 +56,7 @@ class BlogPostsController extends Controller
     public function show(string $id)
     {
         $blogPost = BlogPost::findOrFail($id);
+
         return view('blog.show', compact('blogPost'));
     }
 
@@ -63,6 +66,7 @@ class BlogPostsController extends Controller
     public function edit(string $id)
     {
         $blog = BlogPost::findOrFail($id);
+
         return view('blog.edit', compact('blog'));
     }
 

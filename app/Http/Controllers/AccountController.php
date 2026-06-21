@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +14,7 @@ class AccountController extends Controller
     public function index()
     {
         $user = Auth::user();
+
         return view('account', compact('user'));
     }
 
@@ -26,13 +28,13 @@ class AccountController extends Controller
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('users', 'name')->ignore($user->id)
+                Rule::unique('users', 'name')->ignore($user->id),
             ],
             'email' => [
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users', 'email')->ignore($user->id)
+                Rule::unique('users', 'email')->ignore($user->id),
             ],
             'notelp' => ['nullable', 'string', 'max:20'],
             'current_password' => ['nullable', 'required_with:new_password'],
@@ -47,14 +49,14 @@ class AccountController extends Controller
         $user->phone_number = $request->notelp;
 
         if ($request->filled('new_password')) {
-            if (!Hash::check($request->current_password, $user->password)) {
+            if (! Hash::check($request->current_password, $user->password)) {
                 return back()->withErrors(['current_password' => 'Password lama salah.'])->withInput();
             }
             $user->password = Hash::make($request->new_password);
         }
 
-        /** @var \App\Models\User $user */
-        $user->save(); 
+        /** @var User $user */
+        $user->save();
 
         return back()->with('success', 'Profil berhasil diperbarui!');
     }
@@ -68,7 +70,7 @@ class AccountController extends Controller
         Auth::logout();
 
         // Hapus data user
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user->delete();
 
         // Invalidasi session
