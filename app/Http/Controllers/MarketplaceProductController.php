@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\MarketplaceProduct;
+use Illuminate\Http\Request;
 
 class MarketplaceProductController extends Controller
 {
@@ -13,6 +13,7 @@ class MarketplaceProductController extends Controller
     public function index()
     {
         $products = MarketplaceProduct::orderBy('created_at', 'desc')->get();
+
         return view('marketplace.index', ['products' => $products]);
     }
 
@@ -57,6 +58,7 @@ class MarketplaceProductController extends Controller
     public function show(string $id)
     {
         $product = MarketplaceProduct::findOrFail($id);
+
         return view('marketplace.show', compact('product'));
     }
 
@@ -66,6 +68,7 @@ class MarketplaceProductController extends Controller
     public function edit(string $id)
     {
         $product = MarketplaceProduct::findOrFail($id);
+
         return view('marketplace.edit', compact('product'));
     }
 
@@ -77,8 +80,8 @@ class MarketplaceProductController extends Controller
         $product = MarketplaceProduct::findOrFail($id);
 
         $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
+            'name' => 'required|min:5|max:100',
+            'description' => 'required|min:5|max:3000',
             'price' => 'required|numeric|min:0|max:99999999.99',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);

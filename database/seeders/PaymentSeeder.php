@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Payment;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class PaymentSeeder extends Seeder
         $user = User::first();
 
         Payment::create([
-            'order_id' => 'TRX-' . time(),
+            'order_id' => 'TRX-'.time(),
             'transaction_id' => 'midtrans-test-id-123',
             'payment_type' => 'donation',
             'status' => 'settlement',

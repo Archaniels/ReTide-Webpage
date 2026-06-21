@@ -1,20 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\BlogPostsController;
-use App\Http\Controllers\MarketplaceProductController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DonationController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\Api\PaymentWebhookController;
-use App\Http\Controllers\Admin\DonationUpdateController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
-use App\Http\Controllers\Admin\MarketplaceController as AdminMarketplaceController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DonationUpdateController;
+use App\Http\Controllers\Admin\MarketplaceController as AdminMarketplaceController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Api\PaymentWebhookController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogPostsController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\MarketplaceProductController;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +29,16 @@ Route::get('/debug-boot', function () {
     try {
         // Attempt to resolve a core service to trigger the error
         app('view');
+
         return 'View service resolved successfully!';
-    } catch (\Throwable $e) {
+    } catch (Throwable $e) {
         // Log the full exception to Vercel's STDERR
-        Log::error('BOOT DEBUG: ' . $e->getMessage());
-        Log::error('BOOT DEBUG TRACE: ' . $e->getTraceAsString());
+        Log::error('BOOT DEBUG: '.$e->getMessage());
+        Log::error('BOOT DEBUG TRACE: '.$e->getTraceAsString());
 
         // Also dump it to the browser output
         return response()->make(
-            '<pre>' . e($e) . '</pre>',
+            '<pre>'.e($e).'</pre>',
             500
         )->header('Content-Type', 'text/html');
     }
@@ -116,8 +117,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Public Marketplace
         Route::get('/marketplace', [MarketplaceProductController::class, 'index'])->name('marketplace.index');
-        Route::get('/marketplace/success', function() {
+        Route::get('/marketplace/success', function () {
             session()->forget('cart');
+
             return view('marketplace_success');
         })->name('marketplace.success');
 

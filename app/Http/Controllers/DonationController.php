@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\DonationUpdate;
 use App\Models\Payment;
+use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
 
@@ -29,21 +29,22 @@ class DonationController extends Controller
     public function updates(Donation $donation)
     {
         $updates = DonationUpdate::where('donation_id', $donation->id)->latest()->get();
+
         return response()->json($updates);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'amount'  => 'required|integer|min:1000',
-            'email'   => 'nullable|email',
-            'name'    => 'nullable|string|max:255',
+            'amount' => 'required|integer|min:1000',
+            'email' => 'nullable|email',
+            'name' => 'nullable|string|max:255',
             'message' => 'nullable|string|max:500',
         ]);
 
         $donation = Donation::create([
-            'name'   => $request->name ?: auth()->user()->name,
-            'email'  => $request->email ?: auth()->user()->email,
+            'name' => $request->name ?: auth()->user()->name,
+            'email' => $request->email ?: auth()->user()->email,
             'amount' => $request->amount,
             'message' => $request->message,
             'user_id' => auth()->id(),
@@ -56,7 +57,7 @@ class DonationController extends Controller
         Config::$isSanitized = config('midtrans.is_sanitized');
         Config::$is3ds = config('midtrans.is_3ds');
 
-        $orderId = 'DON-' . time() . '-' . auth()->id();
+        $orderId = 'DON-'.time().'-'.auth()->id();
 
         $params = [
             'transaction_details' => [
@@ -69,11 +70,11 @@ class DonationController extends Controller
             ],
             'item_details' => [
                 [
-                    'id' => 'donation-' . $donation->id,
+                    'id' => 'donation-'.$donation->id,
                     'price' => (int) $request->amount,
                     'quantity' => 1,
                     'name' => 'Donation for ReTide',
-                ]
+                ],
             ],
             'callbacks' => [
                 'finish' => route('donation.success'),
@@ -102,8 +103,9 @@ class DonationController extends Controller
 
             return redirect()->away($redirectUrl);
         } catch (\Exception $e) {
-            \Log::error('Midtrans Snap Error (Donation): ' . $e->getMessage());
-            return back()->with('error', 'Failed to create donation payment: ' . $e->getMessage());
+            \Log::error('Midtrans Snap Error (Donation): '.$e->getMessage());
+
+            return back()->with('error', 'Failed to create donation payment: '.$e->getMessage());
         }
     }
 
@@ -115,12 +117,14 @@ class DonationController extends Controller
     public function adminIndex()
     {
         $donations = Donation::with('user')->latest()->get();
+
         return view('admin.donations.index', compact('donations'));
     }
 
     public function adminDestroy(Donation $donation)
     {
         $donation->delete();
+
         return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil dihapus');
     }
 }

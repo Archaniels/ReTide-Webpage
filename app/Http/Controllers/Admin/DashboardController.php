@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\BlogPost;
 use App\Models\Donation;
 use App\Models\MarketplaceProduct;
-use App\Models\BlogPost;
+use App\Models\User;
 
 class DashboardController extends Controller
 {

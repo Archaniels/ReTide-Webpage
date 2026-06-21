@@ -26,7 +26,7 @@ $directories = [
 ];
 
 foreach ($directories as $directory) {
-    if (!is_dir($directory)) {
+    if (! is_dir($directory)) {
         mkdir($directory, 0755, true);
     }
 }
@@ -35,4 +35,4 @@ if (function_exists('opcache_reset')) {
     opcache_reset();
 }
 
-require __DIR__ . '/../public/index.php';
+require __DIR__.'/../public/index.php';
