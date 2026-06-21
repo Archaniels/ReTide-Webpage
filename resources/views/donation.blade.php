@@ -135,7 +135,7 @@
       <div class="bg-[#0f0f0f] border border-white/10 rounded-2xl p-8 shadow-xl">
         <h2 class="text-2xl font-semibold text-white mb-6">Pilih Nominal Donasi</h2>
         
-        <form method="POST" action="{{ route('donation.store') }}" class="flex flex-col gap-5" id="donationForm">
+        <form method="POST" action="{{ route('donation.store') }}" class="flex flex-col gap-5" id="donationForm" novalidate>
             @csrf
 
             <div class="grid grid-cols-2 gap-3 mb-2">
@@ -147,22 +147,34 @@
 
             <div class="flex flex-col gap-2" id="custom-amount-wrapper">
                 <label for="amount-input" class="text-sm font-medium text-gray-400">Nominal (Rp)</label>
-                <input type="number" id="amount-input" name="amount" min="1000" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors" placeholder="Masukkan nominal">
+                <input type="number" id="amount-input" name="amount" min="1000" value="{{ old('amount') }}" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors @error('amount') border-red-500 @enderror" placeholder="Masukkan nominal">
+                @error('amount')
+                    <p class="text-red-500 text-sm mt-1" id="amount-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="flex flex-col gap-2">
                 <label for="name-input" class="text-sm font-medium text-gray-400">Nama Lengkap</label>
-                <input type="text" id="name-input" name="name" value="{{ auth()->user()->name }}" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors" placeholder="Masukkan nama lengkap">
+                <input type="text" id="name-input" name="name" value="{{ old('name', auth()->user()->name) }}" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors @error('name') border-red-500 @enderror" placeholder="Masukkan nama lengkap">
+                @error('name')
+                    <p class="text-red-500 text-sm mt-1" id="name-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="flex flex-col gap-2">
                 <label for="email-input" class="text-sm font-medium text-gray-400">Email</label>
-                <input type="email" id="email-input" name="email" value="{{ auth()->user()->email }}" class="w-full bg-[#1a1a1a] border border-[#333] text-gray-500 py-3 px-4 rounded-xl cursor-not-allowed focus:outline-none" readonly>
+                <input type="email" id="email-input" name="email" value="{{ old('email', auth()->user()->email) }}" class="w-full bg-[#1a1a1a] border border-[#333] text-gray-500 py-3 px-4 rounded-xl cursor-not-allowed focus:outline-none @error('email') border-red-500 @enderror" readonly>
+                @error('email')
+                    <p class="text-red-500 text-sm mt-1" id="email-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="flex flex-col gap-2">
                 <label for="message-input" class="text-sm font-medium text-gray-400">Pesan atau Dukungan (Opsional)</label>
-                <textarea id="message-input" name="message" rows="3" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors resize-y" placeholder="Tulis harapan Anda..."></textarea>
+                <textarea id="message-input" name="message" rows="3" class="w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors resize-y @error('message') border-red-500 @enderror" placeholder="Tulis harapan Anda...">{{ old('message') }}</textarea>
+                @error('message')
+                    <p class="text-red-500 text-sm mt-1" id="message-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <button type="submit" class="w-full bg-[#63cfc0] text-black font-semibold py-3.5 rounded-full mt-4 hover:bg-[#7ae0d3] hover:-translate-y-px hover:shadow-lg hover:shadow-[#63cfc0]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f0f0f] transition-all">
@@ -308,40 +320,8 @@
             });
         });
 
-        // Form Validation
-        const form = document.getElementById('donationForm');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                const amountStr = form.querySelector('input[name="amount"]').value;
-                const name = form.querySelector('input[name="name"]').value;
-                const email = form.querySelector('input[name="email"]').value;
-                
-                let errors = [];
-                
-                if (!amountStr || amountStr.trim() === '' || !name || name.trim() === '' || !email || email.trim() === '') {
-                    errors.push('Semua field wajib diisi.');
-                } else {
-                    const amount = parseFloat(amountStr);
-                    if (isNaN(amount) || amount < 1000) {
-                        errors.push('Minimal donasi adalah Rp 1.000.');
-                    }
-                    if (name.length < 2) {
-                        errors.push('Nama minimal 2 karakter.');
-                    }
-                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                        errors.push('Email tidak valid.');
-                    }
-                }
-
-                if (errors.length > 0) {
-                    e.preventDefault();
-                    if (typeof showToast === 'function') {
-                        showToast(errors[0]);
-                    }
-                }
-            });
-        }
     });
+
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
