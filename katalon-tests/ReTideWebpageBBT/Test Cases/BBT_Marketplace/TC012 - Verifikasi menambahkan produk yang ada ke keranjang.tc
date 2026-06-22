@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC012 - Verifikasi menambahkan produk yang ada ke keranjang</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>f221f5c1-5cc0-44bf-b996-a0063693d93f</testCaseGuid>
+</TestCaseEntity>

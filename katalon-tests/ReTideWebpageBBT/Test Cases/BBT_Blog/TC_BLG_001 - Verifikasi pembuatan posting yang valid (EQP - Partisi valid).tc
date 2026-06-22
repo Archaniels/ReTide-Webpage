@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_BLG_001 - Verifikasi pembuatan posting yang valid (EQP - Partisi valid)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>bc65ae75-1d81-43e9-bd3f-ca3921c9cd89</testCaseGuid>
+</TestCaseEntity>

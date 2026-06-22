@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC013 - Verifikasi proses checkout dengan item di keranjang</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>353cc2cf-8da7-448d-9b76-a2002bf1ad62</testCaseGuid>
+</TestCaseEntity>

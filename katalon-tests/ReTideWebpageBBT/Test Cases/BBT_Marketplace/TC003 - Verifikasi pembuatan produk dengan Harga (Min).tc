@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC003 - Verifikasi pembuatan produk dengan Harga (Min)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>eefe1f25-1e95-4e94-9ff2-60a5692452c7</testCaseGuid>
+</TestCaseEntity>

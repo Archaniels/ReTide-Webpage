@@ -10,9 +10,6 @@ class MarketplaceProductTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test that MarketplaceProduct model can be instantiated and persisted.
-     */
     public function test_marketplace_product_can_be_instantiated_and_persisted(): void
     {
         $product = MarketplaceProduct::create([

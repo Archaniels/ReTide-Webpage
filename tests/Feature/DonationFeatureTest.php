@@ -20,9 +20,6 @@ class DonationFeatureTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * Test a user can view the donation index page.
-     */
     public function test_user_can_view_donation_page()
     {
         $user = User::factory()->create();
@@ -34,9 +31,6 @@ class DonationFeatureTest extends TestCase
         $response->assertViewHasAll(['donations', 'totalDonations', 'donationGoal', 'progressPercentage']);
     }
 
-    /**
-     * Test a user can submit a donation and midtrans is called.
-     */
     public function test_user_can_submit_donation()
     {
         $user = User::factory()->create();
@@ -75,9 +69,6 @@ class DonationFeatureTest extends TestCase
         ]);
     }
 
-    /**
-     * Test donation validation fails on invalid amount.
-     */
     public function test_donation_requires_minimum_amount()
     {
         $user = User::factory()->create();
@@ -90,9 +81,6 @@ class DonationFeatureTest extends TestCase
         $this->assertDatabaseCount('donations', 0);
     }
 
-    /**
-     * Test a user can get donation updates via ajax.
-     */
     public function test_user_can_fetch_donation_updates()
     {
         $user = User::factory()->create();
@@ -117,9 +105,6 @@ class DonationFeatureTest extends TestCase
         $response->assertJsonFragment(['title' => 'Update 1']);
     }
 
-    /**
-     * Test user can access success page.
-     */
     public function test_user_can_view_success_page()
     {
         $user = User::factory()->create();
@@ -130,9 +115,6 @@ class DonationFeatureTest extends TestCase
         $response->assertViewIs('donation_success');
     }
 
-    /**
-     * Test admin can view all donations.
-     */
     public function test_admin_can_view_donations_index()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -151,9 +133,6 @@ class DonationFeatureTest extends TestCase
         $response->assertViewHas('donations');
     }
 
-    /**
-     * Test admin can delete a donation.
-     */
     public function test_admin_can_delete_donation()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -172,9 +151,6 @@ class DonationFeatureTest extends TestCase
         $this->assertDatabaseMissing('donations', ['id' => $donation->id]);
     }
 
-    /**
-     * Test non-admin cannot view donations index.
-     */
     public function test_non_admin_cannot_view_donations_index()
     {
         $user = User::factory()->create(['role' => 'user']); // Assuming 'user' is default role

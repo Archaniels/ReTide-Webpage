@@ -1,0 +1,147 @@
+
+  [30;43;1m WARN [39;49;22m Your XML configuration validates against a deprecated schema. Migrate your XML configuration using "--migrate-configuration"!
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_happy_path_creates_payment_and_returns_snap_token(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_happy_path_creates_payment_and_returns_json_response(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   PASS  Tests\Unit\BlogPostTest
+  ✓ blog post fillable attributes                                                                                0.39s  
+  ✓ blog post table and primary key                                                                              0.04s  
+  ✓ can create blog post                                                                                         0.05s  
+
+   PASS  Tests\Unit\DonationTest
+  ✓ donation fillable attributes                                                                                 0.06s  
+  ✓ can create donation                                                                                          0.07s  
+  ✓ donation belongs to user                                                                                     0.05s  
+  ✓ donation has many updates                                                                                    0.05s  
+
+   PASS  Tests\Unit\DonationUpdateTest
+  ✓ donation update fillable attributes                                                                          0.05s  
+  ✓ can create donation update                                                                                   0.05s  
+  ✓ donation update belongs to donation                                                                          0.05s  
+
+   PASS  Tests\Unit\MarketplaceProductTest
+  ✓ marketplace product can be instantiated and persisted                                                        0.05s  
+
+   PASS  Tests\Feature\BlogTest
+  ✓ guests are redirected to login for public blog routes                                                        0.11s  
+  ✓ admins are redirected to dashboard when attempting public blog routes                                        0.06s  
+  ✓ non admins get 403 when accessing admin blog routes                                                          0.12s  
+  ✓ admins can access admin blog routes                                                                          0.11s  
+  ✓ listing posts on blog ordered by latest                                                                      0.07s  
+  ✓ viewing single post on blog                                                                                  0.08s  
+  ✓ admin can create blog post with image                                                                        0.09s  
+  ✓ admin can create blog post without image                                                                     0.06s  
+  ✓ admin can update blog post with new image                                                                    0.06s  
+  ✓ admin can update blog post without new image                                                                 0.06s  
+  ✓ admin can delete blog post                                                                                   0.06s  
+  ✓ create post validation fails for empty fields                                                                0.07s  
+  ✓ create post validation fails for invalid title length                                                        0.07s  
+  ✓ create post validation fails for invalid content length                                                      0.07s  
+  ✓ create post validation fails for invalid image type and size                                                 0.07s  
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_happy_path_creates_payment_and_returns_snap_token(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_happy_path_creates_payment_and_returns_json_response(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_happy_path_creates_payment_and_returns_snap_token(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_happy_path_creates_payment_and_returns_json_response(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_happy_path_creates_payment_and_returns_snap_token(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_happy_path_creates_payment_and_returns_json_response(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_happy_path_creates_payment_and_returns_json_response(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_checkout_happy_path_creates_payment_and_returns_snap_token(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CartTest::test_process_redirects_if_cart_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   PASS  Tests\Feature\CartTest
+  ✓ user can add product to cart                                                                                 0.12s  
+  ✓ add to cart fails for non existent product                                                                   0.06s  
+  ✓ user can sync cart                                                                                           0.06s  
+  ✓ user cannot manipulate price during sync                                                                     0.05s  
+  ✓ checkout redirects if cart is empty
+  ✓ checkout happy path creates payment and returns snap token
+  ✓ process redirects if cart is empty
+  ✓ process happy path creates payment and returns json response
+  ✓ adding existing product to cart increments quantity                                                          0.08s  
+  ✓ unauthenticated guests are redirected to login for cart endpoints                                            0.15s  
+
+   PASS  Tests\Feature\DonationFeatureTest
+  ✓ user can view donation page                                                                                  0.17s  
+  ✓ user can submit donation                                                                                     0.15s  
+  ✓ donation requires minimum amount                                                                             0.14s  
+  ✓ user can fetch donation updates                                                                              0.07s  
+  ✓ user can view success page                                                                                   0.12s  
+  ✓ admin can view donations index                                                                               0.17s  
+  ✓ admin can delete donation                                                                                    0.12s  
+  ✓ non admin cannot view donations index                                                                        0.12s  
+
+   PASS  Tests\Feature\DonationUpdateFeatureTest
+  ✓ admin can view donation updates index                                                                        0.19s  
+  ✓ admin can view donation updates ajax                                                                         0.10s  
+  ✓ admin can view create donation update page                                                                   0.14s  
+  ✓ admin can store donation update                                                                              0.13s  
+  ✓ donation update validation                                                                                   0.13s  
+
+   PASS  Tests\Feature\MarketplaceTest
+  ✓ guests are redirected to login for marketplace routes                                                        0.14s  
+  ✓ regular users can access marketplace but are blocked from admin marketplace                                  0.16s  
+  ✓ admins are redirected to dashboard from public marketplace but can access admin marketplace                  0.17s  
+  ✓ admin can create product with image                                                                          0.09s  
+  ✓ admin can create product without image                                                                       0.10s  
+  ✓ admin can update product with new image                                                                      0.15s  
+  ✓ admin can update product without new image                                                                   0.14s  
+  ✓ admin can delete product                                                                                     0.12s  
+  ✓ create product validation fails for empty fields                                                             0.12s  
+  ✓ create product validation fails for invalid name length                                                      0.14s  
+  ✓ create product validation fails for invalid description length                                               0.15s  
+  ✓ create product validation fails for invalid price                                                            0.16s  
+  ✓ create product validation fails for invalid image                                                            0.15s  
+  ✓ update product validation fails for empty fields                                                             0.13s  
+  ✓ update product validation fails for invalid name length                                                      0.15s  
+  ✓ update product validation fails for invalid description length                                               0.15s  
+  ✓ update product validation fails for invalid price                                                            0.17s  
+  ✓ update product validation fails for invalid image                                                            0.17s  
+[2026-06-21 15:56:24] testing.WARNING: Payment record not found for Order ID: MKT-NONEXISTENT  
+[2026-06-21 15:56:24] testing.ERROR: Midtrans Notification Error: Malformed payload  
+
+   PASS  Tests\Feature\PaymentWebhookTest
+  ✓ webhook handles settlement status successfully                                                               0.25s  
+  ✓ webhook handles pending status                                                                               0.12s  
+  ✓ webhook handles cancel status                                                                                0.11s  
+  ✓ webhook handles expire status                                                                                0.12s  
+  ✓ webhook handles deny status                                                                                  0.12s  
+  ✓ webhook handles capture challenge status                                                                     0.12s  
+  ✓ webhook handles capture accept status                                                                        0.12s  
+  ✓ webhook returns 404 for invalid order id                                                                     0.13s  
+  ✓ webhook returns 400 for malformed payload                                                                    0.10s  
+  ✓ webhook with valid signature updates payment status                                                          0.12s  
+[2026-06-21 15:56:24] testing.WARNING: Midtrans Webhook: Signature verification failed for Order ID: MKT-SIG-02  
+  ✓ webhook with invalid signature is rejected                                                                   0.12s  
+
+  Tests:    78 passed (281 assertions)
+  Duration: 10.16s
+

@@ -22,9 +22,6 @@ class BlogTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * Helper to mock Cloudinary upload api.
-     */
     protected function mockCloudinary(): void
     {
         $mockCloudinary = Mockery::mock(Cloudinary::class);
@@ -41,13 +38,6 @@ class BlogTest extends TestCase
         $this->app->instance('cloudinary', $mockCloudinary);
     }
 
-    // =========================================================================
-    // 1. ACCESS CONTROL TESTS
-    // =========================================================================
-
-    /**
-     * Guests are redirected to login for public blog routes.
-     */
     public function test_guests_are_redirected_to_login_for_public_blog_routes(): void
     {
         // View index
@@ -59,9 +49,6 @@ class BlogTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    /**
-     * Admins are redirected to /admin/dashboard when attempting public blog routes.
-     */
     public function test_admins_are_redirected_to_dashboard_when_attempting_public_blog_routes(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -75,9 +62,6 @@ class BlogTest extends TestCase
         $response->assertRedirect(route('admin.dashboard'));
     }
 
-    /**
-     * Non-admins get a 403 response when accessing admin blog routes.
-     */
     public function test_non_admins_get_403_when_accessing_admin_blog_routes(): void
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -94,9 +78,6 @@ class BlogTest extends TestCase
         $this->actingAs($user)->delete("/admin/blogs/{$post->id}")->assertStatus(403);
     }
 
-    /**
-     * Admins successfully access admin blog routes (200 OK).
-     */
     public function test_admins_can_access_admin_blog_routes(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -110,13 +91,6 @@ class BlogTest extends TestCase
         $this->actingAs($admin)->get("/admin/blogs/{$post->id}/edit")->assertStatus(200);
     }
 
-    // =========================================================================
-    // 2. HAPPY PATH CRUD TESTS
-    // =========================================================================
-
-    /**
-     * Listing posts on /blog (ordered by latest).
-     */
     public function test_listing_posts_on_blog_ordered_by_latest(): void
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -154,9 +128,6 @@ class BlogTest extends TestCase
         $this->assertEquals($post1->id, $blogPosts[2]->id);
     }
 
-    /**
-     * Viewing single post on /blog/{id} (404 for invalid).
-     */
     public function test_viewing_single_post_on_blog(): void
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -175,9 +146,6 @@ class BlogTest extends TestCase
         $response404->assertStatus(404);
     }
 
-    /**
-     * Creating a post as admin (assert redirect, database entry exists, session success message, handles image uploading).
-     */
     public function test_admin_can_create_blog_post_with_image(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -203,9 +171,6 @@ class BlogTest extends TestCase
         ]);
     }
 
-    /**
-     * Creating a post as admin without an image.
-     */
     public function test_admin_can_create_blog_post_without_image(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -227,9 +192,6 @@ class BlogTest extends TestCase
         ]);
     }
 
-    /**
-     * Updating a post as admin (assert DB updated, session success, handles new image).
-     */
     public function test_admin_can_update_blog_post_with_new_image(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -261,9 +223,6 @@ class BlogTest extends TestCase
         ]);
     }
 
-    /**
-     * Updating a post as admin without a new image.
-     */
     public function test_admin_can_update_blog_post_without_new_image(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -291,9 +250,6 @@ class BlogTest extends TestCase
         ]);
     }
 
-    /**
-     * Deleting a post as admin (assert DB deleted, session success).
-     */
     public function test_admin_can_delete_blog_post(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -312,13 +268,6 @@ class BlogTest extends TestCase
         ]);
     }
 
-    // =========================================================================
-    // 3. VALIDATION FAILURE TESTS
-    // =========================================================================
-
-    /**
-     * Validation Failure: Empty title/content.
-     */
     public function test_create_post_validation_fails_for_empty_fields(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -331,9 +280,6 @@ class BlogTest extends TestCase
         $response->assertSessionHasErrors(['title', 'content']);
     }
 
-    /**
-     * Validation Failure: Title length < 5 or > 100.
-     */
     public function test_create_post_validation_fails_for_invalid_title_length(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -353,9 +299,6 @@ class BlogTest extends TestCase
         $response->assertSessionHasErrors(['title']);
     }
 
-    /**
-     * Validation Failure: Content length < 10 or > 5000.
-     */
     public function test_create_post_validation_fails_for_invalid_content_length(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -375,9 +318,6 @@ class BlogTest extends TestCase
         $response->assertSessionHasErrors(['content']);
     }
 
-    /**
-     * Validation Failure: Image mimetype and size validations.
-     */
     public function test_create_post_validation_fails_for_invalid_image_type_and_size(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC006 - Verifikasi pembuatan produk dengan Harga (Max)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>72b25ee7-94c6-4edc-84ee-b14f7694b9ec</testCaseGuid>
+</TestCaseEntity>
