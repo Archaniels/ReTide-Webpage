@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>textarea_Tulis harapan Anda</name>
+   <tag></tag>
+   <elementGuidId>42a9f820-9365-4923-8b49-1f659ca46f1c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>#message-input</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id = 'message-input']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>textarea</value>
+      <webElementGuid>bafc4273-f9ce-4efd-8edb-de90e27f1230</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>id</name>
+      <type>Main</type>
+      <value>message-input</value>
+      <webElementGuid>547486f6-4285-4cac-a4fd-b892b7415454</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>name</name>
+      <type>Main</type>
+      <value>message</value>
+      <webElementGuid>c2a0ffc7-b0c8-4ef9-bd55-87c0c057f6d3</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>rows</name>
+      <type>Main</type>
+      <value>3</value>
+      <webElementGuid>66e0cf33-0a6d-4269-b987-09310dc91a49</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors resize-y </value>
+      <webElementGuid>1cc0f3bc-cd1a-4236-9212-a3a7f8863b8e</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>placeholder</name>
+      <type>Main</type>
+      <value>Tulis harapan Anda...</value>
+      <webElementGuid>adc84ade-e050-43f4-970a-85c632905c20</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>parent</name>
+      <type>Main</type>
+      <value>md5.v1-fa08aec4b1201d9af74d7e9e4a87fa6e</value>
+      <webElementGuid>0d566e2d-fb9f-4cd5-94b0-0cbd9bf571ff</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id = 'message-input']</value>
+      <webElementGuid>57e7b035-656c-4996-8148-92c5246053b9</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//*[@id = 'message-input']</value>
+      <webElementGuid>0c567108-605e-4987-8492-b0eeb5e0dd15</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//textarea[@id = 'message-input' and @name = 'message' and @placeholder = 'Tulis harapan Anda...']</value>
+      <webElementGuid>1c0253b3-ebfa-4baa-affb-05c755e763cf</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

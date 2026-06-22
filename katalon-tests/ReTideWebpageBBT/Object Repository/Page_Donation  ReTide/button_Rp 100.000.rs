@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_Rp 100.000</name>
+   <tag></tag>
+   <elementGuidId>59a90bdb-7af5-4316-9517-e21c8ea33e93</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>button.preset-btn.rounded-xl.transition-all.text-white[type=&quot;button&quot;]:nth-child(3)</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' preset-btn ') and contains(concat(' ', normalize-space(@class), ' '), ' rounded-xl ') and contains(concat(' ', normalize-space(@class), ' '), ' transition-all ') and contains(concat(' ', normalize-space(@class), ' '), ' text-white ') and (@type = 'button') and (name() = 'button') and (position() = 3)]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>button</value>
+      <webElementGuid>bb187b8e-c5cb-4f48-ae95-99fcb67e56ad</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>button</value>
+      <webElementGuid>39e74bac-14ad-4e72-a6d8-a28d4f640d88</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>preset-btn bg-[#1a1a1a] border border-[#333] text-white py-3 px-4 rounded-xl font-medium hover:border-[#63cfc0] hover:bg-[#63cfc0]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63cfc0] transition-all</value>
+      <webElementGuid>20668cea-eff8-4236-8c64-32398f40886f</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>data-amount</name>
+      <type>Main</type>
+      <value>100000</value>
+      <webElementGuid>e1004bc5-96a0-4f40-bbc8-c468ed996319</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Rp 100.000</value>
+      <webElementGuid>d190aadd-2c16-4f67-96f1-23efc9016739</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>parent</name>
+      <type>Main</type>
+      <value>md5.v1-7607049c2da87f6cf9509c05f87fd72c</value>
+      <webElementGuid>c3b9527f-5617-4a87-9368-44b66768ca3b</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' preset-btn ') and contains(concat(' ', normalize-space(@class), ' '), ' rounded-xl ') and contains(concat(' ', normalize-space(@class), ' '), ' transition-all ') and contains(concat(' ', normalize-space(@class), ' '), ' text-white ') and (@type = 'button') and (name() = 'button') and (position() = 3)]</value>
+      <webElementGuid>bbe38848-2b49-4e8f-b6b6-bf79f947d9bc</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' preset-btn ') and contains(concat(' ', normalize-space(@class), ' '), ' rounded-xl ') and contains(concat(' ', normalize-space(@class), ' '), ' transition-all ') and contains(concat(' ', normalize-space(@class), ' '), ' text-white ') and (@type = 'button') and (name() = 'button') and (position() = 3)]</value>
+      <webElementGuid>985b0a28-e783-4a1a-8bfa-5ca3b5cab37f</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//button[@type = 'button' and (text() = 'Rp 100.000' or . = 'Rp 100.000')]</value>
+      <webElementGuid>b3330dae-ec36-408d-83a6-5a8dec5d3a17</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

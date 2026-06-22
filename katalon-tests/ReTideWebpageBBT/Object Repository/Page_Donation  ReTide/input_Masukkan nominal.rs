@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Masukkan nominal</name>
+   <tag></tag>
+   <elementGuidId>fb8a56f8-0bcc-4bf1-8941-f17a48c47ae7</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>#amount-input</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id = 'amount-input']</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'number' and @id = 'amount-input' and @name = 'amount' and @placeholder = 'Masukkan nominal']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+      <webElementGuid>6d018c2e-0d30-4930-89c8-e44b4ada589d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>number</value>
+      <webElementGuid>eacb38eb-27a1-4f23-a8b9-f0a312417b7b</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>id</name>
+      <type>Main</type>
+      <value>amount-input</value>
+      <webElementGuid>a36e1e87-b5a2-4f61-8495-5498dd289cf8</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>name</name>
+      <type>Main</type>
+      <value>amount</value>
+      <webElementGuid>38aa9b69-453c-4461-81a8-2428553e394d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>min</name>
+      <type>Main</type>
+      <value>1000</value>
+      <webElementGuid>714f55ce-fc8e-45c3-8c3d-3abab0206193</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>w-full bg-[#121212] border border-[#333] text-white py-3 px-4 rounded-xl focus:outline-none focus:border-[#63cfc0] focus:bg-[#161616] placeholder-gray-600 transition-colors </value>
+      <webElementGuid>12f4282b-7b75-4791-8f8b-64b2f66cc019</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>placeholder</name>
+      <type>Main</type>
+      <value>Masukkan nominal</value>
+      <webElementGuid>eb5198e9-9ec4-4513-986a-aa61fe8f4e88</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>parent</name>
+      <type>Main</type>
+      <value>md5.v1-1aecb4c9c80c6d94e863dbb7abe7d82f</value>
+      <webElementGuid>e180ea2f-9c2c-4a73-a6c3-9159875a6702</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id = 'amount-input']</value>
+      <webElementGuid>3332f244-eb99-4e95-acc4-94d5df532dac</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//*[@id = 'amount-input']</value>
+      <webElementGuid>33b71b14-d980-4792-b996-25db411eb351</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//input[@type = 'number' and @id = 'amount-input' and @name = 'amount' and @placeholder = 'Masukkan nominal']</value>
+      <webElementGuid>a5418c3c-41d4-4a2a-852d-d6153aa6b531</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

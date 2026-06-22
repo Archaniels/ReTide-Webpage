@@ -43,10 +43,6 @@ class PaymentWebhookTest extends TestCase
         $this->setupNotificationMock($orderId, $status, $paymentType, $fraudStatus, $transactionId);
     }
 
-    // =========================================================================
-    // STATUS TRANSITION TESTS
-    // =========================================================================
-
     public function test_webhook_handles_settlement_status_successfully(): void
     {
         $payment = Payment::create([
@@ -199,10 +195,6 @@ class PaymentWebhookTest extends TestCase
         ]);
     }
 
-    // =========================================================================
-    // VALIDATION / ERROR HANDLING TESTS
-    // =========================================================================
-
     public function test_webhook_returns_404_for_invalid_order_id(): void
     {
         $this->setupNotificationStub('MKT-NONEXISTENT', 'settlement', 'credit_card', 'accept', 'tx-888');
@@ -230,10 +222,6 @@ class PaymentWebhookTest extends TestCase
             'message' => 'Invalid notification payload',
         ]);
     }
-
-    // =========================================================================
-    // SIGNATURE KEY VERIFICATION TESTS
-    // =========================================================================
 
     public function test_webhook_with_valid_signature_updates_payment_status(): void
     {

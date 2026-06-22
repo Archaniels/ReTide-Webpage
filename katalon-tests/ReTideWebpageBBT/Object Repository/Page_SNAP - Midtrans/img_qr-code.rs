@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>img_qr-code</name>
+   <tag></tag>
+   <elementGuidId>d1da8be8-f155-44c3-a86d-00237348b1ab</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>.qr-image--with-wrapper</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' qr-image--with-wrapper ')]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>img</value>
+      <webElementGuid>60b3a780-4997-4efc-bac3-570c9b72fb04</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>src</name>
+      <type>Main</type>
+      <value>https://merchants-app.sbx.midtrans.com/v4/qris/gopay/A120260621141351QaToMdCOdHID/qr-code</value>
+      <webElementGuid>717185e6-8324-4230-a4ce-9a52a06e1757</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>alt</name>
+      <type>Main</type>
+      <value>qr-code</value>
+      <webElementGuid>c425f11f-e52b-44b2-8e97-480fb495cdcf</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>qr-image qr-image--with-wrapper</value>
+      <webElementGuid>15aed16a-78dc-4ea1-88c7-a97cacf4b2ed</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>parent</name>
+      <type>Main</type>
+      <value>md5.v1-0adc041ab3ba5e9c3b39d2e174455b59</value>
+      <webElementGuid>86a1d118-8639-47a6-ade6-fd0b90dffa40</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' qr-image--with-wrapper ')]</value>
+      <webElementGuid>002578d5-c7eb-432d-933d-8f5a89088fd8</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' qr-image--with-wrapper ')]</value>
+      <webElementGuid>756c53e8-6351-49b2-a6bf-a6c9f696ab10</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//img[@src = 'https://merchants-app.sbx.midtrans.com/v4/qris/gopay/A120260621141351QaToMdCOdHID/qr-code' and @alt = 'qr-code']</value>
+      <webElementGuid>5760564f-f0c8-4175-8c74-49990a29364b</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

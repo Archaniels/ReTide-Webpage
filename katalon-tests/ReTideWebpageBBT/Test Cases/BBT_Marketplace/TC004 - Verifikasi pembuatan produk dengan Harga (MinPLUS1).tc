@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC004 - Verifikasi pembuatan produk dengan Harga (MinPLUS1)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>03ee553c-7c67-47ae-a2f0-c4ac30f2f048</testCaseGuid>
+</TestCaseEntity>

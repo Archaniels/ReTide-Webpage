@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC008 - Verifikasi pembuatan produk menolak data string non-numerik di Harga</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>faff4b8f-937a-4620-8b61-167268c8f692</testCaseGuid>
+</TestCaseEntity>

@@ -12,9 +12,6 @@ class DonationUpdateFeatureTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test admin can view donation updates index.
-     */
     public function test_admin_can_view_donation_updates_index()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -40,9 +37,6 @@ class DonationUpdateFeatureTest extends TestCase
         $response->assertViewHasAll(['donation', 'updates']);
     }
 
-    /**
-     * Test admin can view donation updates index via AJAX.
-     */
     public function test_admin_can_view_donation_updates_ajax()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -62,9 +56,6 @@ class DonationUpdateFeatureTest extends TestCase
         $response->assertViewIs('admin.donation_updates.partials.updates_list');
     }
 
-    /**
-     * Test admin can view create donation update page.
-     */
     public function test_admin_can_view_create_donation_update_page()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -83,9 +74,6 @@ class DonationUpdateFeatureTest extends TestCase
         $response->assertViewHas('donation');
     }
 
-    /**
-     * Test admin can store a donation update.
-     */
     public function test_admin_can_store_donation_update()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -114,9 +102,6 @@ class DonationUpdateFeatureTest extends TestCase
         ]);
     }
 
-    /**
-     * Test validation rules for storing donation update.
-     */
     public function test_donation_update_validation()
     {
         $admin = User::factory()->create(['role' => 'admin']);

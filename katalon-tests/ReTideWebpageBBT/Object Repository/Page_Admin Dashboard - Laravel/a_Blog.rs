@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>a_Blog</name>
+   <tag></tag>
+   <elementGuidId>21e7bca0-d167-428e-a8a7-345be6331015</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>[href=&quot;https\:\/\/www\.retide\.site\/admin\/blogs&quot;]</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@href = 'https://www.retide.site/admin/blogs']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>a</value>
+      <webElementGuid>7b4794ae-72b3-43bb-9988-af9b89a1e3cd</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>https://www.retide.site/admin/blogs</value>
+      <webElementGuid>454f8fdb-87fe-484d-91b2-66856946df38</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>flex items-center px-4 py-3 rounded-xl transition-all duration-200 text-secondary hover:bg-gray-800 hover:text-primary</value>
+      <webElementGuid>c7ade873-613e-4ece-94c1-e25604dc9b60</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>
+                 Blog
+            </value>
+      <webElementGuid>99b35c16-4e60-47c9-88e6-79e52b493baf</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>parent</name>
+      <type>Main</type>
+      <value>md5.v1-a78aefcaed847592b5e004d71f922d08</value>
+      <webElementGuid>315fe9c5-98e9-4bda-a13a-3617c9d0f924</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@href = 'https://www.retide.site/admin/blogs']</value>
+      <webElementGuid>5ff16271-5911-4542-9579-566879903466</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//*[@href = 'https://www.retide.site/admin/blogs']</value>
+      <webElementGuid>f1586780-1b2e-446c-9675-d95eea496c3a</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//a[@href = 'https://www.retide.site/admin/blogs' and (text() = '
+                 Blog
+            ' or . = '
+                 Blog
+            ')]</value>
+      <webElementGuid>baf2b5a6-eb2f-43c5-9697-604febaa63ae</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

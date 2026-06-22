@@ -18,10 +18,6 @@ class CartTest extends TestCase
         parent::tearDown();
     }
 
-    // =========================================================================
-    // 1. ADD TO CART TESTS
-    // =========================================================================
-
     public function test_user_can_add_product_to_cart(): void
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -61,10 +57,6 @@ class CartTest extends TestCase
 
         $response->assertStatus(404);
     }
-
-    // =========================================================================
-    // 2. SYNC CART TESTS
-    // =========================================================================
 
     public function test_user_can_sync_cart(): void
     {
@@ -143,15 +135,6 @@ class CartTest extends TestCase
         $this->assertEquals($product->image_path, $cart[$product->id]['image']); // image must be canonical
     }
 
-    // =========================================================================
-    // 3. CHECKOUT TESTS
-    // =========================================================================
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @preserveGlobalState disabled
-     */
     public function test_checkout_redirects_if_cart_is_empty(): void
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -162,11 +145,6 @@ class CartTest extends TestCase
         $response->assertSessionHas('error', 'Cart is empty!');
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @preserveGlobalState disabled
-     */
     public function test_checkout_happy_path_creates_payment_and_returns_snap_token(): void
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -201,15 +179,6 @@ class CartTest extends TestCase
         ]);
     }
 
-    // =========================================================================
-    // 4. PROCESS CART TESTS
-    // =========================================================================
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @preserveGlobalState disabled
-     */
     public function test_process_redirects_if_cart_is_empty(): void
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -220,11 +189,6 @@ class CartTest extends TestCase
         $response->assertSessionHas('error', 'Cart is empty!');
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @preserveGlobalState disabled
-     */
     public function test_process_happy_path_creates_payment_and_returns_json_response(): void
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -260,10 +224,6 @@ class CartTest extends TestCase
             'snap_token' => 'dummy-snap-token',
         ]);
     }
-
-    // =========================================================================
-    // 5. QUANTITY INCREMENT & ACCESS CONTROL TESTS
-    // =========================================================================
 
     public function test_adding_existing_product_to_cart_increments_quantity(): void
     {

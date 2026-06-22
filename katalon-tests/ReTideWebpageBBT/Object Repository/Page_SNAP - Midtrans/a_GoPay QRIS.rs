@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>a_GoPay QRIS</name>
+   <tag></tag>
+   <elementGuidId>31a0efc1-c865-4637-a94a-187b03f5fe60</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>div:nth-child(1) > [href=&quot;\#\/gopay-qris&quot;]</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[(name() = 'div') and (position() = 1)]/*[@href = '#/gopay-qris']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>a</value>
+      <webElementGuid>91ec6598-0de5-43a6-9980-2999d7c3f572</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>list</value>
+      <webElementGuid>9cf8fb8e-0550-4700-8caf-d45f624989b3</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>data-testid</name>
+      <type>Main</type>
+      <value>list-item</value>
+      <webElementGuid>1e095996-f4d2-4e8e-b9e7-1bd2e6a53b40</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>#/gopay-qris</value>
+      <webElementGuid>96309a46-7d6f-4550-bd53-5883a1dbe584</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>GoPay QRIS</value>
+      <webElementGuid>c5485ca6-66a1-4c49-96aa-d82f2b30a337</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>parent</name>
+      <type>Main</type>
+      <value>md5.v1-a7b3e51b5c3a1df8622ee45e7091e0b0</value>
+      <webElementGuid>72f13288-8338-4710-b4af-eda178a9cf85</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[(name() = 'div') and (position() = 1)]/*[@href = '#/gopay-qris']</value>
+      <webElementGuid>e12cb365-2beb-4916-8c9a-c1a39c00e767</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//*[(name() = 'div') and (position() = 1)]/*[@href = '#/gopay-qris']</value>
+      <webElementGuid>2c8fbd41-4060-4a40-ad96-7a4f90c8362a</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//a[@href = '#/gopay-qris' and (text() = 'GoPay QRIS' or . = 'GoPay QRIS')]</value>
+      <webElementGuid>d9557624-6674-4bd8-aa1e-bf631efe2a07</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

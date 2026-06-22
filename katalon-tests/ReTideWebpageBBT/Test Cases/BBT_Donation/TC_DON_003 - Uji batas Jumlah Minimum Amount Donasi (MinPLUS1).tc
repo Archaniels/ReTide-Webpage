@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_DON_003 - Uji batas Jumlah Minimum Amount Donasi (MinPLUS1)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>22059ab1-bc9e-407e-8757-edcbbfb107a7</testCaseGuid>
+</TestCaseEntity>

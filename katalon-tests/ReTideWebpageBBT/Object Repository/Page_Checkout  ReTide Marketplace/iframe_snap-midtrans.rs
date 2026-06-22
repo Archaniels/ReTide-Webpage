@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>iframe_snap-midtrans</name>
+   <tag></tag>
+   <elementGuidId>29b6e110-37dc-4f07-ae1b-fbb771aa2847</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>#snap-midtrans</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id = 'snap-midtrans']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>iframe</value>
+      <webElementGuid>7daa626a-7808-4330-a530-3a8668ee5277</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>src</name>
+      <type>Main</type>
+      <value>https://app.sandbox.midtrans.com/snap/v4/popup?origin_host=https://www.retide.site&amp;client_key=Mid-client-RSiiVT7L04PXHt9y#/</value>
+      <webElementGuid>c48c2679-5885-4e4f-81cc-1d92f7461205</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>id</name>
+      <type>Main</type>
+      <value>snap-midtrans</value>
+      <webElementGuid>56f42f10-b7b8-42a1-ae75-b587db4afe93</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>name</name>
+      <type>Main</type>
+      <value>popup_1782125889044</value>
+      <webElementGuid>acc5f16b-4dfd-456b-9add-59dc99de1f47</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>parent</name>
+      <type>Main</type>
+      <value>md5.v1-3c679ba776a45a94935bb1a275779b5c</value>
+      <webElementGuid>2cd3226d-b50a-4d0e-ae73-debd7a0132d2</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id = 'snap-midtrans']</value>
+      <webElementGuid>eb007131-6992-4780-8a36-9f5f2fd5b1d3</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//*[@id = 'snap-midtrans']</value>
+      <webElementGuid>3d24a848-0db0-4672-b0e7-c6708e5fa71c</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//iframe[@src = 'https://app.sandbox.midtrans.com/snap/v4/popup?origin_host=https://www.retide.site&amp;client_key=Mid-client-RSiiVT7L04PXHt9y#/' and @id = 'snap-midtrans' and @name = 'popup_1782125889044']</value>
+      <webElementGuid>3a830b83-843e-418b-ae15-306c5af0e2b9</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>
