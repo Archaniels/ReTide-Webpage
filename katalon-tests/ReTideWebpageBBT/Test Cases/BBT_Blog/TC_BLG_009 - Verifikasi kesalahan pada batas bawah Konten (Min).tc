@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_BLG_009 - Verifikasi kesalahan pada batas bawah Konten (Min)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>a9748a28-8bdf-45b8-a998-5ac0b1f66272</testCaseGuid>
+</TestCaseEntity>

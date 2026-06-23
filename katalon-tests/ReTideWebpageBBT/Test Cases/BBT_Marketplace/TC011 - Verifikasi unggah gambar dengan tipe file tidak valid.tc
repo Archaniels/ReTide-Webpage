@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC011 - Verifikasi unggah gambar dengan tipe file tidak valid</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>2b9e8086-59ac-4f69-9582-1f47090d66be</testCaseGuid>
+</TestCaseEntity>

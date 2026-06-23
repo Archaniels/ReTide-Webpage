@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_DON_009 - Uji bidang wajib kosong (EQP)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>cbf0803b-4374-4190-bca0-8e1961da5b16</testCaseGuid>
+</TestCaseEntity>

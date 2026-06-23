@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_DON_004 - Uji Jumlah di batas Maksimum Donasi (Max-1)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>29df1caa-8191-4db6-96b7-2389c3f72fd1</testCaseGuid>
+</TestCaseEntity>

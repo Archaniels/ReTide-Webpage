@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_DON_007 - Uji tipe data Jumlah yang tidak valid (Alfabet) (EQP)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>99db8ada-4b04-454c-89a4-0bba4f24e8c3</testCaseGuid>
+</TestCaseEntity>

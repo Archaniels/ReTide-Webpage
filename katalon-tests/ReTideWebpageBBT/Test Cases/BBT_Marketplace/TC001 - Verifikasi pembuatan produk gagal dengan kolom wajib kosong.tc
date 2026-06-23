@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC001 - Verifikasi pembuatan produk gagal dengan kolom wajib kosong</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>15bec966-ee36-4f35-a9d5-405f8513e074</testCaseGuid>
+</TestCaseEntity>

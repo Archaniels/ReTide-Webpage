@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>textarea_Description</name>
+   <tag></tag>
+   <elementGuidId>1e627347-3df3-4dae-a729-a5623eb098af</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>#description</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id = 'description']</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'text' and @id = 'description' and @name = 'description']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>textarea</value>
+      <webElementGuid>1b22a6bf-9170-4f22-89f6-78b211b33493</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+      <webElementGuid>85c4cd00-7aad-4e56-b34a-f8c4ae2da6b4</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>id</name>
+      <type>Main</type>
+      <value>description</value>
+      <webElementGuid>d009c4f0-19f7-47e3-a629-c2ca086c5d26</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>name</name>
+      <type>Main</type>
+      <value>description</value>
+      <webElementGuid>abfd30b2-5c8d-4aa8-b8ba-83c8bb3276df</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>bg-black border border-default-medium rounded-lg text-heading text-base focus:ring-brand focus:outline-[#7ae0d3] block w-full px-3.5 py-3 shadow-xs placeholder:text-body</value>
+      <webElementGuid>e2fbbd2c-96df-47da-93b0-e03a0ada577f</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>parent</name>
+      <type>Main</type>
+      <value>md5.v1-4392bed012225ae2511d448c6960d28f</value>
+      <webElementGuid>fa6fa083-9f9f-49bc-b098-69ccaffbffa8</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id = 'description']</value>
+      <webElementGuid>710f4972-010a-4271-8176-bd3d68b5a7b1</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//*[@id = 'description']</value>
+      <webElementGuid>95d7de32-0e4d-4e40-9620-dab618835962</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//textarea[@type = 'text' and @id = 'description' and @name = 'description']</value>
+      <webElementGuid>13b12b02-f6a2-4e13-8651-e404dea70c2e</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

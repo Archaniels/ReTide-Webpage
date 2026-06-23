@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_BLG_006 - Verifikasi kesalahan pada batas atas Judul (Max)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>23251e73-e40c-4cea-8d58-6f6faa03a586</testCaseGuid>
+</TestCaseEntity>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_BLG_013 - Verifikasi kesalahan pada batas atas Konten (MaxPLUS1)</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>ab6e7c3b-3d4f-40b4-9df8-e757ace27d67</testCaseGuid>
+</TestCaseEntity>

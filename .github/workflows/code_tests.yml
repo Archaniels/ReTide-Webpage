@@ -1,4 +1,4 @@
-name: Testing for Code Coverage  
+name: Testing for Code Coverage
 
 on:
   push:
@@ -72,8 +72,17 @@ jobs:
         name: code-coverage-report
         path: coverage.xml
 
-    # - name: Install Playwright Browsers
-    #   run: npx playwright install --with-deps
+    - name: Start App for E2E Tests
+      run: |
+        php artisan serve --port=8000 &
+        npm run dev &
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
 
-    # - name: Run Playwright tests
-    #   run: npx playwright test
+    - name: Run Katalon UI Regression Tests
+      uses: katalon-studio/katalon-studio-github-action@v3.0
+      with:
+          version: '9.0.0'
+          projectPath: '${{ github.workspace }}/katalon-tests/ReTideWebpageBBT'
+          args: '-retry=0 -testSuiteCollectionPath="Test Suites/Collections" -apiKey=${{ secrets.KATALON_API_KEY }}'

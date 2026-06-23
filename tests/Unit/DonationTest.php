@@ -12,9 +12,6 @@ class DonationTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test the Donation model's fillable properties.
-     */
     public function test_donation_fillable_attributes(): void
     {
         $donation = new Donation;
@@ -28,9 +25,6 @@ class DonationTest extends TestCase
         ], $donation->getFillable());
     }
 
-    /**
-     * Test that we can create a Donation and persist it.
-     */
     public function test_can_create_donation(): void
     {
         $user = User::factory()->create();
@@ -51,9 +45,6 @@ class DonationTest extends TestCase
         $this->assertEquals(50000, $donation->amount);
     }
 
-    /**
-     * Test donation belongs to a user.
-     */
     public function test_donation_belongs_to_user(): void
     {
         $user = User::factory()->create();
@@ -68,9 +59,6 @@ class DonationTest extends TestCase
         $this->assertEquals($user->id, $donation->user->id);
     }
 
-    /**
-     * Test donation has many updates.
-     */
     public function test_donation_has_many_updates(): void
     {
         $user = User::factory()->create();

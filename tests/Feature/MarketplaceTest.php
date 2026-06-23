@@ -22,9 +22,6 @@ class MarketplaceTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * Helper to mock Cloudinary upload api.
-     */
     protected function mockCloudinary(): void
     {
         $mockCloudinary = Mockery::mock(Cloudinary::class);
@@ -41,10 +38,6 @@ class MarketplaceTest extends TestCase
         $this->app->instance("cloudinary", $mockCloudinary);
         $this->app->instance(Cloudinary::class, $mockCloudinary);
     }
-
-    // =========================================================================
-    // 1. ACCESS CONTROL TESTS
-    // =========================================================================
 
     public function test_guests_are_redirected_to_login_for_marketplace_routes(): void
     {
@@ -87,10 +80,6 @@ class MarketplaceTest extends TestCase
         $response = $this->actingAs($admin)->get("/admin/marketplace/create");
         $response->assertStatus(200);
     }
-
-    // =========================================================================
-    // 2. CRUD OPERATIONS (HAPPY PATH)
-    // =========================================================================
 
     public function test_admin_can_create_product_with_image(): void
     {
@@ -244,10 +233,6 @@ class MarketplaceTest extends TestCase
             "id" => $product->id,
         ]);
     }
-
-    // =========================================================================
-    // 3. VALIDATION TESTS
-    // =========================================================================
 
     public function test_create_product_validation_fails_for_empty_fields(): void
     {

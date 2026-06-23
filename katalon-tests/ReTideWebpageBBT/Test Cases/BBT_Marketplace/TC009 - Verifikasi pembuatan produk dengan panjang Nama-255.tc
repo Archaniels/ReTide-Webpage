@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC009 - Verifikasi pembuatan produk dengan panjang Nama-255</name>
+   <tag></tag>
+   <comment></comment>
+   <origin>WEB_RECORDER</origin>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>5ca291db-ec42-41e7-871d-720c61ca238b</testCaseGuid>
+</TestCaseEntity>

@@ -10,9 +10,6 @@ class BlogPostTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test the BlogPost model's fillable properties.
-     */
     public function test_blog_post_fillable_attributes(): void
     {
         $post = new BlogPost;
@@ -20,9 +17,6 @@ class BlogPostTest extends TestCase
         $this->assertEquals(['title', 'content', 'image_path'], $post->getFillable());
     }
 
-    /**
-     * Test that BlogPost model has correct table and primary key.
-     */
     public function test_blog_post_table_and_primary_key(): void
     {
         $post = new BlogPost;
@@ -31,9 +25,6 @@ class BlogPostTest extends TestCase
         $this->assertEquals('id', $post->getKeyName());
     }
 
-    /**
-     * Test that we can create a BlogPost and persist it.
-     */
     public function test_can_create_blog_post(): void
     {
         $postData = [
